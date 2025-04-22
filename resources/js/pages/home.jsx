@@ -1,4 +1,5 @@
-import Hero from "../components/hero"
+import Hero from "../components/hero";
+import { useIsMobile } from "../hooks/useMobile";
 import {
     Carousel,
     CarouselContent,
@@ -30,25 +31,44 @@ const shoes = [
 ]
 
 export default function Home(){
+    const isMobile = useIsMobile();
+    const orientation = isMobile ? 'vertical' : 'horizontal';
     return (
-        <div className="bg-gray-400 h-[1300px]">
+        <div className="bg-gray-400 h-[100%]">
             <Hero />
-            <h1 className="text-2xl font-bold place-self-center">T-shirt</h1>
-            <Carousel className="mx-15">
-                <CarouselContent className="mx-4">
-                {shirts.map((shirt) => (
-                    <CarouselItem key={shirt.id} className="bg-white p-2 mx-1 rounded shadow basis-1/3">
-                        <img src={shirt.image} alt={shirt.name} className=" " />
-                        <h2 className="text-gray-600">{shirt.name}</h2>
-                        <p className="text-gray-600">${shirt.price}</p>
-                    </CarouselItem>
-                ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-            </Carousel>
-            <div className="flex gap-4">
-                
+            <div className="max-md:flex">
+                <div>
+                    <h1 className="text-2xl font-bold place-self-center">T-shirt</h1>
+                    <Carousel orientation={orientation} opts={{ align: "start",loop: true }} className="md:ml-14 md:mr-15 max-md:mt-14">
+                        <CarouselContent className="ml-0 max-md:h-[650px] max-md:mt-0 max-md:mb-1">
+                        {shirts.map((shirt) => (
+                            <CarouselItem key={shirt.id} className="bg-white p-2 m-0.5 rounded shadow basis-1/2 md:basis-1/3">
+                                <img src={shirt.image} alt={shirt.name} className="" />
+                                <h2 className="text-gray-600">{shirt.name}</h2>
+                                <p className="text-gray-600">${shirt.price}</p>
+                            </CarouselItem>
+                        ))}
+                        </CarouselContent>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                    </Carousel>
+                </div>
+                <div>
+                    <h1 className="text-2xl font-bold place-self-center md:mt-3">Sneakers</h1>
+                    <Carousel orientation={orientation} opts={{ align: "start",loop: true }} className="md:ml-14 md:mr-15 max-md:mt-14">
+                        <CarouselContent className="ml-0 max-md:h-[650px] max-md:mt-0 max-md:mb-1">
+                        {shoes.map((item) => (
+                            <CarouselItem key={item.id} className="bg-white p-2 m-0.5 rounded shadow basis-1/2 md:basis-1/3">
+                                <img src={item.image} alt={item.name} className=" " />
+                                <h2 className="text-gray-600">{item.name}</h2>
+                                <p className="text-gray-600">${item.price}</p>
+                            </CarouselItem>
+                        ))}
+                        </CarouselContent>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                    </Carousel>
+                </div>
             </div>
             
             <p className="mt-4">Votre plateforme de gestion de projets.</p>

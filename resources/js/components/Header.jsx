@@ -2,11 +2,11 @@ import { Button } from "./ui/button";
 
 export default function Header() {
     return (
-        <header className="bg-gray-600 text-white p-4 flex sticky top-0 justify-between items-center ">
+        <header className="bg-gray-600 text-white p-2 sm:p-4 flex sticky top-0 justify-between items-center z-10 ">
             <div className="flex items-center gap-x-5">
                 <h1 className="text-2xl">Piwee!</h1>
-                <nav>
-                    <ul className="flex space-x-4">
+                <nav className="hidden sm:block">
+                    <ul className="flex space-x-1 sm:space-x-4">
                         <li><a href="/">Accueil</a></li>
                         <li><a href="/">Categories</a></li>
                         <li><a href="/">Contact</a></li>
