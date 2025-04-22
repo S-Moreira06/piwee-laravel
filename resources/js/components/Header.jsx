@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 export default function Header() {
     return (
-        <header className="bg-gray-600 text-white p-4 flex justify-between items-center ">
+        <header className="bg-gray-600 text-white p-4 flex sticky top-0 justify-between items-center ">
             <div className="flex items-center gap-x-5">
                 <h1 className="text-2xl">Piwee!</h1>
                 <nav>
