@@ -48,9 +48,6 @@ export default function Home(){
                     <MainCarousel data={shoes} />
                 </div>
             </div>
-            
-            <p className="mt-4">Votre plateforme de gestion de projets.</p>
-            <p className="mt-2">Explorez nos fonctionnalités et commencez à organiser votre travail dès aujourd'hui!</p>
         </div>
     )
 }
