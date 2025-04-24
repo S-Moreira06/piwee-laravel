@@ -7,7 +7,7 @@ export default function Footer() {
         <footer className="bg-gray-600 text-white p-2 sm:p-4">
             <div className="flex items-center justify-between gap-x-5">
                 <div>
-                    <h1 className="text-2xl"><Link href={'/'}>Piwee!</Link></h1>
+                    <h1 ><Link href={'/'}className="text-2xl joti">Piwee!</Link></h1>
                 </div>
                 <div>
                     <nav className="">
