@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 
-import {usePage} from "@inertiajs/react";
+import {usePage, Link} from "@inertiajs/react";
 import { FakeItems } from "../hooks/useFakeItems";
 
 
@@ -18,6 +18,10 @@ export default function Details() {
     const { id } = usePage().props;
     const { shirts, shoes } = FakeItems();
     const shirt = shirts[id-1]; 
+
+    const addToCart = (id) => {
+        router.post(route('cart.add', id))
+      }
 
     return (
         <div className="bg-gray-400 h-[1800px] p-2">
@@ -32,8 +36,11 @@ export default function Details() {
                         <p>Description du produit...</p>
                         <div className="place-self-center">
                             <p className="text-3xl mb-5 place-self-center">${shirt.price}</p>
-                            <Button variant="outline" className="max-md:text-xs text-lg">Ajouter au panier</Button>
-                        </div>
+                            <Button variant="outline" className="max-md:text-xs text-lg">
+                                <Link href={route('cart.add', shirt.id)} method="post" as="button">
+                                    Ajouter au panier
+                                </Link>
+                            </Button>                        </div>
                     </div>
                 </CardContent>
 
