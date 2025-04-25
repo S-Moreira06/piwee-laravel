@@ -20,8 +20,9 @@ export default function Header() {
                 <Button className="">Se connecter</Button>
             </div> */}
             <div>
-                <Button className="mr-1"><Link href={route('auth.login')}>Connexion</Link></Button>
-                <Button><Link href={route('auth.register')}>Inscription</Link></Button>
+            <Button className="mr-1"><Link href={route('cart.index')}>Panier</Link></Button>
+            <Button className="mr-1"><Link href={route('auth.login')}>Connexion</Link></Button>
+            <Button><Link href={route('auth.register')}>Inscription</Link></Button>
             </div>
         </header>
     );
