@@ -1,0 +1,48 @@
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle
+} from "@/components/ui/card";
+
+import {usePage, Link , router} from "@inertiajs/react";
+import { FakeItems } from "../hooks/useFakeItems";
+
+
+export default function Cart() {
+    const { cart } = usePage().props;
+    const { shirts, shoes } = FakeItems();
+    const cartItems = cart.map(id => shirts.find(shirt => shirt.id === parseInt(id)));
+
+    return (
+        <div className="min-h-[800px] p-4">
+            <h1 className="text-4xl place-self-center mb-4">Mon panier</h1>
+            {cartItems.map(item => (
+            <Card className="mb-2">
+                {/* <CardHeader>
+                    <CardTitle>
+                        
+                    </CardTitle>
+                </CardHeader> */}
+                <CardContent className="flex p-1.5">
+                    <img src={item.image} alt={item.name} className="w-1/2  p-1.5 rounded-2xl" />
+                    <div className="flex flex-col justify-between h-auto w-1/2 ">
+                        <div >
+                            <h2 className="text-lg font-extrabold">{item.name}</h2>
+                            <p>{item.description}</p>
+                            
+                        </div>
+                        <p className="place-self-end">{item.price}€</p>
+                        <><Link href={route("cart.remove", item.id)} method="post" as="button">Retirer</Link></>
+                    </div>
+                </CardContent>
+            </Card>
+            ))}                
+            <Link href={route('cart.clear')} as="button" method="post" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                Vider le panier
+            </Link>
+        </div>
+    )
+}
