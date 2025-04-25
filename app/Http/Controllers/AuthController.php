@@ -28,4 +28,12 @@ class AuthController extends Controller
     {
         // Handle logout logic here
     }
+    public function resetPassword()
+    {
+        return Inertia::render('auth/forgot-password');
+    }
+    public function resetPasswordPost(Request $request)
+    {
+        // Handle password reset logic here
+    }
 }

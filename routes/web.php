@@ -20,6 +20,8 @@ Route::prefix('auth')->name('auth.')->controller(AuthController::class)->group(f
     Route::get('/register', 'register')->name('register');
     Route::post('/register', 'registerPost')->name('register.post');
     Route::get('/logout', 'logout')->name('logout');
+    Route::get('/password/reset', 'resetPassword')->name('password.reset');
+    Route::post('/password/reset', 'resetPasswordPost')->name('password.reset.post');
 });
 
 Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function () {
