@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return Inertia::render('home');
@@ -11,6 +12,14 @@ Route::get('/', function () {
 
 Route::prefix('details')->name('details')->controller(ItemsController::class)->group(function () {
     Route::get('/{id}', 'details')->name('item');
+});
+
+Route::prefix('auth')->name('auth.')->controller(AuthController::class)->group(function () {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'loginPost')->name('login.post');
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register', 'registerPost')->name('register.post');
+    Route::get('/logout', 'logout')->name('logout');
 });
 
 Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function () {
