@@ -19,9 +19,6 @@ export default function Details() {
     const { shirts, shoes } = FakeItems();
     const shirt = shirts[id-1]; 
 
-    const addToCart = (id) => {
-        router.post(route('cart.add', id))
-      }
 
     return (
         <div className="bg-gray-400 h-[1800px] p-2">
@@ -40,7 +37,8 @@ export default function Details() {
                                 <Link href={route('cart.add', shirt.id)} method="post" as="button">
                                     Ajouter au panier
                                 </Link>
-                            </Button>                        </div>
+                            </Button>
+                        </div>
                     </div>
                 </CardContent>
 
