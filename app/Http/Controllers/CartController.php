@@ -22,11 +22,15 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Produit ajouté');
     }
 
-    public function remove($id)
+    public function removeFromCart($id)
     {
         $cart = session()->get('cart', []);
-        unset($cart[$id]);
-        session()->put('cart', $cart);
+        $index = array_search($id, $cart);
+        
+            unset($cart[$index]);
+            $cart = array_values($cart);
+        
+        session(['cart' => $cart]);
         return redirect()->back();
     }
 
