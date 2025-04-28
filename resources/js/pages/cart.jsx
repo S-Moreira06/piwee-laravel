@@ -13,8 +13,8 @@ import { FakeItems } from "../hooks/useFakeItems";
 
 export default function Cart() {
     const { cart } = usePage().props;
-    const { shirts, shoes } = FakeItems();
-    const cartItems = cart.map(id => shirts.find(shirt => shirt.id === parseInt(id)));
+    const { items } = FakeItems();
+    const cartItems = cart.map(id => items.find(item => item.id === parseInt(id)));
 
     return (
         <div className="min-h-[800px] p-4">
@@ -40,6 +40,9 @@ export default function Cart() {
                 </CardContent>
             </Card>
             ))}                
+            <div className="text-center text-4xl font-bold mt-4">
+                Total : {cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)} €
+            </div>
             <Link href={route('cart.clear')} as="button" method="post" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                 Vider le panier
             </Link>
