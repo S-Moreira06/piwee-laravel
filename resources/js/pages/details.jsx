@@ -32,7 +32,7 @@ export default function Details() {
                     <div className="flex flex-col justify-between h-auto lg:w-1/2">
                         <p>{item.description}</p>
                         <div className="place-self-center">
-                            <p className="text-3xl mb-5 place-self-center">${item.price}</p>
+                            <p className="text-3xl mb-5 place-self-center">{item.price}€</p>
                             <Button variant="outline" className="max-md:text-xs text-lg">
                                 <Link href={route('cart.add', item.id)} method="post" as="button">
                                     Ajouter au panier

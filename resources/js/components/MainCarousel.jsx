@@ -18,7 +18,7 @@ export default function MainCarousel (props) {
                         <Link href={`/details/${item.id}`} >
                             <img src={item.image} alt={item.name} className="" />
                             <h2 className="text-gray-600">{item.name}</h2>
-                            <p className="text-gray-600">${item.price}</p>
+                            <p className="text-gray-600">{item.price}€</p>
                         </Link> 
                     </CarouselItem>
                 //  
