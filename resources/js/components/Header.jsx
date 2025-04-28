@@ -11,18 +11,21 @@ export default function Header() {
                     <ul className="flex space-x-1 sm:space-x-4">
                         <li><Link href={"/"} className="">Accueil</Link></li>
                         <li><Link href={"/"}>Categories</Link></li>
-                        <li><Link href={"/"}>Contact</Link></li>
+                        <li><Link href={route("contact")}>Contact</Link></li>
                     </ul>
                 </nav>
             </div>
-            {/* <div className="flex gap-x-4">
-                <Button className="">S'inscrire</Button>
-                <Button className="">Se connecter</Button>
-            </div> */}
+            
             <div>
-            <Button className="mr-1"><Link href={route('cart.index')}>Panier</Link></Button>
-            <Button className="mr-1"><Link href={route('auth.login')}>Connexion</Link></Button>
-            <Button><Link href={route('auth.register')}>Inscription</Link></Button>
+                <Link href={route('cart.index')}>
+                    <Button className="mr-1">Panier</Button>
+                </Link>
+                <Link href={route('auth.login')}>
+                    <Button className="mr-1">Connexion</Button>
+                </Link>
+                <Link href={route('auth.register')}>
+                    <Button>Inscription</Button>
+                </Link>
             </div>
         </header>
     );

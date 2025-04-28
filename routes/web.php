@@ -10,6 +10,10 @@ Route::get('/', function () {
     return Inertia::render('home');
 })->name('home');
 
+Route::get('/contact', function () {
+    return Inertia::render('contact');
+})->name('contact');
+
 Route::prefix('details')->name('details')->controller(ItemsController::class)->group(function () {
     Route::get('/{id}', 'details')->name('item');
 });
