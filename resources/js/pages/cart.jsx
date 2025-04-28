@@ -19,8 +19,9 @@ export default function Cart() {
     return (
         <div className="min-h-[800px] p-4">
             <h1 className="text-4xl place-self-center mb-4">Mon panier</h1>
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-4">
             {cartItems.map(item => (
-            <Card className="mb-2">
+            <Card className="">
                 {/* <CardHeader>
                     <CardTitle>
                         
@@ -39,7 +40,8 @@ export default function Cart() {
                     </div>
                 </CardContent>
             </Card>
-            ))}                
+            ))}
+            </div>                
             <div className="text-center text-4xl font-bold mt-4">
                 Total : {cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)} €
             </div>
