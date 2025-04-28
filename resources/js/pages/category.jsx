@@ -1,5 +1,6 @@
+import Hero from "../components/Hero";
 import {FakeItems} from "../hooks/useFakeItems";
-import { usePage, Link } from "@inertiajs/react";
+import { usePage, Link, Head } from "@inertiajs/react";
 
 export default function Category(){
     const { props } = usePage(); 
@@ -9,10 +10,12 @@ export default function Category(){
     console.log(category);
 
     return (
-        <div className="bg-gray-400 text-black min-h-screen p-2">
-            
+        <div className="bg-gray-400 text-black min-h-screen">
+
+            <Head title={category[0].category.name} />
+            <Hero />
             <h1 className="text-4xl place-self-center mb-4">{category[0].category.name}</h1>
-            <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+            <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 p-2">
                 {category.map(item => (
                     <Link href={`/details/${item.id}`} >
                     <div key={item.id} className="bg-white p-4 rounded-lg shadow-md">

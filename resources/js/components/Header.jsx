@@ -17,7 +17,9 @@ export default function Header() {
     return (
         <header className="bg-gray-600 text-white p-2 sm:p-4 flex sticky top-0 justify-between items-center z-10 ">
             <div className="flex items-center gap-x-5">
-                <h1 ><Link href={route("home")} className="text-3xl md:text-6xl joti">Piwee!</Link></h1>
+                <h1 >
+                    <Link href={route("home")} className="text-3xl md:text-6xl joti">Piwee!</Link>
+                </h1>
                 <NavigationMenu className="text-lg">
                     <NavigationMenuList>
                         <NavigationMenuItem>

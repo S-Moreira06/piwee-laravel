@@ -1,6 +1,9 @@
+import { Head } from "@inertiajs/react";
+
 export default function Contact() {
     return (
         <div className="mt-20 mb-30">
+            <Head title={"Contactez-nous!"} />
             <h1 className="text-4xl place-self-center mb-10">Formulaire de contact</h1>
             <form className="flex flex-col gap-4 p-4 max-w-md mx-auto bg-gray-200 text-black rounded-lg shadow-md">
                 <label htmlFor="name" className="text-lg font-semibold">Nom:</label>

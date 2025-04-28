@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 
-import {usePage, Link} from "@inertiajs/react";
+import {usePage, Link, Head} from "@inertiajs/react";
 import { FakeItems } from "../hooks/useFakeItems";
 
 
@@ -22,6 +22,7 @@ export default function Details() {
 
     return (
         <div className="bg-gray-400 min-h-screen p-2">
+            <Head title={item.name} />
             <Card className="w-9/10 md:w-3/4 place-self-center bg-gray-500 border-gray-600 shadow-2xl">
                 <CardHeader>
                     <CardTitle className="place-self-center text-2xl">{item.name}</CardTitle>

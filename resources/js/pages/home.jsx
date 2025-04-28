@@ -1,12 +1,14 @@
 import Hero from "../components/Hero";
 import MainCarousel from "../components/MainCarousel";
 import {FakeItems} from "../hooks/useFakeItems";
+import {Head} from "@inertiajs/react";
 
 export default function Home(){
     const { items } = FakeItems();
 
     return (
         <div className="bg-gray-400 h-[1800px]">
+            <Head title={"Home"} />
             <Hero />
             <div className="max-md:flex mx-2">
                 <div>
