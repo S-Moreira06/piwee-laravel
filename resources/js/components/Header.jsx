@@ -15,7 +15,7 @@ import { Link } from '@inertiajs/react';
 
 export default function Header() {
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <header className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -47,11 +47,11 @@ export default function Header() {
                 </ul>
             </div>
             <div className="navbar-end gap-3">
-                <Link href={route('cart.index')} className="btn">Panier</Link>
-                <Link href={route('auth.login')} className="btn btn-primary">Connexion</Link>
+                <Link href={route('cart.index')} className="btn rounded-2xl">Panier</Link>
+                <Link href={route('auth.login')} className="btn btn-secondary rounded-2xl">Connexion</Link>
                 <Link href={route('auth.register')} className="btn btn-primary">Inscription</Link>
             </div>
-        </div>
+        </header>
 
         //     ANCENNE VERSION SHADCNUI
         // <header className="bg-gray-600 text-white p-2 sm:p-4 flex sticky top-0 justify-between items-center z-10 ">
