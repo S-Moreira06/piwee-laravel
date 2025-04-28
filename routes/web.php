@@ -13,6 +13,12 @@ Route::get('/', function () {
 Route::get('/contact', function () {
     return Inertia::render('contact');
 })->name('contact');
+Route::get('/about', function () {
+    return Inertia::render('about');
+})->name('about');
+Route::get('/gcu', function () {
+    return Inertia::render('gcu');
+})->name('gcu');
 
 Route::prefix('details')->name('details')->controller(ItemsController::class)->group(function () {
     Route::get('/{id}', 'details')->name('item');
