@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return Inertia::render('home');
@@ -19,6 +20,12 @@ Route::get('/about', function () {
 Route::get('/gcu', function () {
     return Inertia::render('gcu');
 })->name('gcu');
+
+
+Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
+    Route::get('/{id}', 'category')->name('index');
+});
+
 
 Route::prefix('details')->name('details')->controller(ItemsController::class)->group(function () {
     Route::get('/{id}', 'details')->name('item');
