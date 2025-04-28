@@ -12,9 +12,9 @@ export default function Footer() {
                 <div>
                     <nav className="">
                         <ul className="flex space-x-1 sm:space-x-4">
-                            <li><Link href={"/"}>Accueil</Link></li>
-                            <li><Link href={"/"}>C.G.U</Link></li>
-                            <li><Link href={"/"}>Contact</Link></li>
+                            <li><Link href={route("about")}>A propos</Link></li>
+                            <li><Link href={route("gcu")}>C.G.U</Link></li>
+                            <li><Link href={route("contact")}>Contact</Link></li>
                         </ul>
                     </nav>
                 </div>

@@ -3,7 +3,7 @@ import MainCarousel from "../components/MainCarousel";
 import {FakeItems} from "../hooks/useFakeItems";
 
 export default function Home(){
-    const { shirts, shoes } = FakeItems();
+    const { items } = FakeItems();
 
     return (
         <div className="bg-gray-400 h-[1800px]">
@@ -11,12 +11,12 @@ export default function Home(){
             <div className="max-md:flex mx-2">
                 <div>
                     <h1 className="text-2xl font-bold place-self-center joti">T-shirt</h1>
-                    <MainCarousel data={shirts} />
+                    <MainCarousel data={items} cat={1} />
                     
                 </div>
                 <div>
                     <h1 className="text-2xl font-bold place-self-center md:mt-3 joti">Sneakers</h1>
-                    <MainCarousel data={shoes} />
+                    <MainCarousel data={items} cat={2} />
                 </div>
             </div>
             
