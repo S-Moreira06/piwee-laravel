@@ -20,6 +20,9 @@ Route::get('/about', function () {
 Route::get('/gcu', function () {
     return Inertia::render('gcu');
 })->name('gcu');
+Route::get('/privacy', function () {
+    return Inertia::render('privacy');
+})->name('privacy');
 
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {

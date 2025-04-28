@@ -13,13 +13,11 @@ export default function Footer() {
                 <h6 className="footer-title">Entreprise</h6>
                 <Link href={route("about")} className="link link-hover">À propos</Link>
                 <Link href={route("contact")} className="link link-hover">Contact</Link>
-                <Link href={route("home")} className="link link-hover">Carrières</Link>
-                <Link href={route("home")} className="link link-hover">Kit média</Link>
             </nav>
             <nav>
                 <h6 className="footer-title">Légal</h6>
                 <Link href={route("gcu")} className="link link-hover">Conditions générales d’utilisation</Link>
-                <Link href={route("home")} className="link link-hover">Politique de confidentialité</Link>
+                <Link href={route("privacy")} className="link link-hover">Politique de confidentialité</Link>
                 <Link href={route("home")} className="link link-hover">Politique relative aux cookies</Link>
             </nav>
         </footer>
