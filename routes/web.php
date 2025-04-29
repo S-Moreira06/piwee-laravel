@@ -10,7 +10,6 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
     return Inertia::render('home');
 })->name('home');
-
 Route::get('/contact', function () {
     return Inertia::render('contact');
 })->name('contact');
@@ -31,7 +30,6 @@ Route::get('/cookie', function () {
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
     Route::get('/{id}', 'category')->name('index');
 });
-
 
 Route::prefix('details')->name('details')->controller(ItemsController::class)->group(function () {
     Route::get('/{id}', 'details')->name('item');
