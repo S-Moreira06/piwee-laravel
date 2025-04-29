@@ -23,6 +23,9 @@ Route::get('/gcu', function () {
 Route::get('/privacy', function () {
     return Inertia::render('privacy');
 })->name('privacy');
+Route::get('/cookie', function () {
+    return Inertia::render('cookie');
+})->name('cookie');
 
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {

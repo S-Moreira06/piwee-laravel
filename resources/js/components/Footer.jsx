@@ -18,7 +18,7 @@ export default function Footer() {
                 <h6 className="footer-title">Légal</h6>
                 <Link href={route("gcu")} className="link link-hover">Conditions générales d’utilisation</Link>
                 <Link href={route("privacy")} className="link link-hover">Politique de confidentialité</Link>
-                <Link href={route("home")} className="link link-hover">Politique relative aux cookies</Link>
+                <Link href={route("cookie")} className="link link-hover">Politique relative aux cookies</Link>
             </nav>
         </footer>
 
