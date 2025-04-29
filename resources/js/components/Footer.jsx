@@ -1,11 +1,9 @@
-import { Button } from "./ui/button";
-import Divider from "./Divider";
 import { usePage, Link, router} from '@inertiajs/react';
 
 export default function Footer() {
     return (
         <div>
-            <Divider />
+
             <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
                 <nav>
                     <h6 className="footer-title">Services</h6>
