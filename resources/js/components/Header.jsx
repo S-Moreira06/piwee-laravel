@@ -49,7 +49,7 @@ export default function Header() {
             <div className="navbar-end gap-3">
                 <Link href={route('cart.index')} className="btn rounded-2xl">Panier</Link>
                 <Link href={route('auth.login')} className="btn btn-secondary rounded-2xl">Connexion</Link>
-                <Link href={route('auth.register')} className="btn btn-primary">Inscription</Link>
+                <Link href={route('auth.register')} className="btn btn-primary rounded-2xl">Inscription</Link>
             </div>
         </header>
 
