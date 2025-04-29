@@ -21,30 +21,27 @@ export default function Details() {
 
 
     return (
-        <div className="bg-gray-400 min-h-screen p-2">
-            <Head title={item.name} />
-            <Card className="w-9/10 md:w-3/4 place-self-center bg-gray-500 border-gray-600 shadow-2xl">
-                <CardHeader>
-                    <CardTitle className="place-self-center text-2xl">{item.name}</CardTitle>
-                    <CardDescription className="place-self-center">Marque</CardDescription>
-                </CardHeader>
-                <CardContent className="lg:flex p-1.5">
-                    <img src={item.image} alt={item.name} className="lg:w-1/2  p-1.5 rounded-2xl"/>
-                    <div className="flex flex-col justify-between h-auto lg:w-1/2">
-                        <p>{item.description}</p>
-                        <div className="place-self-center">
-                            <p className="text-3xl mb-5 place-self-center">{item.price}€</p>
-                            <Button variant="outline" className="max-md:text-xs text-lg">
-                                <Link href={route('cart.add', item.id)} method="post" as="button">
-                                    Ajouter au panier
-                                </Link>
-                            </Button>
-                        </div>
-                    </div>
-                </CardContent>
+        <div className="lg:flex bg-gray-400  p-2">
+            <Head title={item.name}/>
+            <div className="card w-9/10 bg-base-100 shadow-sm
+                            lg:card-side lg:w-1/2
+                            max-lg:max-w-130 max-lg:place-self-center ">
+                <figure>
+                    <img
+                    src={item.image}
+                    alt="Album" className=""/>
+                </figure>
+                <div className="card-body">
+                    <h2 className="card-title">{item.name}</h2>
+                    <p>{item.description}</p>
+                </div>
+            </div>
+            <div className="flex justify-center w-full lg:w-1/2 place-self-end mt-2">
+                <Link href={route('cart.add', item.id)} method="post" as="button" >
+                    <div className="btn btn-primary">Ajouter au panier</div>
+                </Link>
 
-            </Card>
-            
+            </div>
         </div>
     )
 }

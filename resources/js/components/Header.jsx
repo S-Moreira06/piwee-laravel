@@ -15,7 +15,7 @@ import { Link } from '@inertiajs/react';
 
 export default function Header() {
     return (
-        <header className="navbar bg-base-100 shadow-sm">
+        <header className="navbar bg-base-100 shadow-sm ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -38,7 +38,7 @@ export default function Header() {
                     <li>
                         <details>
                             <summary>Catégories</summary>
-                            <ul className="p-2">
+                            <ul className="p-2 z-90">
                                 <li><Link href={route("category.index", { id: 1 })}>T-Shirts</Link></li>
                                 <li><Link href={route("category.index", { id: 2 })}>Sneakers</Link></li>
                             </ul>
