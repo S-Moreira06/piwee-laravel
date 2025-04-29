@@ -13,7 +13,7 @@ export default function Home(){
         <div className="bg-gray-400 min-h-[1800px] pb-2">
             <Head title={"Home"} />
             <Hero />
-            <div className="max-md:flex mx-2">
+            <div className="max-md:flex max-md:gap-4 mx-2">
                 <div>
                     <h2 className="text-2xl font-bold place-self-center joti">T-shirt</h2>
                     <MainCarousel data={items} cat={1} />

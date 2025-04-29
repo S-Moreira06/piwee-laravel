@@ -13,24 +13,20 @@ export default function MainCarousel (props) {
 
     return (
         <Carousel orientation={orientation} opts={{ align: "start",loop: true }} className="">
-            <CarouselContent className="max-md:h-105 ml-0 max-md:mt-0 max-md:mb-1 md:mr-2.5">
+            <CarouselContent className="max-sm:h-105 max-md:h-120 ml-0 max-md:mt-0 max-md:mb-1 md:mr-2.5">
             {randomItems.map((item) => (
-                <CarouselItem key={item.id} className=" rounded shadow-xl md:basis-1/3 lg:basis-1/5">
-                    {/* <Link href={`/details/${item.id}`}>
-                        <img src={item.image} alt={item.name} className="" />
-                        <h2 className="text-gray-600">{item.name}</h2>
-                        <p className="text-gray-600">{item.price}€</p>
-                    </Link>  */}
-                    <div className="card bg-base-100 ">
-                        <figure>
+                <CarouselItem key={item.id} className=" rounded md:basis-1/3 lg:basis-1/4">
+                    <Link href={`/details/${item.id}`}>
+                    <div className="card card-sm md:card-md lg:card-lg bg-base-100 ">
+                        <figure className="">
                             <img
                             src={item.image}
                             alt="Shoes" />
                         </figure>
                         <div className="card-body">
                             <div className="flex w-auto justify-between">
-                                <h2 className="card-title text-lg text-nowrap">{item.name}</h2>
-                                <span className="text-bold text-lg">{item.price}€</span>
+                                <h2 className="card-title text-nowrap">{item.name}</h2>
+                                <span className="text-bold">{item.price}€</span>
                             </div>
                             <p>
                             {item.description && item.description.length > 100
@@ -42,6 +38,7 @@ export default function MainCarousel (props) {
                             </div>
                         </div>
                     </div>
+                    </Link>
                 </CarouselItem>
             ))}
             </CarouselContent>
