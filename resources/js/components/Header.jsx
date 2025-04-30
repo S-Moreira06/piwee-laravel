@@ -51,7 +51,6 @@ export default function Header() {
                 <Link href={route('auth.login')} className="btn btn-secondary rounded-2xl">Connexion</Link>
                 <Link href={route('auth.register')} className="btn btn-primary rounded-2xl">Inscription</Link>
                 <Link href={route('profile')} className="btn btn-primary rounded-2xl">Profil</Link>
-                <Link href={route('password')} className="btn btn-primary rounded-2xl">MDP</Link>
             </div>
         </header>
 

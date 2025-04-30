@@ -38,6 +38,12 @@ Route::get('settings/password', function () {
 Route::get('settings/appearance', function () {
     return Inertia::render('settings/appearance');
 })->name('appearance');
+Route::get('settings/orders', function () {
+    return Inertia::render('settings/orders');
+})->name('orders');
+Route::get('settings/favoris', function () {
+    return Inertia::render('settings/favoris');
+})->name('favoris');
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
     Route::get('/{id}', 'category')->name('index');
