@@ -8,10 +8,10 @@ export default function SelectedItem() {
     const randomItems = getRandomItems(items, 1);
     
     return (
-        <div className="">
+        <div className="mb-5">
             <Link href={`/details/${randomItems[0].id}`}>
-                <h2 className="text-2xl font-bold place-self-center joti">Notre séléction</h2>
-                <div className="card bg-base-100 w-3/4 max-w-[700px] shadow-sm place-self-center">
+                <h2 className="text-4xl font-bold place-self-center joti">Notre séléction</h2>
+                <div className="card card-sm md:card-md lg:card-lg bg-base-100 w-3/4 max-w-[400px] shadow-sm place-self-center">
                     <figure>
                         <img
                         src={randomItems[0].image}

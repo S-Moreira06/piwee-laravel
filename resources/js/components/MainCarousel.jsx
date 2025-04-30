@@ -5,19 +5,21 @@ import { usePage, Link, router} from '@inertiajs/react';
 
 export default function MainCarousel (props) {
     const isMobile = useIsMobile();
-    const orientation = isMobile ? 'vertical' : 'horizontal';
+    // const orientation = isMobile ? 'vertical' : 'horizontal';
+    const orientation = 'horizontal';
     const items = props.cat 
     ? props.data.filter((item) => item.category.id === props.cat)
     : props.data;
     const randomItems = getRandomItems(items, 6);
 
     return (
-        <Carousel orientation={orientation} opts={{ align: "start",loop: true }} className="">
-            <CarouselContent className="max-sm:h-105 max-md:h-120 ml-0 max-md:mt-0 max-md:mb-1 md:mr-2.5">
+        <Carousel orientation={orientation} opts={{ align: "start",loop: true }} className="mb-5">
+            <CarouselContent className="">
+                {/*max-sm:h-105 max-md:h-120 ml-0 max-lg:mt-0 max-lg:mb-1 md:mr-2.5 */}
             {randomItems.map((item) => (
-                <CarouselItem key={item.id} className=" rounded md:basis-1/3 lg:basis-1/4">
+                <CarouselItem key={item.id} className=" rounded basis-1/2 md:basis-1/3 lg:basis-1/6">
                     <Link href={`/details/${item.id}`}>
-                    <div className="card card-sm md:card-md lg:card-lg bg-base-100 ">
+                    <div className="card card-sm md:card-md lg:card-lg bg-base-100 h-full">
                         <figure className="">
                             <img
                             src={item.image}
