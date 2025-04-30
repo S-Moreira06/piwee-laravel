@@ -29,6 +29,15 @@ Route::get('/cookie', function () {
 Route::get('settings/profile', function () {
     return Inertia::render('settings/profile');
 })->name('profile');
+Route::get('settings/password', function () {
+    return Inertia::render('settings/password');
+})->name('password');
+Route::get('settings/password', function () {
+    return Inertia::render('settings/password');
+})->name('password');
+Route::get('settings/appearance', function () {
+    return Inertia::render('settings/appearance');
+})->name('appearance');
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
     Route::get('/{id}', 'category')->name('index');

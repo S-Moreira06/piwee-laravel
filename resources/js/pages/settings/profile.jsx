@@ -38,12 +38,12 @@ export default function Profile({ mustVerifyEmail, status }) {
     return (
         <>
         
-        {/* <SettingsLayout> */}
-        <div className="space-y-6 p-5 w-3/4 place-self-center">
+        <SettingsLayout>
+        <div className="space-y-6 p-5 w-3/4 flex flex-col place-self-center">
                     <Head title="Paramètres de profil" />
-                    <HeadingSmall title="Informations du profil" description="Mettez a jour votre nom et votre adresse mail" />
+                    <HeadingSmall className="" title="Informations du profil" description="Mettez a jour votre nom et votre adresse mail" />
 
-                    <form onSubmit={submit} className="space-y-6">
+                    <form onSubmit={submit} className="space-y-6 place-self-center">
                         <div className="grid gap-2">
                             <Label htmlFor="name">Nom</Label>
 
@@ -116,7 +116,7 @@ export default function Profile({ mustVerifyEmail, status }) {
                 </div>
 
                 {/* <DeleteUser /> */}
-            {/* </SettingsLayout> */}
+            </SettingsLayout>
         </>
     );
 }
