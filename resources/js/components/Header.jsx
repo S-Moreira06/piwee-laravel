@@ -31,7 +31,7 @@ export default function Header() {
                         </li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl joti"><Link href={route("home")}>Piwee!</Link></a>
+                <p className="btn btn-ghost text-xl joti"><Link href={route("home")}>Piwee!</Link></p>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -50,6 +50,7 @@ export default function Header() {
                 <Link href={route('cart.index')} className="btn rounded-2xl">Panier</Link>
                 <Link href={route('auth.login')} className="btn btn-secondary rounded-2xl">Connexion</Link>
                 <Link href={route('auth.register')} className="btn btn-primary rounded-2xl">Inscription</Link>
+                <Link href={route('profile')} className="btn btn-primary rounded-2xl">Profil</Link>
             </div>
         </header>
 

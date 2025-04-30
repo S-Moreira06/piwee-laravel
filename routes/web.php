@@ -26,6 +26,9 @@ Route::get('/cookie', function () {
     return Inertia::render('cookie');
 })->name('cookie');
 
+Route::get('settings/profile', function () {
+    return Inertia::render('settings/profile');
+})->name('profile');
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
     Route::get('/{id}', 'category')->name('index');

@@ -54,7 +54,6 @@ export default function Details() {
                 <Link href={route('home')} method="get" as="button" >
                     <div className="btn btn-primary">Ajouter au favoris</div>
                 </Link>
-
             </div>
         </div>
     )
