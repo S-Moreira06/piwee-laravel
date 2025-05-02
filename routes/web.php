@@ -5,10 +5,49 @@ use Inertia\Inertia;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return Inertia::render('home');
 })->name('home');
+Route::get('/contact', function () {
+    return Inertia::render('contact');
+})->name('contact');
+Route::get('/about', function () {
+    return Inertia::render('about');
+})->name('about');
+Route::get('/gcu', function () {
+    return Inertia::render('gcu');
+})->name('gcu');
+Route::get('/privacy', function () {
+    return Inertia::render('privacy');
+})->name('privacy');
+Route::get('/cookie', function () {
+    return Inertia::render('cookie');
+})->name('cookie');
+
+Route::get('settings/profile', function () {
+    return Inertia::render('settings/profile');
+})->name('profile');
+Route::get('settings/password', function () {
+    return Inertia::render('settings/password');
+})->name('password');
+Route::get('settings/password', function () {
+    return Inertia::render('settings/password');
+})->name('password');
+Route::get('settings/appearance', function () {
+    return Inertia::render('settings/appearance');
+})->name('appearance');
+Route::get('settings/orders', function () {
+    return Inertia::render('settings/orders');
+})->name('orders');
+Route::get('settings/favoris', function () {
+    return Inertia::render('settings/favoris');
+})->name('favoris');
+
+Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
+    Route::get('/{id}', 'category')->name('index');
+});
 
 Route::prefix('details')->name('details')->controller(ItemsController::class)->group(function () {
     Route::get('/{id}', 'details')->name('item');

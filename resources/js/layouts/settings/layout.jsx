@@ -6,21 +6,32 @@ import { Link } from '@inertiajs/react';
 
 const sidebarNavItems = [
     {
-        title: 'Profile',
+        title: 'Profil',
         url: '/settings/profile',
         icon: null,
     },
     {
-        title: 'Password',
+        title: 'Mot de pase',
         url: '/settings/password',
         icon: null,
     },
     {
-        title: 'Appearance',
+        title: 'Apparences',
         url: '/settings/appearance',
         icon: null,
     },
+    {
+        title: 'Mes Commandes',
+        url: '/settings/orders',
+        icon: null,
+    },
+    {
+        title: 'Mes Favoris',
+        url: '/settings/favoris',
+        icon: null,
+    },
 ];
+
 
 export default function SettingsLayout({ children }) {
     // When server-side rendering, we only render the layout on the client...

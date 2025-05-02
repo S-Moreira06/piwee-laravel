@@ -1,49 +1,60 @@
-// ShadCN UI Import 
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
-
-import {usePage, Link} from "@inertiajs/react";
+import {usePage, Link, Head} from "@inertiajs/react";
 import { FakeItems } from "../hooks/useFakeItems";
 
 
 export default function Details() {
     const { id } = usePage().props;
-    const { shirts, shoes } = FakeItems();
-    const shirt = shirts[id-1]; 
+    const { items } = FakeItems();
+    const item = items[id-1]; 
 
 
     return (
-        <div className="bg-gray-400 h-[1800px] p-2">
-            <Card className="w-9/10 md:w-3/4 place-self-center bg-gray-500 border-gray-600 shadow-2xl">
-                <CardHeader>
-                    <CardTitle className="place-self-center text-2xl">{shirt.name}</CardTitle>
-                    <CardDescription className="place-self-center">Marque</CardDescription>
-                </CardHeader>
-                <CardContent className="flex p-1.5">
-                    <img src={shirt.image} alt={shirt.name} className="w-2/3 md:w-1/2  p-1.5 rounded-2xl" />
-                    <div className="flex flex-col justify-between h-auto md:w-1/2">
-                        <p>Description du produit...</p>
-                        <div className="place-self-center">
-                            <p className="text-3xl mb-5 place-self-center">${shirt.price}</p>
-                            <Button variant="outline" className="max-md:text-xs text-lg">
-                                <Link href={route('cart.add', shirt.id)} method="post" as="button">
-                                    Ajouter au panier
-                                </Link>
-                            </Button>
-                        </div>
-                    </div>
-                </CardContent>
-
-            </Card>
-            
+        <div className="lg:flex bg-gray-400  p-2">
+            <Head title={item.name}/>
+            <div className="card w-9/10 bg-base-100 shadow-sm
+                            lg:card-side lg:w-1/2
+                            max-lg:max-w-130 max-lg:place-self-center ">
+                <figure>
+                    <img
+                    src={item.image}
+                    alt="Album" className=""/>
+                </figure>
+                <div className="card-body">
+                    <h2 className="card-title">{item.name}</h2>
+                    <p className="p-4">{item.description}</p>
+                </div>
+            </div>
+            <div className="flex flex-col justify-center w-full lg:w-1/2 place-self-end lg:place-self-center mt-2">
+                <div className="flex justify-center gap-4 mb-5">
+                    <p>Sélectionner la taille:</p>
+                </div>
+                <div className="grid grid-cols-8 gap-2 place-self-center mb-5">
+                    {Array.from({ length: 24 }, (_, i) => {
+                        const size = 35 + i * 0.5;
+                        return (
+                        <p key={size} className="badge badge-primary px-2.5 place-self-center">
+                            {size}
+                        </p>
+                        );
+                    })}
+                </div>
+                <p className="place-self-center mb-2">Quantité:</p>
+                <div className="flex justify-center gap-4 mb-5">
+                    <button className="btn btn-primary">-</button>
+                    <p className="place-self-center">1</p>
+                    <button className="btn btn-primary">+</button>
+                </div>
+                <div className="flex justify-around mb-5">
+                    <h2 className="text-3xl font-bold ">{item.price} €</h2>
+                    <p className="text-sm place-self-center">En stock : Oui</p>
+                </div>
+                <Link href={route('cart.add', item.id)} method="post" as="button" >
+                    <div className="btn btn-primary mb-2">Ajouter au panier</div>
+                </Link>
+                <Link href={route('home')} method="get" as="button" >
+                    <div className="btn btn-primary">Ajouter au favoris</div>
+                </Link>
+            </div>
         </div>
     )
 }

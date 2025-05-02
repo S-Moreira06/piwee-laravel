@@ -8,22 +8,22 @@ import SettingsLayout from '@/layouts/settings/layout';
 
 const breadcrumbs = [
     {
-        title: 'Appearance settings',
+        title: 'Paramètres-d-affichage',
         href: '/settings/appearance',
     },
 ];
 
 export default function Appearance() {
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Appearance settings" />
+        <>
+            <Head title="Paramètres d'affichage" />
 
             <SettingsLayout>
                 <div className="space-y-6">
-                    <HeadingSmall title="Appearance settings" description="Update your account's appearance settings" />
+                    <HeadingSmall title="Parametres d'affichage" description="Mettez a jour les paramètres d'affichage de votre compte" />
                     <AppearanceTabs />
                 </div>
             </SettingsLayout>
-        </AppLayout>
+        </>
     );
 }
