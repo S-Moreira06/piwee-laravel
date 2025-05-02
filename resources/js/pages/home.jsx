@@ -14,12 +14,12 @@ export default function Home(){
             <SelectedItem />
             <div className="mx-2">
                 <div className="">
-                    <h2 className="text-4xl font-bold place-self-center joti">T-shirt</h2>
+                    <h2 className="text-4xl font-bold place-self-center joti mb-4">T-shirt</h2>
                     <MainCarousel data={items} cat={1} />
                     
                 </div>
                 <div>
-                    <h2 className="text-4xl font-bold place-self-center md:mt-3 joti">Sneakers</h2>
+                    <h2 className="text-4xl font-bold place-self-center md:mt-3 joti mb-'" >Sneakers</h2>
                     <MainCarousel data={items} cat={2} />
                 </div>
             </div>

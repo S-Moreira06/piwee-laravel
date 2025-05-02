@@ -7,7 +7,7 @@ export default function Hero(){
             <div className="hero-content text-neutral-content text-center">
                 <div className="max-w-md">
                     <h1 className="mb-5 text-9xl font-bold joti">Piwee!</h1>
-                    <p className="mb-5">
+                    <p className="mb-5 montserrat-semibold-italic">
                         Revendeur officiel de vêtements et sneakers de marques tendances.
                     </p>
                     <button className="btn btn-primary">Inscrivez-vous</button>

@@ -10,7 +10,7 @@ export default function SelectedItem() {
     return (
         <div className="mb-5">
             <Link href={`/details/${randomItems[0].id}`}>
-                <h2 className="text-4xl font-bold place-self-center joti">Notre séléction</h2>
+                <h2 className="text-4xl font-bold place-self-center joti mb-4">Notre séléction</h2>
                 <div className="card card-sm md:card-md lg:card-lg bg-base-100 w-3/4 max-w-[400px] shadow-sm place-self-center">
                     <figure>
                         <img

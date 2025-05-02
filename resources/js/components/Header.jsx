@@ -44,7 +44,7 @@ export default function Header() {
                             </ul>
                         </details> */}
                         <div className="dropdown dropdown-hover">
-                            <div tabIndex={0} role="button" className="">Catégories</div>
+                            <div tabIndex={0} role="button" className="montserrat-semibold-italic">Catégories</div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 mt-5 w-52 p-2 shadow">
                                     <li><Link href={route("category.index", { id: 1 })}>T-Shirts</Link></li>
                                     <li><Link href={route("category.index", { id: 2 })}>Sneakers</Link></li>
