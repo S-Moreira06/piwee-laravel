@@ -10,7 +10,7 @@ export default function MainCarousel (props) {
     const items = props.cat 
     ? props.data.filter((item) => item.category.id === props.cat)
     : props.data;
-    const randomItems = getRandomItems(items, 6);
+    const randomItems = getRandomItems(items, 10);
 
     return (
         <Carousel orientation={orientation} opts={{ align: "start",loop: true }} className="mb-5">

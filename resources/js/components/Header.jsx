@@ -36,13 +36,20 @@ export default function Header() {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <details>
+                        {/* <details>
                             <summary>Catégories</summary>
                             <ul className="p-2 z-90">
                                 <li><Link href={route("category.index", { id: 1 })}>T-Shirts</Link></li>
                                 <li><Link href={route("category.index", { id: 2 })}>Sneakers</Link></li>
                             </ul>
-                        </details>
+                        </details> */}
+                        <div className="dropdown dropdown-hover">
+                            <div tabIndex={0} role="button" className="">Catégories</div>
+                                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 mt-5 w-52 p-2 shadow">
+                                    <li><Link href={route("category.index", { id: 1 })}>T-Shirts</Link></li>
+                                    <li><Link href={route("category.index", { id: 2 })}>Sneakers</Link></li>
+                                </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
