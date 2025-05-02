@@ -17,7 +17,7 @@ export default function MainCarousel (props) {
             <CarouselContent className="">
                 {/*max-sm:h-105 max-md:h-120 ml-0 max-lg:mt-0 max-lg:mb-1 md:mr-2.5 */}
             {randomItems.map((item) => (
-                <CarouselItem key={item.id} className=" rounded basis-1/2 md:basis-1/3 lg:basis-1/6">
+                <CarouselItem key={item.id} className=" rounded basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6">
                     <Link href={`/details/${item.id}`}>
                     <div className="card card-sm md:card-md lg:card-lg bg-base-100 h-full">
                         <figure className="">
@@ -27,8 +27,8 @@ export default function MainCarousel (props) {
                         </figure>
                         <div className="card-body">
                             <div className="flex w-auto justify-between">
-                                <h2 className="card-title text-nowrap">{item.name}</h2>
-                                <span className="text-bold">{item.price}€</span>
+                                <h2 className="card-title">{item.name}</h2>
+                                <span className="text-bold text-xl">{item.price}€</span>
                             </div>
                             <p>
                             {item.description && item.description.length > 100
