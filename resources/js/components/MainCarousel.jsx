@@ -21,9 +21,7 @@ export default function MainCarousel (props) {
                     <Link href={`/details/${item.id}`}>
                     <div className="card card-sm md:card-md lg:card-lg bg-base-100 h-full">
                         <figure className="">
-                            <img
-                            src={item.image}
-                            alt="Shoes" />
+                            <img src={item.image} alt={item.name} />                            
                         </figure>
                         <div className="card-body">
                             <div className="flex w-auto justify-between">
@@ -36,7 +34,7 @@ export default function MainCarousel (props) {
                                 : item.description}
                             </p>
                             <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Voir détails</button>
+                            <button className="btn btn-primary">Détails</button>
                             </div>
                         </div>
                     </div>

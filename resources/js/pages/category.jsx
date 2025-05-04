@@ -28,35 +28,48 @@ export default function Category(){
     // 2. Filtrer les marques disponibles dans la liste des marques
     const availableBrands = brands.filter(brand => brandsInCategory.includes(brand.id));
     return (
-        <div className="bg-gray-400 text-black min-h-screen">
+        <div className="">
 
-            {categoryItems.length > 0 ? (
-            <>
+            {/* {categoryItems.length > 0 ? (
+            <> */}
                 <Head title={categoryItems[0].category.name} />
                 <h1 className="text-4xl place-self-center mb-4">{categoryItems[0].category.name}</h1>
-            </>
+            {/* </>
             ) : (
             <>
                 <Head title="Catégorie inconnue" />
                 <h1 className="text-4xl place-self-center mb-4">Catégorie introuvable</h1>
             </>
-            )}
-            <form action="">
+            )} */}
+            <form action="" className="ml-4">
                 <select name="brand" id="brand" value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)} className="p-2 border border-gray-300 rounded">
-                    <option value="">Marque</option>
+                    <option value="" disabled>Marque</option>
                     {availableBrands.map(brand => (
                         <option value={brand.id} key={brand.id}>{brand.name}</option>
                     ))}
                 </select>
             </form>
-            <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 p-2">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 p-20">
             {filteredItems.length > 0 ? (
                 filteredItems.map(item => (
-                    <Link href={`/details/${item.id}`} key={item.id} className="bg-white p-4 rounded-lg shadow-md">
-                        <img src={item.image} alt={item.name} className="w-full h-auto rounded-lg mb-4" />
-                        <h2 className="text-xl font-bold">{item.name}</h2>
-                        <p>{item.description}</p>
-                        <p className="text-lg font-semibold">{item.price}€</p>
+                    <Link href={`/details/${item.id}`} key={item.id} className="card card-sm md:card-md lg:card-lg bg-base-100">
+                        <figure>
+                            <img src={item.image} alt={item.name} className="" />
+                        </figure>
+                        <div className="card-body">
+                            <div className="flex w-auto justify-between">
+                                <h2 className="card-title">{item.name}</h2>
+                                <span className="text-bold text-xl">{item.price}€</span>
+                            </div>
+                            <p>
+                            {item.description && item.description.length > 100
+                                ? item.description.slice(0, 50) + '...'
+                                : item.description}
+                            </p>
+                            <div className="card-actions justify-end">
+                            <button className="btn btn-primary">Détails</button>
+                            </div>
+                        </div>
                     </Link>
                 ))):(<p>Aucun articles trouvé pour cette marque en ce moment.</p>)}
             </div>

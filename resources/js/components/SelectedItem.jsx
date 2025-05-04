@@ -24,7 +24,7 @@ export default function SelectedItem() {
                         </div>
                         <p className="mx-5">{randomItems[0].description}</p>
                         <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Ajouter au panier</button>
+                        <button className="btn btn-primary">Détails</button>
                         </div>
                     </div>
                 </div>
