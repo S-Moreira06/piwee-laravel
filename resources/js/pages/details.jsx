@@ -9,22 +9,20 @@ export default function Details() {
 
 
     return (
-        <div className="lg:flex bg-gray-400  p-2">
+        <div className="flex max-lg:flex-col gap-5 p-2 min-h-screen p-20">
             <Head title={item.name}/>
-            <div className="card w-9/10 bg-base-100 shadow-sm
-                            lg:card-side lg:w-1/2
-                            max-lg:max-w-130 max-lg:place-self-center ">
+
+            <div className="card card-sm md:card-md lg:card-lg bg-base-100 w-9/10 lg:w-1/2 max-lg:max-w-130 place-self-center max-h-[600px]">
                 <figure>
-                    <img
-                    src={item.image}
-                    alt="Album" className=""/>
+                    <img src={item.image} alt="Album" className=""/>
                 </figure>
                 <div className="card-body">
                     <h2 className="card-title">{item.name}</h2>
                     <p className="p-4">{item.description}</p>
                 </div>
             </div>
-            <div className="flex flex-col justify-center w-full lg:w-1/2 place-self-end lg:place-self-center mt-2">
+            
+            <div className="flex flex-col justify-center w-full lg:w-1/2 mt-2">
                 <div className="flex justify-center gap-4 mb-5">
                     <p>Sélectionner la taille:</p>
                 </div>
