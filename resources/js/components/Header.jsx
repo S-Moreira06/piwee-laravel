@@ -15,7 +15,7 @@ import { Link } from '@inertiajs/react';
 
 export default function Header() {
     return (
-        <header className="navbar bg-base-100 shadow-sm ">
+        <header className="navbar shadow-sm bg-neutral sticky top-0 z-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -23,12 +23,13 @@ export default function Header() {
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li>
-                            <p>Catégories</p>
+                            Catégories
                             <ul className="p-2">
                                 <li><Link href={route("category.index", { id: 1 })}>T-Shirts</Link></li>
                                 <li><Link href={route("category.index", { id: 2 })}>Sneakers</Link></li>
                             </ul>
                         </li>
+                        <li><Link href={route('cart.index')} className="">Panier</Link></li>
                     </ul>
                 </div>
                 <p className="btn btn-ghost text-xl joti"><Link href={route("home")}>Piwee!</Link></p>
@@ -36,13 +37,6 @@ export default function Header() {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        {/* <details>
-                            <summary>Catégories</summary>
-                            <ul className="p-2 z-90">
-                                <li><Link href={route("category.index", { id: 1 })}>T-Shirts</Link></li>
-                                <li><Link href={route("category.index", { id: 2 })}>Sneakers</Link></li>
-                            </ul>
-                        </details> */}
                         <div className="dropdown dropdown-hover">
                             <div tabIndex={0} role="button" className="montserrat-semibold-italic">Catégories</div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 mt-5 w-52 p-2 shadow">
@@ -51,13 +45,14 @@ export default function Header() {
                                 </ul>
                         </div>
                     </li>
+                    <li><Link href={route('cart.index')} className="montserrat-semibold-italic">Panier</Link></li>
                 </ul>
             </div>
             <div className="navbar-end gap-3">
-                <Link href={route('cart.index')} className="btn rounded-2xl">Panier</Link>
-                <Link href={route('auth.login')} className="btn btn-secondary rounded-2xl">Connexion</Link>
-                <Link href={route('auth.register')} className="btn btn-primary rounded-2xl">Inscription</Link>
-                <Link href={route('profile')} className="btn btn-primary rounded-2xl">Profil</Link>
+                
+                <Link href={route('auth.login')} className="btn btn-secondary ">Connexion</Link>
+                <Link href={route('auth.register')} className="btn btn-primary ">Inscription</Link>
+                <Link href={route('profile')} className="btn btn-primary ">Profil</Link>
             </div>
         </header>
 
