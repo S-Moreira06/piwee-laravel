@@ -15,6 +15,9 @@ export default function Cart() {
     const { cart } = usePage().props;
     const { items } = FakeItems();
     const cartItems = cart.map(id => items.find(item => item.id === parseInt(id)));
+    const subtotal = cartItems.reduce((acc, item) => acc + item.price, 0);
+    const shipping = 9.99;
+    const total = cartItems.length > 0 ? subtotal + shipping : subtotal;
 
     return (
         <div className="min-h-[800px] p-4">
@@ -22,7 +25,7 @@ export default function Cart() {
             <div className="lg:flex gap-4">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:w-2/3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                 {cartItems.map(item => (
-                <div className="card card-sm md:card-md lg:card-lg bg-base-100 ">
+                <div className="card card-sm md:card-md lg:card-lg bg-base-100 " key={item.id}>
                             <figure className="">
                                 <img
                                 src={item.image}
@@ -47,10 +50,17 @@ export default function Cart() {
                 </div>
                 <div className="lg:w-1/3 lg:fixed lg:right-0">
                     <div className="text-center my-4">
-                        <p>Sous-total = {cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)} €</p>
-
-                        <p>+ Frais de port 9,99 €</p>
-                        <p className="text-4xl font-bold">Total : {(cartItems.reduce((acc, item) => acc + item.price, 0)+9.99).toFixed(2)} €</p>
+                        {cartItems.length === 0 ? (
+                            <p className="text-center text-lg">Votre panier est vide.</p>
+                        ) : (
+                            <>
+                                <p>Sous-total = {subtotal.toFixed(2)} €</p>
+                                <p>+ Frais de port {shipping.toFixed(2)} €</p>
+                            </>
+                        )}
+                        <p className="text-4xl font-bold">
+                            Total : {total.toFixed(2)} €
+                        </p>
                     </div>
                     <div className="place-self-center">
                         <Link href={route('cart.clear')} as="button" method="post" className="btn btn-error w-full">

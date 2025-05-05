@@ -15,7 +15,7 @@ export default function Home(){
             <div className="p-20">
                 <div className="">
                     <h2 className="text-4xl font-bold place-self-center joti mb-4">T-shirt</h2>
-                    <MainCarousel data={items} cat={1} className="" />
+                    <MainCarousel data={items} cat={1} />
                     
                 </div>
                 <div>
