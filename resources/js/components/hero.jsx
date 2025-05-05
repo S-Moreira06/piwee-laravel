@@ -15,7 +15,7 @@ export default function Hero() {
                     className="max-w-md"
                     initial={{ opacity: 0 }} // Texte et bouton commencent invisibles
                     animate={{ opacity: 1 }} // Apparition progressive
-                    transition={{ duration: 1, delay: 1 }} // Apparition après le glissement
+                    transition={{ duration: 1.5, delay: 0.8 }} // Apparition après le glissement
                 >
                     <h1 className="mb-5 text-9xl font-bold joti">Piwee!</h1>
                     <p className="mb-5 montserrat-semibold-italic">
@@ -25,7 +25,7 @@ export default function Hero() {
                         className="btn btn-primary"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 1.5 }} // Apparition plus tard que le texte
+                        transition={{ duration: 1.5, delay: 1.2 }} // Apparition plus tard que le texte
                     >
                         Inscrivez-vous
                     </motion.button>
