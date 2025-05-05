@@ -19,35 +19,46 @@ export default function Cart() {
     return (
         <div className="min-h-[800px] p-4">
             <h1 className="text-4xl place-self-center mb-4">Mon panier</h1>
-            <div className="flex flex-col md:grid md:grid-cols-2 gap-4">
-            {cartItems.map(item => (
-            <Card className="">
-                {/* <CardHeader>
-                    <CardTitle>
-                        
-                    </CardTitle>
-                </CardHeader> */}
-                <CardContent className="flex p-1.5">
-                    <img src={item.image} alt={item.name} className="w-1/2  p-1.5 rounded-2xl" />
-                    <div className="flex flex-col justify-between h-auto w-1/2 ">
-                        <div >
-                            <h2 className="text-lg font-extrabold">{item.name}</h2>
-                            <p>{item.description}</p>
-                            
+            <div className="lg:flex gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:w-2/3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+                {cartItems.map(item => (
+                <div className="card card-sm md:card-md lg:card-lg bg-base-100 ">
+                            <figure className="">
+                                <img
+                                src={item.image}
+                                alt="Shoes" />
+                            </figure>
+                            <div className="card-body">
+                                <div className="flex w-auto justify-between">
+                                    <h2 className="card-title">{item.name}</h2>
+                                    <span className="text-bold text-xl">{item.price}€</span>
+                                </div>
+                                <p>
+                                {item.description && item.description.length > 100
+                                    ? item.description.slice(0, 50) + '...'
+                                    : item.description}
+                                </p>
+                                <div className="card-actions justify-end">
+                                <Link href={route("cart.remove", item.id)} method="post" as="button" className="btn btn-error">Retirer</Link>
+                                </div>
+                            </div>
                         </div>
-                        <p className="place-self-end">{item.price}€</p>
-                        <><Link href={route("cart.remove", item.id)} method="post" as="button">Retirer</Link></>
+                ))}
+                </div>
+                <div className="lg:w-1/3 lg:fixed lg:right-0">
+                    <div className="text-center my-4">
+                        <p>Sous-total = {cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)} €</p>
+
+                        <p>+ Frais de port 9,99 €</p>
+                        <p className="text-4xl font-bold">Total : {(cartItems.reduce((acc, item) => acc + item.price, 0)+9.99).toFixed(2)} €</p>
                     </div>
-                </CardContent>
-            </Card>
-            ))}
-            </div>                
-            <div className="text-center text-4xl font-bold mt-4">
-                Total : {cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)} €
+                    <div className="place-self-center">
+                        <Link href={route('cart.clear')} as="button" method="post" className="btn btn-error w-full">
+                            Vider le panier
+                        </Link>
+                    </div>
+                </div>
             </div>
-            <Link href={route('cart.clear')} as="button" method="post" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                Vider le panier
-            </Link>
         </div>
     )
 }
