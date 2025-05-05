@@ -12,7 +12,7 @@ export default function MainCarousel(props) {
     ? props.data.filter((item) => item.category.id === props.cat)
     : props.data;
       // Ajout d'un état pour charger les éléments uniquement au début
-      const [randomItems, setRandomItems] = useState([]);
+    const [randomItems, setRandomItems] = useState([]);
     // Fonction pour charger les éléments au début
     useEffect(() => {
         const fetchedItems = getRandomItems(items, 10);
@@ -82,7 +82,7 @@ export default function MainCarousel(props) {
                                         <img
                                             src={item.image}
                                             alt={item.name}
-                                            loading="lazy" // Lazy loading des images
+                                            loading="lazy"
                                         />
                                     </figure>
                                     <div className="card-body">

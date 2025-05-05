@@ -28,7 +28,7 @@ export default function SelectedItem() {
     const checkVisibility = () => {
         if (selectedItemRef.current) {
             const rect = selectedItemRef.current.getBoundingClientRect();
-            const isInView = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4; // 40% visible
+            const isInView = rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5; //0.6 0.4 = 40% visible
 
             setIsVisible(isInView);
         }
@@ -56,7 +56,7 @@ export default function SelectedItem() {
 
     return (
         <div className="mb-5 mt-20" ref={selectedItemRef}>
-            <Link href={`/details/${randomItems[0]?.id}`}>
+            
                 <h2 className="text-4xl font-bold place-self-center joti mb-4">Notre sélection</h2>
                 
                 {/* Animation sur la carte entière, ne démarre que si 40% de l'élément est visible */}
@@ -73,9 +73,9 @@ export default function SelectedItem() {
                             alt="Shoes"
                             initial={{ opacity: 0 }} // Image invisible au départ
                             animate={{ opacity: hasAnimated ? 1 : 0 }}  // L'image devient visible uniquement si l'élément est visible
-                            transition={{ duration: 1.5 }}  // Durée de l'animation
+                            transition={{ duration:hasAnimated ? 0.8 : 1.5 }}  // Durée de l'animation
                             loading="lazy"
-                            whileHover={{ scale: 1.05 }}  // Zoom au survol
+                            whileHover={{ scale: 1.15 }}  // Zoom au survol
                         />
                     </figure>
 
@@ -103,16 +103,17 @@ export default function SelectedItem() {
 
                         {/* Animation sur le bouton */}
                         <motion.div
-                            className="card-actions justify-end"
+                            className="card-actions justify-center"
                             initial={{ opacity: 0, y: 20 }} // Le bouton est caché et légèrement décalé vers le bas
                             animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}  // Il devient visible avec un léger mouvement vers le haut
-                            transition={{ duration: 1.5, delay: 1 }} // Délai pour que le bouton apparaisse après la description
+                            transition={{ duration: hasAnimated ? 0.3 : 1.5, delay: hasAnimated ? 0 : 1 }} // Délai pour que le bouton apparaisse après la description
+                            whileHover={{ scale: 1.15 }}
                         >
-                            <button className="btn btn-primary">Détails</button>
+                            <button className="btn btn-primary"><Link href={`/details/${randomItems[0]?.id}`}>Détails</Link></button>
                         </motion.div>
                     </div>
                 </motion.div>
-            </Link>
+            
         </div>
     );
 }
