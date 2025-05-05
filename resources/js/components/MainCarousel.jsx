@@ -54,20 +54,10 @@ export default function MainCarousel(props) {
     return (
         <Carousel orientation={orientation} opts={{ align: "start", loop: true }} className="my-5 px-10">
             <CarouselContent className="py-10">
-                {randomItems.map((item, index) => {
-                    // Calcul de la taille du titre selon le nombre de caractères
-                    const titleLength = item.name.length;
-                    let titleClass = "";
-                    if (titleLength > 18) {
-                        titleClass = "text-xs xl:text-sm"; // Taille plus petite pour des titres longs
-                    } else if (titleLength > 13) {
-                        titleClass = "text-sm xl:text-md"; // Taille intermédiaire
-                    }
-
-                    return (
+                {randomItems.map((item, index) => (
                         <CarouselItem
                             key={item.id}
-                            className="rounded sm:basis-1/2 md:basis-1/3 lg:basis-1/4 2xl:basis-1/5 2xl:basis-1/6"
+                            className="rounded md:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5 2xl:basis-1/6"
                             ref={elementRef} // On applique la ref ici pour cet élément spécifique
                         >
                             <Link href={`/details/${item.id}`}>
@@ -97,7 +87,7 @@ export default function MainCarousel(props) {
                                     </figure>
                                     <div className="card-body">
                                         <div className="flex flex-col">
-                                            <h2 className={`card-title ${titleClass}`}>{item.name}</h2>
+                                            <h2 className="card-title">{item.name}</h2>
                                             <p className="text-sm italic text-gray-500 mb-2">{item.brand?.name}</p>
                                             <span className="text-bold place-self-end">{item.price}€</span>
                                         </div>
@@ -113,8 +103,8 @@ export default function MainCarousel(props) {
                                 </motion.div>
                             </Link>
                         </CarouselItem>
-                    );
-                })}
+                    
+    ))}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
