@@ -55,7 +55,7 @@ export default function SelectedItem() {
     }, [isVisible]);
 
     return (
-        <div className="mb-5" ref={selectedItemRef}>
+        <div className="mb-5 mt-20" ref={selectedItemRef}>
             <Link href={`/details/${randomItems[0]?.id}`}>
                 <h2 className="text-4xl font-bold place-self-center joti mb-4">Notre sélection</h2>
                 

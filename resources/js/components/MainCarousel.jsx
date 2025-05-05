@@ -57,7 +57,7 @@ export default function MainCarousel(props) {
                 {randomItems.map((item, index) => (
                         <CarouselItem
                             key={item.id}
-                            className="rounded md:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5 2xl:basis-1/6"
+                            className="rounded md:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5 4xl:basis-1/6"
                             ref={elementRef} // On applique la ref ici pour cet élément spécifique
                         >
                             <Link href={`/details/${item.id}`}>
