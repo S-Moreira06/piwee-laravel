@@ -15,7 +15,7 @@ import { Link } from '@inertiajs/react';
 
 export default function Header() {
     return (
-        <header className="navbar shadow-sm bg-neutral sticky top-0 z-10">
+        <header className="navbar shadow-sm bg-neutral sticky top-0 z-90">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

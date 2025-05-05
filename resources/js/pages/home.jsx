@@ -12,10 +12,10 @@ export default function Home(){
             <Head title={"Home"} />
             <Hero />
             <SelectedItem />
-            <div className="mx-2">
+            <div className="p-20">
                 <div className="">
                     <h2 className="text-4xl font-bold place-self-center joti mb-4">T-shirt</h2>
-                    <MainCarousel data={items} cat={1} />
+                    <MainCarousel data={items} cat={1} className="" />
                     
                 </div>
                 <div>
