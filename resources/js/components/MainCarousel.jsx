@@ -11,11 +11,17 @@ export default function MainCarousel(props) {
     const items = props.cat 
     ? props.data.filter((item) => item.category.id === props.cat)
     : props.data;
-    const randomItems = getRandomItems(items, 10);
-
+      // Ajout d'un état pour charger les éléments uniquement au début
+      const [randomItems, setRandomItems] = useState([]);
+    // Fonction pour charger les éléments au début
+    useEffect(() => {
+        const fetchedItems = getRandomItems(items, 10);
+        setRandomItems(fetchedItems);
+    }, []);
     // État pour savoir si l'élément est visible
     const [isVisible, setIsVisible] = useState(false);
-
+    // État pour vérifier si l'animation a déjà eu lieu
+    const [hasAnimated, setHasAnimated] = useState(false);
     // Référence pour l'élément
     const elementRef = useRef(null);
 
@@ -37,6 +43,13 @@ export default function MainCarousel(props) {
             window.removeEventListener("scroll", checkVisibility);
         };
     }, []);
+    // Utiliser useEffect pour lancer l'animation au chargement de la page une seule fois
+    useEffect(() => {
+        if (isVisible) {
+            // Marquer l'animation comme ayant eu lieu
+            setHasAnimated(true);
+        }
+    }, [isVisible]);
 
     return (
         <Carousel orientation={orientation} opts={{ align: "start", loop: true }} className="my-5 px-10">
@@ -60,12 +73,12 @@ export default function MainCarousel(props) {
                             <Link href={`/details/${item.id}`}>
                                 <motion.div
                                     className={`card card-sm md:card-md lg:card-lg bg-base-100 h-full transition-opacity duration-500 ease-in-out ${
-                                        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                                        hasAnimated ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                                     }`} // Animation de fade-in et translate-y
                                     initial={{ opacity: 0, y: 30 }} // Initialisation de l'animation
                                     animate={{
-                                        opacity: isVisible ? 1 : 0, // L'élément devient visible
-                                        y: isVisible ? 0 : 30, // L'élément descend de 30px quand non visible
+                                        opacity: hasAnimated ? 1 : 0, // L'élément devient visible
+                                        y: hasAnimated ? 0 : 30, // L'élément descend de 30px quand non visible
                                         transition: { duration: 0.4, delay: index * 0.1 }, // Délai progressif entre les cartes
                                     }}
                                     whileHover={{
