@@ -1,12 +1,3 @@
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle
-} from "@/components/ui/card";
-
 import {usePage, Link , router} from "@inertiajs/react";
 import { FakeItems } from "../hooks/useFakeItems";
 

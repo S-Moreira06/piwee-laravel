@@ -2,10 +2,12 @@ import Hero from "@/components/Hero";
 import MainCarousel from "../components/MainCarousel";
 import SelectedItem from "../components/SelectedItem";
 import {FakeItems} from "../hooks/useFakeItems";
-import {Head} from "@inertiajs/react";
+import {Head, usePage} from "@inertiajs/react";
 
 export default function Home(){
     const { items } = FakeItems();
+    const { auth } = usePage().props;
+    console.log(auth.user)
 
     return (
         <div className="min-h-[1800px] pb-2">

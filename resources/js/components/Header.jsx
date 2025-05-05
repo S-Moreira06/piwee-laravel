@@ -53,6 +53,7 @@ export default function Header() {
                 <Link href={route('auth.login')} className="btn btn-secondary ">Connexion</Link>
                 <Link href={route('auth.register')} className="btn btn-primary ">Inscription</Link>
                 <Link href={route('profile')} className="btn btn-primary ">Profil</Link>
+                <Link href={route('auth.logout')} className="btn btn-primary ">Deco</Link>
             </div>
         </header>
 
