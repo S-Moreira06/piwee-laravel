@@ -59,7 +59,7 @@ class AuthController extends Controller
         ]);
         event(new Registered($user));
         Auth::login($user);
-        return redirect()->route('auth.login')->with('succes', 'Votre compte a bien été créé');
+        return redirect()->route('auth.login')->with('success', 'Votre compte a bien été créé');
     }
 
     public function logout(Request $request)

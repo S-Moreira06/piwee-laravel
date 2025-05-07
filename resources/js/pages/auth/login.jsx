@@ -10,8 +10,8 @@ import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
 
 export default function Login({ status, canResetPassword }) {
-    const { success } = usePage().props;
-    console.log(success)
+    const { flash } = usePage().props;
+    console.log(flash.success)
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -28,7 +28,7 @@ export default function Login({ status, canResetPassword }) {
     return (
         <AuthLayout title="Connectez-vous a vontre compte" description="Entrez vos indentifiants pour vous connecter">
             <Head title="Connexion" />
-            {success && <div className="alert-success">{success}</div>}
+            {flash?.success && <div className="alert-success text-black">{flash?.success}</div>}
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
