@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
 
-export default function Login({ status, canResetPassword }) {
+export default function Login({ canResetPassword }) {
     const { flash } = usePage().props;
     console.log(flash.success)
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -28,7 +28,19 @@ export default function Login({ status, canResetPassword }) {
     return (
         <AuthLayout title="Connectez-vous a vontre compte" description="Entrez vos indentifiants pour vous connecter">
             <Head title="Connexion" />
-            {flash?.success && <div className="alert-success text-black">{flash?.success}</div>}
+            {flash?.success && <div role="alert" className="alert alert-success">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{flash?.success}</span>
+            </div>}
+            <div role="alert" className="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <InputError message={errors.email}/>
+                <InputError message={errors.password}/>
+            </div>
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
@@ -44,7 +56,8 @@ export default function Login({ status, canResetPassword }) {
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder="email@exemple.com"
                         />
-                        <InputError message={errors.email} />
+                        
+                        
                     </div>
 
                     <div className="grid gap-2">
@@ -66,7 +79,7 @@ export default function Login({ status, canResetPassword }) {
                             onChange={(e) => setData('password', e.target.value)}
                             placeholder="Mot de passe"
                         />
-                        <InputError message={errors.password} />
+                        
                     </div>
 
                     <div className="flex items-center space-x-3">
@@ -96,7 +109,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
             </form>
 
-            {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
+            {/* {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>} */}
         </AuthLayout>
     );
 }
