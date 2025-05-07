@@ -34,7 +34,6 @@ export default function Header() {
                                 </ul>
                         </div>
                     </li>
-                    <li><Link href={route('cart.index')} className="montserrat-semibold-italic">Panier</Link></li>
                 </ul>
             </div>
             <div className="navbar-end gap-3">
@@ -46,6 +45,7 @@ export default function Header() {
                     </>
                 ) : (
                     <>
+                        <Link href={route('cart.index')} className="montserrat-semibold-italic">Panier</Link>
                         <Link href={route('profile')} className="btn btn-primary ">Profil</Link>
                         <Link href={route('auth.logout')} className="btn btn-primary ">Deco</Link>
                     
