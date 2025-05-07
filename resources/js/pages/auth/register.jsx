@@ -10,15 +10,15 @@ import AuthLayout from '@/layouts/auth-layout';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        name: 'Soso Test',
+        email: 'sosotest@live.fr',
+        password: 'Azerty06!',
+        password_confirmation: 'Azerty06!',
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('register'), {
+        post(route('auth.register'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };

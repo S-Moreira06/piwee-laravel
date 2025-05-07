@@ -3,6 +3,7 @@ import { FakeItems } from "../hooks/useFakeItems";
 import { usePage, Link, Head } from "@inertiajs/react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Layout from "../layouts/layout";
 
 export default function Category() {
     const { props } = usePage();
@@ -34,7 +35,7 @@ export default function Category() {
     }, [selectedBrand]);
 
     return (
-        <div className="">
+        <Layout className="min-w-screen">
             <Head title={categoryItems[0]?.category?.name || "Catégorie"} />
             <h1 className="text-4xl place-self-center mb-4 text-center">{categoryItems[0]?.category?.name}</h1>
             <form className="ml-4 flex items-center gap-4">
@@ -104,7 +105,7 @@ export default function Category() {
                     <p className="col-span-full text-center">Aucun article trouvé pour cette marque en ce moment.</p>
                 )}
             </div>
-        </div>
+        </Layout>
     );
 }
 

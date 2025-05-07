@@ -1,19 +1,8 @@
-import { Button } from "./ui/button";
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuIndicator,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-    NavigationMenuViewport,
-  } from "@/components/ui/navigation-menu"
-
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 export default function Header() {
+    const { auth } = usePage().props;
+    
     return (
         <header className="navbar shadow-sm bg-neutral sticky top-0 z-90">
             <div className="navbar-start">
@@ -49,11 +38,21 @@ export default function Header() {
                 </ul>
             </div>
             <div className="navbar-end gap-3">
+
+                {auth.user === null ? (
+                    <>
+                        <Link href={route('auth.login')} className="btn btn-secondary ">Connexion</Link>
+                        <Link href={route('auth.register')} className="btn btn-primary ">Inscription</Link>
+                    </>
+                ) : (
+                    <>
+                        <Link href={route('profile')} className="btn btn-primary ">Profil</Link>
+                        <Link href={route('auth.logout')} className="btn btn-primary ">Deco</Link>
+                    
+                    </>
+
+                )}
                 
-                <Link href={route('auth.login')} className="btn btn-secondary ">Connexion</Link>
-                <Link href={route('auth.register')} className="btn btn-primary ">Inscription</Link>
-                <Link href={route('profile')} className="btn btn-primary ">Profil</Link>
-                <Link href={route('auth.logout')} className="btn btn-primary ">Deco</Link>
             </div>
         </header>
 

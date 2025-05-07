@@ -3,14 +3,13 @@ import MainCarousel from "../components/MainCarousel";
 import SelectedItem from "../components/SelectedItem";
 import {FakeItems} from "../hooks/useFakeItems";
 import {Head, usePage} from "@inertiajs/react";
+import Layout from "../layouts/layout";
 
 export default function Home(){
     const { items } = FakeItems();
-    const { auth } = usePage().props;
-    console.log(auth.user)
 
     return (
-        <div className="min-h-[1800px] pb-2">
+        <Layout className="min-h-screen">
             <Head title={"Home"} />
             <Hero />
             <SelectedItem />
@@ -26,6 +25,6 @@ export default function Home(){
                 </div>
             </div>
             
-        </div>
+        </Layout>
     )
 }

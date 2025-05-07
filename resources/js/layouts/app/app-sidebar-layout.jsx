@@ -5,10 +5,10 @@ import { AppSidebarHeader } from '@/components/app-sidebar-header';
 
 export default function AppSidebarLayout({ children, breadcrumbs = [] }) {
     return (
-        <AppShell variant="sidebar">
+        <AppShell >
             <AppSidebar />
-            <AppContent variant="sidebar">
-                <AppSidebarHeader breadcrumbs={breadcrumbs} />
+            <AppContent>
+                
                 {children}
             </AppContent>
         </AppShell>
