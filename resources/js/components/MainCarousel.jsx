@@ -72,7 +72,7 @@ export default function MainCarousel(props) {
                                         transition: { duration: 0.4, delay: index * 0.1 }, // Délai progressif entre les cartes
                                     }}
                                     whileHover={{
-                                        scale: 1.05,
+                                        scale: 1.02,
                                         zIndex: 50,
                                         boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.5)",
                                         transition: { duration: 0.2 },

@@ -15,9 +15,9 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <Layout> 
+            
                 <App {...props} />
-            </Layout>
+            
         );
     },
     progress: {

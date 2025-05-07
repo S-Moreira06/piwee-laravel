@@ -10,15 +10,15 @@ import AuthLayout from '@/layouts/auth-layout';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        name: 'Soso Test',
+        email: 'sosotest@live.fr',
+        password: 'Azerty06!',
+        password_confirmation: 'Azerty06!',
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('register'), {
+        post(route('auth.register'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
@@ -42,7 +42,13 @@ export default function Register() {
                             disabled={processing}
                             placeholder="Nom complet"
                         />
-                        <InputError message={errors.name} className="mt-2" />
+                        {errors.name&& 
+                        <div role="alert" className="alert alert-error">
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span>{errors.name}</span>
+</div>}
                     </div>
 
                     <div className="grid gap-2">
@@ -58,7 +64,14 @@ export default function Register() {
                             disabled={processing}
                             placeholder="email@exemple.com"
                         />
-                        <InputError message={errors.email} />
+                        {errors.email&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.email}</span>
+                        </div>
+                        }
                     </div>
 
                     <div className="grid gap-2">
@@ -74,7 +87,14 @@ export default function Register() {
                             disabled={processing}
                             placeholder="Mot de passe"
                         />
-                        <InputError message={errors.password} />
+                        {errors.password&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.password}</span>
+                        </div>
+                        }
                     </div>
 
                     <div className="grid gap-2">
@@ -90,7 +110,14 @@ export default function Register() {
                             disabled={processing}
                             placeholder="Confirmation du Mot de passe"
                         />
-                        <InputError message={errors.password_confirmation} />
+                        {errors.password_confirmation&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.password_confirmation}</span>
+                        </div>
+                        }
                     </div>
 
                     <Button type="submit" className="mt-2 w-full" tabIndex={5} disabled={processing}>

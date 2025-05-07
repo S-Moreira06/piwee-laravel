@@ -2,32 +2,35 @@ import { Head } from "@inertiajs/react";
 
 
 import { motion } from "framer-motion";
+import Layout from "../layouts/layout";
 
 export default function Gcu() {
     return (
-        <motion.section 
-        className="max-w-4xl mx-auto p-6 bg-base-100 rounded-2xl shadow-lg my-10"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-        <h1 className="text-3xl font-bold mb-6 text-center">Conditions Générales d'Utilisation</h1>
-        <Head title={"C.G.U"} />
-
-        <div className="space-y-6 text-base-content">
-            {sections.map((section, index) => (
-            <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+        <Layout className="min-w-screen">
+            <motion.section 
+            className="max-w-4xl mx-auto p-6 bg-base-100 rounded-2xl shadow-lg my-10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             >
-                <h2 className="text-xl font-semibold mb-2">{section.title}</h2>
-                {section.content}
-            </motion.div>
-            ))}
-        </div>
-        </motion.section>
+            <h1 className="text-3xl font-bold mb-6 text-center">Conditions Générales d'Utilisation</h1>
+            <Head title={"C.G.U"} />
+
+            <div className="space-y-6 text-base-content">
+                {sections.map((section, index) => (
+                <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                >
+                    <h2 className="text-xl font-semibold mb-2">{section.title}</h2>
+                    {section.content}
+                </motion.div>
+                ))}
+            </div>
+            </motion.section>
+        </Layout>
     );
     }
 

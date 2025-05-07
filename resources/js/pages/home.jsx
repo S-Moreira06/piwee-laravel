@@ -2,20 +2,21 @@ import Hero from "@/components/Hero";
 import MainCarousel from "../components/MainCarousel";
 import SelectedItem from "../components/SelectedItem";
 import {FakeItems} from "../hooks/useFakeItems";
-import {Head} from "@inertiajs/react";
+import {Head, usePage} from "@inertiajs/react";
+import Layout from "../layouts/layout";
 
 export default function Home(){
     const { items } = FakeItems();
 
     return (
-        <div className="min-h-[1800px] pb-2">
+        <Layout className="min-h-screen">
             <Head title={"Home"} />
             <Hero />
             <SelectedItem />
             <div className="p-20">
                 <div className="">
                     <h2 className="text-4xl font-bold place-self-center joti mb-4">T-shirt</h2>
-                    <MainCarousel data={items} cat={1} className="" />
+                    <MainCarousel data={items} cat={1} />
                     
                 </div>
                 <div>
@@ -24,6 +25,6 @@ export default function Home(){
                 </div>
             </div>
             
-        </div>
+        </Layout>
     )
 }

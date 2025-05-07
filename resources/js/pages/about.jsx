@@ -1,29 +1,33 @@
 import { motion } from "framer-motion";
+import Layout from "../layouts/layout";
+
 
 export default function About() {
   return (
-    <motion.section 
-      className="max-w-4xl mx-auto p-6 bg-base-100 rounded-2xl shadow-lg my-10"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <h1 className="text-3xl font-bold mb-6 text-center">À propos de Piwee!</h1>
+    <Layout className="min-h-screen">
+      <motion.section 
+        className="max-w-4xl mx-auto p-6 bg-base-100  shadow-lg my-10"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <h1 className="text-3xl font-bold mb-6 text-center">À propos de Piwee!</h1>
 
-      <div className="space-y-6 text-base-content">
-        {sections.map((section, index) => (
-          <motion.div 
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-          >
-            <h2 className="text-xl font-semibold mb-2">{section.title}</h2>
-            {section.content}
-          </motion.div>
-        ))}
-      </div>
-    </motion.section>
+        <div className="space-y-6 text-base-content">
+          {sections.map((section, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+            >
+              <h2 className="text-xl font-semibold mb-2">{section.title}</h2>
+              {section.content}
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+    </Layout> 
   );
 }
 
