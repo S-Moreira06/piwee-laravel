@@ -11,7 +11,7 @@ import AuthLayout from '@/layouts/auth-layout';
 
 export default function Login({ canResetPassword }) {
     const { flash } = usePage().props;
-    console.log(flash.success)
+    console.log(flash)
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -36,13 +36,20 @@ export default function Login({ canResetPassword }) {
                 <span>{flash?.success}</span>
             </div>
             }
+            {errors.email && 
             <div role="alert" className="alert alert-error">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>{errors.email}</span>
+            </div>}
+            {errors.password && 
+            <div role="alert" className="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 <span>{errors.password}</span>
-            </div>
+            </div>}
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
