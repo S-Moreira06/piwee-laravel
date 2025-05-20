@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
+    protected static ?string $navigationLabel = 'Articles';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -54,7 +55,8 @@ class ItemResource extends Resource
                     ->maxValue(42949672.95),
                 Forms\Components\Radio::make('isDeleted')
                         ->label('Supprimer?')
-                        ->boolean(),
+                        ->boolean()
+                        ->nullable(),
         ]);
     }
 
@@ -100,5 +102,10 @@ class ItemResource extends Resource
             'create' => Pages\CreateItem::route('/create'),
             'edit' => Pages\EditItem::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }
