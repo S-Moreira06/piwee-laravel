@@ -7,9 +7,14 @@ use App\Filament\Resources\ItemResource\RelationManagers;
 use App\Models\Item;
 use Filament\Forms;
 use Filament\Forms\Form;
+use App\Models\Image;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -53,6 +58,16 @@ class ItemResource extends Resource
                     ->numeric()
                     ->prefix('€')
                     ->maxValue(42949672.95),
+                Forms\Components\FileUpload::make('images')
+                        ->label('Images')
+                        ->multiple()
+                        ->disk('public')
+                        ->directory('img')
+                        ->visibility('public')
+                        ->preserveFilenames()
+                        ->required()
+                        ->dehydrated(false) // Ne pas essayer de stocker dans la table items
+                        ->storeFiles(),// Forcer l'upload immédiat
                 Forms\Components\Radio::make('isDeleted')
                         ->label('Supprimer?')
                         ->boolean()
@@ -73,12 +88,34 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->sortable()
+                    ->sortable(),
+                Tables\Columns\ImageColumn::make('images')
+     ->label('Image')
+    ->getStateUsing(fn ($record) => $record->images->first()?->url ? asset('storage/' . $record->images->first()->url) : null)
+    ->circular()
+    ->extraAttributes(['class' => 'cursor-pointer'])
+    ->action(
+        Action::make('viewImage')
+            ->label('Aperçu')
+            ->modalHeading('Aperçu de l\'image')
+            ->modalContent(function ($record) {
+                $imageUrl = $record->images->first()?->url
+                    ? asset('storage/' . $record->images->first()->url)
+                    : null;
+
+                return $imageUrl
+                    ? new HtmlString('<img src="' . $imageUrl . '" class="w-full rounded-xl" />')
+                    : new HtmlString('<p>Aucune image</p>');
+            })
+            ->modalSubmitAction(false)
+            ->modalCancelActionLabel('Fermer')
+    )
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -108,4 +145,6 @@ class ItemResource extends Resource
     {
         return static::getModel()::count();
     }
+
+    
 }
