@@ -61,8 +61,7 @@ class ItemResource extends Resource
                 Forms\Components\FileUpload::make('images')
                         ->label('Images')
                         ->multiple()
-                        ->disk('public')
-                        ->directory('img')
+                        ->disk('custom_public')
                         ->visibility('public')
                         ->preserveFilenames()
                         ->required()
@@ -90,26 +89,25 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('images')
-     ->label('Image')
-    ->getStateUsing(fn ($record) => $record->images->first()?->url ? asset('storage/' . $record->images->first()->url) : null)
-    ->circular()
-    ->extraAttributes(['class' => 'cursor-pointer'])
-    ->action(
-        Action::make('viewImage')
-            ->label('Aperçu')
-            ->modalHeading('Aperçu de l\'image')
-            ->modalContent(function ($record) {
-                $imageUrl = $record->images->first()?->url
-                    ? asset('storage/' . $record->images->first()->url)
-                    : null;
-
-                return $imageUrl
-                    ? new HtmlString('<img src="' . $imageUrl . '" class="w-full rounded-xl" />')
-                    : new HtmlString('<p>Aucune image</p>');
-            })
-            ->modalSubmitAction(false)
-            ->modalCancelActionLabel('Fermer')
-    )
+                    ->label('Image')
+                    ->getStateUsing(fn ($record) => $record->images->first()?->url ? asset('img/' . $record->images->first()->url) : null)
+                    ->circular()
+                    ->extraAttributes(['class' => 'cursor-pointer'])
+                    ->action(
+                        Action::make('viewImage')
+                            ->label('Aperçu')
+                            ->modalHeading('Aperçu de l\'image')
+                            ->modalContent(function ($record) {
+                                $imageUrl = $record->images->first()?->url
+                                    ? asset('img/' . $record->images->first()->url)
+                                    : null;
+                                return $imageUrl
+                                    ? new HtmlString('<img src="' . $imageUrl . '" class="w-full rounded-xl" />')
+                                    : new HtmlString('<p>Aucune image</p>');
+                            })
+                            ->modalSubmitAction(false)
+                            ->modalCancelActionLabel('Fermer')
+                    )
             ])
             ->filters([
                 //
