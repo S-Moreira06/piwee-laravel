@@ -96,44 +96,30 @@ class ItemResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->tooltip(fn ($record) => $record->name)
+                    ->limit(30)
                     ->searchable(),
+                Tables\Columns\ImageColumn::make('images.0.url')
+                    ->label('Image')
+                    ->disk('public')
+                    ->size(80),
+                Tables\Columns\TextColumn::make('price')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('brand.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
+                    ->tooltip(fn ($record) => $record->description)
+                    ->limit(30)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->sortable(),
-                Tables\Columns\ImageColumn::make('images.0.url')
-                    ->label('Image')
-                    ->disk('public')
-                    ->size(80),
-                    // ->getStateUsing(fn ($record) => $record->images->first()?->url ? asset('img/' . $record->images->first()->url) : null)
-                    // ->circular()
-                    // ->extraAttributes(['class' => 'cursor-pointer'])
-                    // ->action(
-                    //     Action::make('viewImage')
-                    //         ->label('Aperçu')
-                    //         ->modalHeading('Aperçu de l\'image')
-                    //         ->modalContent(function ($record) {
-                    //             $imageUrl = $record->images->first()?->url
-                    //                 ? asset('img/' . $record->images->first()->url)
-                    //                 : null;
-                    //             return $imageUrl
-                    //                 ? new HtmlString('<img src="' . $imageUrl . '" class="w-full rounded-xl" />')
-                    //                 : new HtmlString('<p>Aucune image</p>');
-                    //         })
-                    //         ->modalSubmitAction(false)
-                    //         ->modalCancelActionLabel('Fermer')
-                    // )
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
