@@ -57,19 +57,36 @@ class ItemResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->prefix('€')
-                    ->maxValue(42949672.95),
-                Forms\Components\FileUpload::make('images')
-                        ->label('Images')
-                        ->multiple()
-                        ->disk('custom_public')
-                        ->visibility('public')
-                        ->preserveFilenames()
-                        ->required()
-                        ->dehydrated(false) // Ne pas essayer de stocker dans la table items
-                        ->storeFiles(),// Forcer l'upload immédiat
+                    ->maxValue(42949672.95)
+                    ->required(),
+                // Forms\Components\Placeholder::make('Aperçu des images')
+                //     ->content(function ($record) {
+                //         // On vérifie que le record et les images existent et ne sont pas vides
+                //         if (!$record || empty($record->images)) {
+                //             return '';
+                //         }
+
+                //         // Si tu stockes plusieurs images (tableau)
+                //         $html = collect($record->images)->map(function ($img) {
+                //             return "<img src='" . asset('img/' . $img->url) . "' class='w-24 inline-block mr-2 mb-2' />";
+                //         })->implode('');
+
+                //         return new HtmlString($html);
+                //     }),
+                // Forms\Components\FileUpload::make('url')
+                //         ->label('Images')
+                //         ->multiple()
+                //         ->disk('public')
+                //         ->visibility('public')
+                //         ->directory('img')
+                //         //->image()
+                //         //->preserveFilenames()
+                //         ->required(),
+                //         //->dehydrated(false) // Ne pas essayer de stocker dans la table items
+                //         //->storeFiles(),// Forcer l'upload immédiat
                 Forms\Components\Radio::make('isDeleted')
                         ->label('Supprimer?')
-                        ->boolean()
+                        ->boolean(false)
                         ->nullable(),
         ]);
     }
@@ -88,26 +105,28 @@ class ItemResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('images')
+                Tables\Columns\ImageColumn::make('images.0.url')
                     ->label('Image')
-                    ->getStateUsing(fn ($record) => $record->images->first()?->url ? asset('img/' . $record->images->first()->url) : null)
-                    ->circular()
-                    ->extraAttributes(['class' => 'cursor-pointer'])
-                    ->action(
-                        Action::make('viewImage')
-                            ->label('Aperçu')
-                            ->modalHeading('Aperçu de l\'image')
-                            ->modalContent(function ($record) {
-                                $imageUrl = $record->images->first()?->url
-                                    ? asset('img/' . $record->images->first()->url)
-                                    : null;
-                                return $imageUrl
-                                    ? new HtmlString('<img src="' . $imageUrl . '" class="w-full rounded-xl" />')
-                                    : new HtmlString('<p>Aucune image</p>');
-                            })
-                            ->modalSubmitAction(false)
-                            ->modalCancelActionLabel('Fermer')
-                    )
+                    ->disk('public')
+                    ->size(80),
+                    // ->getStateUsing(fn ($record) => $record->images->first()?->url ? asset('img/' . $record->images->first()->url) : null)
+                    // ->circular()
+                    // ->extraAttributes(['class' => 'cursor-pointer'])
+                    // ->action(
+                    //     Action::make('viewImage')
+                    //         ->label('Aperçu')
+                    //         ->modalHeading('Aperçu de l\'image')
+                    //         ->modalContent(function ($record) {
+                    //             $imageUrl = $record->images->first()?->url
+                    //                 ? asset('img/' . $record->images->first()->url)
+                    //                 : null;
+                    //             return $imageUrl
+                    //                 ? new HtmlString('<img src="' . $imageUrl . '" class="w-full rounded-xl" />')
+                    //                 : new HtmlString('<p>Aucune image</p>');
+                    //         })
+                    //         ->modalSubmitAction(false)
+                    //         ->modalCancelActionLabel('Fermer')
+                    // )
             ])
             ->filters([
                 //
@@ -126,8 +145,8 @@ class ItemResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
-        ];
+        RelationManagers\ImagesRelationManager::class,
+    ];
     }
 
     public static function getPages(): array

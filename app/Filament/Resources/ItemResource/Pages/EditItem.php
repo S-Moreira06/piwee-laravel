@@ -16,4 +16,16 @@ class EditItem extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+    protected function afterSave(): void
+    {
+        $uploadedImages = $this->data['images'] ?? [];
+
+        foreach ($uploadedImages as $uuid => $path) {
+            \App\Models\Image::create([
+                'item_id' => $this->record->id,
+                'url' => $path,
+            ]);
+        }
+    }
+
 }

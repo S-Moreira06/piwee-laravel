@@ -40,18 +40,11 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('public'),
+            'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
-        ],
-
-        'custom_public' => [
-            'driver' => 'local',
-            'root' => public_path('img'), // directement dans public/img
-            'url' => env('APP_URL') . '/img',
-            'visibility' => 'public',
         ],
 
         's3' => [
