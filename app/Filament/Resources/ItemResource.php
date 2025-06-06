@@ -7,19 +7,11 @@ use App\Filament\Resources\ItemResource\RelationManagers;
 use App\Models\Item;
 use Filament\Forms;
 use Filament\Forms\Form;
-use App\Models\Image;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Actions\Action as FormAction;
 use Filament\Notifications\Notification;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Actions\Action;
-use Illuminate\Support\Str;
-use Illuminate\Support\HtmlString;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ItemResource extends Resource
 {
@@ -143,6 +135,7 @@ class ItemResource extends Resource
     {
         return [
         RelationManagers\ImagesRelationManager::class,
+        RelationManagers\StocksRelationManager::class,
     ];
     }
 
