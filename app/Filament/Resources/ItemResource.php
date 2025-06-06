@@ -116,7 +116,22 @@ class ItemResource extends Resource
                     ->tooltip(fn ($record) => $record->description)
                     ->limit(30)
                     ->searchable(),
-            ])
+                Tables\Columns\TextColumn::make('tailles_disponibles')
+                ->label('Tailles disponibles')
+                ->html()
+                ->getStateUsing(function ($record) {
+                    return $record->stocks
+                        ->map(function ($stock) {
+                            $size = $stock->size;
+                            $count = $stock->stock;
+                            return "<span 
+                                class='inline-block px-2 py-1 bg-gray-200 text-gray-600 rounded text-xs font-semibold mr-1 mb-1'
+                                title='Stock disponible : $count'
+                            >$size</span>";
+                        })
+                        ->implode(' ');
+                }),
+                ])
             ->filters([
                 //
             ])
