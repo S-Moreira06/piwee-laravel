@@ -1,16 +1,21 @@
 import { usePage, Link, Head } from "@inertiajs/react";
-import { FakeItems } from "../hooks/useFakeItems";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "../layouts/layout";
 
 export default function Details() {
-    const { id } = usePage().props;
-    const { items } = FakeItems();
-    const item = items[id - 1];
+    const { item } = usePage().props;
+
+    // Pour la sélection de taille et quantité, tu peux utiliser des states
+    // (exemple simple, à adapter selon tes besoins)
+    const [selectedSize, setSelectedSize] = useState(item.sizes[0]?.size || "");
+    const [quantity, setQuantity] = useState(1);
+    const selectedStock = item.sizes.find(s => s.size === selectedSize)?.stock || 0;
+    const isQuantityTooHigh = quantity > selectedStock;
+
 
     return (
         <Layout className="min-w-screen">
-
             <motion.div
                 className="flex max-lg:flex-col gap-5 min-h-screen p-2 lg:p-20"
                 initial={{ opacity: 0 }}
@@ -68,7 +73,7 @@ export default function Details() {
                         <p>Sélectionner la taille:</p>
                     </div>
 
-                    {/* Tailles */}
+                    {/* Tailles dynamiques */}
                     <motion.div
                         className="grid grid-cols-8 gap-2 place-self-center mb-5"
                         initial="hidden"
@@ -82,24 +87,23 @@ export default function Details() {
                             },
                             hidden: {},
                         }}
-                        
                     >
-                        {Array.from({ length: 24 }, (_, i) => {
-                            const size = 35 + i * 0.5;
-                            return (
-                                <motion.p
-                                    key={size}
-                                    whileHover={{ scale: 1.05 }}
-                                    className="badge badge-primary px-2.5 place-self-center"
-                                    variants={{
-                                        hidden: { opacity: 0, y: 10 },
-                                        visible: { opacity: 1, y: 0 },
-                                    }}
-                                >
-                                    {size}
-                                </motion.p>
-                            );
-                        })}
+                        {item.sizes.map(({ size, stock }) => (
+                            <motion.p
+                                key={size}
+                                whileHover={{ scale: 1.05 }}
+                                className={`badge px-2.5 place-self-center cursor-pointer ${
+                                    selectedSize === size ? "badge-primary" : "badge-outline"
+                                }`}
+                                variants={{
+                                    hidden: { opacity: 0, y: 10 },
+                                    visible: { opacity: 1, y: 0 },
+                                }}
+                                onClick={() => setSelectedSize(size)}
+                            >
+                                {size}
+                            </motion.p>
+                        ))}
                     </motion.div>
 
                     {/* Quantité */}
@@ -108,18 +112,24 @@ export default function Details() {
                         <motion.button
                             whileHover={{ scale: 1.1 }}
                             className="btn btn-primary"
+                            onClick={() => setQuantity(q => Math.max(1, q - 1))}
                         >
                             -
                         </motion.button>
-                        <p className="place-self-center">1</p>
+                        <p className="place-self-center">{quantity}</p>
                         <motion.button
                             whileHover={{ scale: 1.1 }}
                             className="btn btn-primary"
+                            onClick={() => setQuantity(q => q + 1)}
                         >
                             +
                         </motion.button>
                     </div>
-
+                    {isQuantityTooHigh && (
+    <div className="text-error text-center mb-2">
+        La quantité demandée dépasse le stock disponible ({selectedStock}).
+    </div>
+)}
                     {/* Prix + stock */}
                     <div className="flex justify-around mb-5">
                         <motion.h2
@@ -130,14 +140,32 @@ export default function Details() {
                         >
                             {item.price} €
                         </motion.h2>
-                        <p className="text-sm place-self-center">En stock : Oui</p>
+                        <p className="text-sm place-self-center">
+                            En stock :{" "}
+                            {item.sizes.find(s => s.size === selectedSize)?.stock > 0 ? "Oui" : "Non"}
+                        </p>
                     </div>
 
                     {/* Boutons */}
-                    <Link href={route("cart.add", item.id)} method="post" as="button">
+                    {/* <Link href={route("cart.add", item.id)} method="post" as="button">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             className="btn btn-primary mb-2"
+                        >
+                            Ajouter au panier
+                        </motion.div>
+                    </Link> */}
+                    <Link
+                        href={route("cart.add", item.id)}
+                        method="post"
+                        as="button"
+                        data={{ size: selectedSize, quantity: quantity }}
+                        disabled={isQuantityTooHigh}
+                        
+                    >
+                        <motion.div
+                            whileHover={isQuantityTooHigh ? {} : { scale: 1.05 }}
+                            className={`btn btn-primary mb-2 ${isQuantityTooHigh ? "btn-disabled opacity-50 cursor-not-allowed pointer-events-none" : ""}`}
                         >
                             Ajouter au panier
                         </motion.div>
@@ -155,64 +183,3 @@ export default function Details() {
         </Layout>
     );
 }
-// Page sans animations
-
-
-// import {usePage, Link, Head} from "@inertiajs/react";
-// import { FakeItems } from "../hooks/useFakeItems";
-
-
-// export default function Details() {
-//     const { id } = usePage().props;
-//     const { items } = FakeItems();
-//     const item = items[id-1]; 
-
-
-//     return (
-//         <div className="flex max-lg:flex-col gap-5 p-2 min-h-screen p-20">
-//             <Head title={item.name}/>
-
-//             <div className="card card-sm md:card-md lg:card-lg bg-base-100 w-9/10 lg:w-1/2 max-lg:max-w-130 place-self-center max-h-[600px]">
-//                 <figure>
-//                     <img src={item.image} alt="Album" className=""/>
-//                 </figure>
-//                 <div className="card-body">
-//                     <h2 className="card-title">{item.name}</h2>
-//                     <p className="p-4">{item.description}</p>
-//                 </div>
-//             </div>
-            
-//             <div className="flex flex-col justify-center w-full lg:w-1/2 mt-2">
-//                 <div className="flex justify-center gap-4 mb-5">
-//                     <p>Sélectionner la taille:</p>
-//                 </div>
-//                 <div className="grid grid-cols-8 gap-2 place-self-center mb-5">
-//                     {Array.from({ length: 24 }, (_, i) => {
-//                         const size = 35 + i * 0.5;
-//                         return (
-//                         <p key={size} className="badge badge-primary px-2.5 place-self-center">
-//                             {size}
-//                         </p>
-//                         );
-//                     })}
-//                 </div>
-//                 <p className="place-self-center mb-2">Quantité:</p>
-//                 <div className="flex justify-center gap-4 mb-5">
-//                     <button className="btn btn-primary">-</button>
-//                     <p className="place-self-center">1</p>
-//                     <button className="btn btn-primary">+</button>
-//                 </div>
-//                 <div className="flex justify-around mb-5">
-//                     <h2 className="text-3xl font-bold ">{item.price} €</h2>
-//                     <p className="text-sm place-self-center">En stock : Oui</p>
-//                 </div>
-//                 <Link href={route('cart.add', item.id)} method="post" as="button" >
-//                     <div className="btn btn-primary mb-2">Ajouter au panier</div>
-//                 </Link>
-//                 <Link href={route('home')} method="get" as="button" >
-//                     <div className="btn btn-primary">Ajouter au favoris</div>
-//                 </Link>
-//             </div>
-//         </div>
-//     )
-// }

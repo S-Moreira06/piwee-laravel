@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use App\Models\Item;
 
-class ItemsController extends Controller
+class HomeController extends Controller
 {
-    public function details($id)
-    {
-        $item = Item::with(['category', 'brand', 'images', 'stocks'])->findOrFail($id);
-
-        // Prépare l’objet pour le front
-        $itemData = [
+    public function index()
+{
+    $items = Item::with(['category', 'brand', 'images', 'stocks'])->get();
+//adapter le donné pour le front
+    $items = $items->map(function ($item) {
+        return [
             'id' => $item->id,
             'name' => $item->name,
             'brand' => $item->brand ? ['name' => $item->brand->name] : null,
@@ -28,9 +27,10 @@ class ItemsController extends Controller
                 'stock' => $s->stock,
             ]),
         ];
+    });
 
-        return Inertia::render('details', [
-            'item' => $itemData,
-        ]);
-    }
+    return inertia('home', [
+        'items' => $items,
+    ]);
+}
 }

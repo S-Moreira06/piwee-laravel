@@ -6,10 +6,12 @@ use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return Inertia::render('home');
-})->name('home');
+// Route::get('/', function () {
+//     return Inertia::render('home');
+// })->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', function () {
     return Inertia::render('contact');
 })->name('contact');
@@ -68,6 +70,8 @@ Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(f
     Route::post('/add/{id}', 'addToCart')->name('add');
     Route::post('/remove/{id}', 'removeFromCart')->name('remove');
     Route::post('/clear', 'clearCart')->name('clear');
-    // Route::post('/update', 'updateCart')->name('update');
+    Route::post('/increment', 'increment')->name('increment');
+    Route::post('/decrement', 'decrement')->name('decrement');
 });
+
 
