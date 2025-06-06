@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Item extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'brand_id',
         'category_id',
@@ -19,14 +21,27 @@ class Item extends Model
         'price',
         'isDeleted',
     ];
+
+    // Génération automatique du slug à chaque sauvegarde
+    protected static function booted()
+    {
+        static::saving(function ($item) {
+            if (!empty($item->name)) {
+                $item->slug = Str::slug($item->name);
+            }
+        });
+    }
+
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
+
     public function images(): HasMany
     {
         return $this->hasMany(Image::class);

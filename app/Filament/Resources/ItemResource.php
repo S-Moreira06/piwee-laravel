@@ -10,10 +10,13 @@ use Filament\Forms\Form;
 use App\Models\Image;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Actions\Action as FormAction;
+use Filament\Notifications\Notification;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Actions\Action;
+use Illuminate\Support\Str;
 use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -51,43 +54,50 @@ class ItemResource extends Resource
                             ->maxLength(50),
                     ])
                     ->required(),
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('slug')->required(),
+                Forms\Components\TextInput::make('name')
+                    ->label('Nom')
+                    ->required(),
+                // Forms\Components\TextInput::make('slug')->required()->readOnly(),
                 Forms\Components\TextInput::make('description')->required(),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->prefix('€')
                     ->maxValue(42949672.95)
                     ->required(),
-                // Forms\Components\Placeholder::make('Aperçu des images')
-                //     ->content(function ($record) {
-                //         // On vérifie que le record et les images existent et ne sont pas vides
-                //         if (!$record || empty($record->images)) {
-                //             return '';
-                //         }
+                Forms\Components\Actions::make([
+                FormAction::make('marquerCommeSupprime')
+                    ->label('Marquer comme supprimé')
+                    ->color('danger')
+                    ->icon('heroicon-o-trash')
+                    ->visible(fn ($record) => $record && !$record->isDeleted)
+                    ->requiresConfirmation()
+                    ->action(function ($get, $record, $set) {
+                        $record->isDeleted = true;
+                        $record->save();
+                        $set('isDeleted', true);
 
-                //         // Si tu stockes plusieurs images (tableau)
-                //         $html = collect($record->images)->map(function ($img) {
-                //             return "<img src='" . asset('img/' . $img->url) . "' class='w-24 inline-block mr-2 mb-2' />";
-                //         })->implode('');
+                        Notification::make()
+                            ->title('L\'item a été marqué comme supprimé.')
+                            ->success()
+                            ->send();
+                    }),
+                FormAction::make('reactiver')
+                    ->label('Réactiver')
+                    ->color('success')
+                    ->icon('heroicon-o-arrow-path')
+                    ->visible(fn ($record) => $record && $record->isDeleted)
+                    ->requiresConfirmation()
+                    ->action(function ($get, $record, $set) {
+                        $record->isDeleted = false;
+                        $record->save();
+                        $set('isDeleted', false);
 
-                //         return new HtmlString($html);
-                //     }),
-                // Forms\Components\FileUpload::make('url')
-                //         ->label('Images')
-                //         ->multiple()
-                //         ->disk('public')
-                //         ->visibility('public')
-                //         ->directory('img')
-                //         //->image()
-                //         //->preserveFilenames()
-                //         ->required(),
-                //         //->dehydrated(false) // Ne pas essayer de stocker dans la table items
-                //         //->storeFiles(),// Forcer l'upload immédiat
-                Forms\Components\Radio::make('isDeleted')
-                        ->label('Supprimer?')
-                        ->boolean(false)
-                        ->nullable(),
+                        Notification::make()
+                            ->title('L\'item a été réactivé.')
+                            ->success()
+                            ->send();
+                    }),
+            ])->visible(fn ($record) => $record !== null),
         ]);
     }
 
@@ -108,6 +118,7 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('brand.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->tooltip(fn ($record) => $record->description)
