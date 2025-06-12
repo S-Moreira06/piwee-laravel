@@ -160,14 +160,14 @@ export default function Details() {
                             Ajouter au panier
                         </motion.div>
                     </Link>
-                    <Link href={route("home")} method="get" as="button">
+                    {/* <Link href={route("home")} method="get" as="button">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             className="btn btn-primary"
                         >
                             Ajouter aux favoris
                         </motion.div>
-                    </Link>
+                    </Link> */}
                 </motion.div>
             </motion.div>
         </Layout>
