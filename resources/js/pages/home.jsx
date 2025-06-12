@@ -9,7 +9,7 @@ export default function Home(){
 
     return (
         <Layout className="min-h-screen">
-            <Head title={"Home"} />
+            <Head title={"Acceuil"} />
             <Hero />
             <SelectedItem />
             <div className="p-20">

@@ -13,13 +13,13 @@ export default function Details() {
 
     return (
         <Layout className="min-w-screen">
+            <Head title={`Détails de l'article: ${item.name}`} />
             <motion.div
                 className="flex max-lg:flex-col gap-5 min-h-screen p-2 lg:p-20"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
             >
-                <Head title={item.name} />
 
                 {/* Card produit */}
                 <motion.div

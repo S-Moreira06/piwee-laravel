@@ -1,4 +1,4 @@
-import {usePage, Link , router} from "@inertiajs/react";
+import {usePage, Link , router, Head} from "@inertiajs/react";
 import Layout from "../layouts/layout";
 
 
@@ -31,6 +31,7 @@ export default function Cart() {
 
     return (
         <Layout className="min-h-screen">
+            <Head title={"Panier"} />
             <div className="min-h-[800px] p-4">
                 <h1 className="text-4xl place-self-center mb-4">Mon panier</h1>
                 <div className="lg:flex gap-4">
