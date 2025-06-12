@@ -1,6 +1,4 @@
 import { Head } from "@inertiajs/react";
-
-
 import { motion } from "framer-motion";
 import Layout from "../layouts/layout";
 
@@ -32,7 +30,7 @@ export default function Gcu() {
             </motion.section>
         </Layout>
     );
-    }
+}
 
     const sections = [
     {

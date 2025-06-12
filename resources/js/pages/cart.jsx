@@ -36,54 +36,54 @@ export default function Cart() {
                 <div className="lg:flex gap-4">
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:w-2/3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                         {cartItems.map(item => {
-    // Récupère le stock pour la taille sélectionnée
-    const stock = item.stocks?.find(s => s.size === item.size)?.stock ?? 0;
-    const isMaxQuantity = item.quantity >= stock;
+                            // Récupère le stock pour la taille sélectionnée
+                            const stock = item.stocks?.find(s => s.size === item.size)?.stock ?? 0;
+                            const isMaxQuantity = item.quantity >= stock;
 
-    return (
-        <div className="card card-sm md:card-md lg:card-lg bg-base-100" key={`${item.id}-${item.size}`}>
-            <figure>
-                <img src={item.image} alt={item.name} />
-            </figure>
-            <div className="card-body">
-                <div className="flex w-auto justify-between">
-                    <h2 className="card-title">{item.name}</h2>
-                    <span className="text-bold text-xl">{item.price}€</span>
-                </div>
-                <p>
-                    {item.description && item.description.length > 100
-                        ? item.description.slice(0, 50) + '...'
-                        : item.description}
-                </p>
-                <div className="my-2 flex items-center gap-2">
-                    <span className="badge badge-outline">Taille : {item.size}</span>
-                    <button
-                        className="btn btn-xs btn-primary"
-                        onClick={() =>
-                            router.post(route('cart.decrement'), { id: item.id, size: item.size })
-                        }
-                        disabled={item.quantity <= 1}
-                    >-</button>
-                    <span>{item.quantity}</span>
-                    <button
-                        className="btn btn-xs btn-primary"
-                        onClick={() =>
-                            router.post(route('cart.increment'), { id: item.id, size: item.size })
-                        }
-                        disabled={isMaxQuantity}
-                    >+</button>
-                </div>
-                {/* Message si stock max atteint */}
-                {isMaxQuantity && (
-                    <div className="text-error text-xs">Stock maximum atteint ({stock})</div>
-                )}
-                <div className="card-actions justify-end">
-                    <Link href={route("cart.remove", item.id)} method="post" as="button" data={{ size: item.size }} className="btn btn-error">Retirer</Link>
-                </div>
-            </div>
-        </div>
-    );
-})}
+                            return (
+                                <div className="card card-sm md:card-md lg:card-lg bg-base-100" key={`${item.id}-${item.size}`}>
+                                    <figure>
+                                        <img src={item.image} alt={item.name} />
+                                    </figure>
+                                    <div className="card-body">
+                                        <div className="flex w-auto justify-between">
+                                            <h2 className="card-title">{item.name}</h2>
+                                            <span className="text-bold text-xl">{item.price}€</span>
+                                        </div>
+                                        <p>
+                                            {item.description && item.description.length > 100
+                                                ? item.description.slice(0, 50) + '...'
+                                                : item.description}
+                                        </p>
+                                        <div className="my-2 flex items-center gap-2">
+                                            <span className="badge badge-outline">Taille : {item.size}</span>
+                                            <button
+                                                className="btn btn-xs btn-primary"
+                                                onClick={() =>
+                                                    router.post(route('cart.decrement'), { id: item.id, size: item.size })
+                                                }
+                                                disabled={item.quantity <= 1}
+                                            >-</button>
+                                            <span>{item.quantity}</span>
+                                            <button
+                                                className="btn btn-xs btn-primary"
+                                                onClick={() =>
+                                                    router.post(route('cart.increment'), { id: item.id, size: item.size })
+                                                }
+                                                disabled={isMaxQuantity}
+                                            >+</button>
+                                        </div>
+                                        {/* Message si stock max atteint */}
+                                        {isMaxQuantity && (
+                                            <div className="text-error text-xs">Stock maximum atteint ({stock})</div>
+                                        )}
+                                        <div className="card-actions justify-end">
+                                            <Link href={route("cart.remove", item.id)} method="post" as="button" data={{ size: item.size }} className="btn btn-error">Retirer</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
 
                     </div>
                     <div className="lg:w-1/3 lg:fixed lg:right-0">

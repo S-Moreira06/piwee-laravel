@@ -5,9 +5,6 @@ import Layout from "../layouts/layout";
 
 export default function Details() {
     const { item } = usePage().props;
-
-    // Pour la sélection de taille et quantité, tu peux utiliser des states
-    // (exemple simple, à adapter selon tes besoins)
     const [selectedSize, setSelectedSize] = useState(item.sizes[0]?.size || "");
     const [quantity, setQuantity] = useState(1);
     const selectedStock = item.sizes.find(s => s.size === selectedSize)?.stock || 0;
@@ -88,7 +85,7 @@ export default function Details() {
                             hidden: {},
                         }}
                     >
-                        {item.sizes.map(({ size, stock }) => (
+                        {item.sizes.map(({ size }) => (
                             <motion.p
                                 key={size}
                                 whileHover={{ scale: 1.05 }}
@@ -126,10 +123,11 @@ export default function Details() {
                         </motion.button>
                     </div>
                     {isQuantityTooHigh && (
-    <div className="text-error text-center mb-2">
-        La quantité demandée dépasse le stock disponible ({selectedStock}).
-    </div>
-)}
+                        <div className="text-error text-center mb-2">
+                            La quantité demandée dépasse le stock disponible ({selectedStock}).
+                        </div>
+                    )}
+
                     {/* Prix + stock */}
                     <div className="flex justify-around mb-5">
                         <motion.h2
@@ -147,14 +145,6 @@ export default function Details() {
                     </div>
 
                     {/* Boutons */}
-                    {/* <Link href={route("cart.add", item.id)} method="post" as="button">
-                        <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            className="btn btn-primary mb-2"
-                        >
-                            Ajouter au panier
-                        </motion.div>
-                    </Link> */}
                     <Link
                         href={route("cart.add", item.id)}
                         method="post"
