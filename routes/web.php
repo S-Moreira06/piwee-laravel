@@ -67,7 +67,7 @@ Route::prefix('auth')->name('auth.')->controller(AuthController::class)->group(f
 });
 
 Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
+    Route::get('/', 'index')->name('index')->middleware('auth');
     Route::post('/add/{id}', 'addToCart')->name('add');
     Route::post('/remove/{id}', 'removeFromCart')->name('remove');
     Route::post('/clear', 'clearCart')->name('clear');
