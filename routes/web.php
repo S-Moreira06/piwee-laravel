@@ -29,24 +29,14 @@ Route::get('/cookie', function () {
     return Inertia::render('cookie');
 })->name('cookie');
 
-Route::get('settings/profile', function () {
-    return Inertia::render('settings/profile');
-})->name('profile');
-Route::get('settings/password', function () {
-    return Inertia::render('settings/password');
-})->name('password');
-Route::get('settings/password', function () {
-    return Inertia::render('settings/password');
-})->name('password');
-Route::get('settings/appearance', function () {
-    return Inertia::render('settings/appearance');
-})->name('appearance');
-Route::get('settings/orders', function () {
-    return Inertia::render('settings/orders');
-})->name('orders');
-Route::get('settings/favoris', function () {
-    return Inertia::render('settings/favoris');
-})->name('favoris');
+Route::middleware('auth')->prefix('settings')->name('settings.')->group(function () {
+    Route::get('profile', fn() => Inertia::render('settings/profile'))->name('profile');
+    Route::get('password', fn() => Inertia::render('settings/password'))->name('password');
+    Route::get('appearance', fn() => Inertia::render('settings/appearance'))->name('appearance');
+    Route::get('orders', fn() => Inertia::render('settings/orders'))->name('orders');
+    Route::get('favoris', fn() => Inertia::render('settings/favoris'))->name('favoris');
+});
+
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
     Route::get('/{id}', 'category')->name('index');
@@ -66,8 +56,8 @@ Route::prefix('auth')->name('auth.')->controller(AuthController::class)->group(f
     Route::post('/password/reset', 'resetPasswordPost')->name('password.reset.post');
 });
 
-Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function () {
-    Route::get('/', 'index')->name('index')->middleware('auth');
+Route::prefix('cart')->name('cart.')->controller(CartController::class)->middleware('auth')->group(function () {
+    Route::get('/', 'index')->name('index');
     Route::post('/add/{id}', 'addToCart')->name('add');
     Route::post('/remove/{id}', 'removeFromCart')->name('remove');
     Route::post('/clear', 'clearCart')->name('clear');
