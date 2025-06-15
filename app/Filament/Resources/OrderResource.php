@@ -105,6 +105,13 @@ class OrderResource extends Resource
                         'shipped' => 'info',
                         'cancelled' => 'danger',
                         default => 'secondary',
+                    })
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'pending' => 'En attente',
+                        'paid' => 'Payé',
+                        'shipped' => 'Expédié',
+                        'cancelled' => 'Annulé',
+                        default => ucfirst($state),
                     }),
                 Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable(),
 
