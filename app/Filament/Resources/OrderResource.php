@@ -76,13 +76,7 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('total')->money('EUR')->sortable(),
                 Tables\Columns\TextColumn::make('shipping')->money('EUR'),
                 Tables\Columns\TextColumn::make('tax')->money('EUR'),
-                // Tables\Columns\TextColumn::make('articles_count')
-                // ->label('Nb articles')
-                // ->getStateUsing(function ($record) {
-                //     // Additionne la quantité de chaque OrderItem pour cette commande
-                //     return $record->items->sum('quantity');
-                // }),
-                TextColumn::make('items_sum_quantity')
+                Tables\Columns\TextColumn::make('items_sum_quantity')
                     ->label('Nb articles')
                     ->sum('items', 'quantity')
                     ->action(
@@ -97,30 +91,24 @@ class OrderResource extends Resource
                             ->modalCancelActionLabel('Fermer')
                     )
                     ->formatStateUsing(fn ($state) => $state ?: 0),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->color(fn ($state) => match ($state) {
-                        'pending' => 'warning',
-                        'paid' => 'success',
-                        'shipped' => 'info',
-                        'cancelled' => 'danger',
-                        default => 'secondary',
-                    })
-                    ->formatStateUsing(fn ($state) => match ($state) {
-                        'pending' => 'En attente',
+                Tables\Columns\SelectColumn::make('status')
+                    ->label('Statut')
+                    ->options([
                         'paid' => 'Payé',
+                        'pending' => 'En préparation',
                         'shipped' => 'Expédié',
                         'cancelled' => 'Annulé',
-                        default => ucfirst($state),
-                    }),
+                    ])
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable(),
 
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->options([
-                        'pending' => 'En attente',
                         'paid' => 'Payée',
+                        'pending' => 'En préparation',
                         'shipped' => 'Expédiée',
                         'cancelled' => 'Annulée',
                     ]),
