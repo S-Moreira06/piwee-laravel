@@ -73,6 +73,12 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('total')->money('EUR')->sortable(),
                 Tables\Columns\TextColumn::make('shipping')->money('EUR'),
                 Tables\Columns\TextColumn::make('tax')->money('EUR'),
+                Tables\Columns\TextColumn::make('articles_count')
+                ->label('Nb articles')
+                ->getStateUsing(function ($record) {
+                    // Additionne la quantité de chaque OrderItem pour cette commande
+                    return $record->items->sum('quantity');
+                }),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn ($state) => match ($state) {
@@ -83,6 +89,7 @@ class OrderResource extends Resource
                         default => 'secondary',
                     }),
                 Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable(),
+
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
