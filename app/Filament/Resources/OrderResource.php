@@ -9,7 +9,10 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -73,12 +76,27 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('total')->money('EUR')->sortable(),
                 Tables\Columns\TextColumn::make('shipping')->money('EUR'),
                 Tables\Columns\TextColumn::make('tax')->money('EUR'),
-                Tables\Columns\TextColumn::make('articles_count')
-                ->label('Nb articles')
-                ->getStateUsing(function ($record) {
-                    // Additionne la quantité de chaque OrderItem pour cette commande
-                    return $record->items->sum('quantity');
-                }),
+                // Tables\Columns\TextColumn::make('articles_count')
+                // ->label('Nb articles')
+                // ->getStateUsing(function ($record) {
+                //     // Additionne la quantité de chaque OrderItem pour cette commande
+                //     return $record->items->sum('quantity');
+                // }),
+                TextColumn::make('items_sum_quantity')
+                    ->label('Nb articles')
+                    ->sum('items', 'quantity')
+                    ->action(
+                        Action::make('voir_articles')
+                            ->modalHeading('Articles de la commande')
+                            ->modalContent(function ($record): View {
+                                return view('admin.order-item-list', [
+                                    'items' => $record->items,
+                                ]);
+                            })
+                            ->modalSubmitAction(false)
+                            ->modalCancelActionLabel('Fermer')
+                    )
+                    ->formatStateUsing(fn ($state) => $state ?: 0),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn ($state) => match ($state) {
