@@ -8,9 +8,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 
-// Route::get('/', function () {
-//     return Inertia::render('home');
-// })->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/contact', function () {
@@ -29,14 +26,13 @@ Route::get('/cookie', function () {
     return Inertia::render('cookie');
 })->name('cookie');
 
-Route::middleware('auth')->prefix('settings')->name('settings.')->group(function () {
+Route::prefix('settings')->middleware('auth')->group(function () {
     Route::get('profile', fn() => Inertia::render('settings/profile'))->name('profile');
     Route::get('password', fn() => Inertia::render('settings/password'))->name('password');
     Route::get('appearance', fn() => Inertia::render('settings/appearance'))->name('appearance');
     Route::get('orders', fn() => Inertia::render('settings/orders'))->name('orders');
     Route::get('favoris', fn() => Inertia::render('settings/favoris'))->name('favoris');
 });
-
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
     Route::get('/{id}', 'category')->name('index');
