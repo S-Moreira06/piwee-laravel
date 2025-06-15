@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {usePage, Link , router, Head} from "@inertiajs/react";
 import Layout from "../layouts/layout";
 
@@ -28,6 +29,24 @@ export default function Cart() {
     const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
     const shipping = 9.99;
     const total = cartItems.length > 0 ? subtotal + shipping : subtotal;
+
+    const [loading, setLoading] = useState(false);
+    function handleOrder() {
+        if (cartItems.length === 0) return; // Sécurité côté front
+        setLoading(true);
+        router.post(
+            route('order.store'),
+            {},
+            {
+                onSuccess: () => {
+                    setLoading(false);
+                    // Redirection ou message de succès si besoin
+                    router.visit(route('orders.user'));
+                },
+                onError: () => setLoading(false),
+            }
+        );
+    }
 
     return (
         <Layout className="min-h-screen">
@@ -105,6 +124,16 @@ export default function Cart() {
                             <Link href={route('cart.clear')} as="button" method="post" className="btn btn-error w-full">
                                 Vider le panier
                             </Link>
+                            {cartItems.length > 0 && (
+                                <button
+                                    className="btn btn-success w-full mt-4"
+                                    onClick={handleOrder}
+                                >
+                                    Commander
+                                </button>
+                            )}
+
+
                         </div>
                     </div>
                 </div>

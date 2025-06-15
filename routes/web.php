@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -60,5 +61,7 @@ Route::prefix('cart')->name('cart.')->controller(CartController::class)->middlew
     Route::post('/increment', 'increment')->name('increment');
     Route::post('/decrement', 'decrement')->name('decrement');
 });
+
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 

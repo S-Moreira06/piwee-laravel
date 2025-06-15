@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('reference', 8);
-            $table->decimal('shipping');
+            $table->decimal('shipping', 8, 2)->default(9.99);
             $table->decimal('total');
             $table->decimal('tax');
             $table->string('invoice_number', 40)->nullable();
-            $table->string('status', 10); // Champ pour l’état de la commande
+            $table->string('status', 10)->default('paid'); // Champ pour l’état de la commande
             $table->timestamps();
         });
 
