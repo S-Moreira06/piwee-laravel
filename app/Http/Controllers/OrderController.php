@@ -85,7 +85,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-
+        $this->authorize('view', $order);
         // Charger les items associés à la commande
         $order->load('items');
 
