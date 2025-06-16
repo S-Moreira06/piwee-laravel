@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import Layout from '@/layouts/layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import ErrorDisplay from '@/components/ErrorDisplay';
+import { CheckCircle, XCircle } from 'lucide-react';
 
 const breadcrumbs = [
     {
@@ -19,7 +20,7 @@ const breadcrumbs = [
 ];
 
 export default function Profile({ mustVerifyEmail, status }) {
-    const { auth } = usePage().props;
+    const { auth, flash } = usePage().props;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         firstname: auth.user.firstname || '',
@@ -48,6 +49,12 @@ export default function Profile({ mustVerifyEmail, status }) {
                 <Head title="Paramètres de profil" />
                 <HeadingSmall className="" title="Informations du profil" description="Mettez à jour vos informations personnelles et votre adresse" />
                 <ErrorDisplay errors={errors} />
+                {flash?.success && (
+                    <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md flex items-center">
+                        <CheckCircle className="h-5 w-5 mr-2" />
+                        <span>{flash.success}</span>
+                    </div>
+                )}
                 <form onSubmit={submit} className="space-y-6 place-self-center">
                     {/* Prénom */}
                     <div className="grid gap-2">
