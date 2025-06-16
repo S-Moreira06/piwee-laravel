@@ -37,7 +37,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return to_route('profile.edit');
+        return to_route('profile');
     }
 
     /**
@@ -53,7 +53,9 @@ class ProfileController extends Controller
 
         Auth::logout();
 
-        $user->delete();
+        // Marquer comme supprimé au lieu de supprimer définitivement
+        $user->update(['is_deleted' => true]);
+        // $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

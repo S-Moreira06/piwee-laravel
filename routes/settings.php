@@ -5,17 +5,33 @@ use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::middleware('auth')->group(function () {
-    Route::redirect('settings', 'settings/profile');
+Route::middleware('auth')->prefix('settings')->group(function () {
+    // Redirection de base
+    Route::redirect('/', 'settings/profile', 301);
 
-    Route::get('settings/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('settings/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('settings/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Gestion du profil
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('profile');
+        Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
 
-    Route::get('settings/password', [PasswordController::class, 'edit'])->name('password.edit');
-    Route::put('settings/password', [PasswordController::class, 'update'])->name('password.update');
+    // Gestion du mot de passe
+    Route::prefix('password')->group(function () {
+        Route::get('/', [PasswordController::class, 'edit'])->name('password.edit');
+        Route::put('/', [PasswordController::class, 'update'])->name('password.update');
+    });
 
-    Route::get('settings/appearance', function () {
+    // Pages statiques
+    Route::get('appearance', function () {
         return Inertia::render('settings/appearance');
     })->name('appearance');
+
+    Route::get('orders', function () {
+        return Inertia::render('settings/orders');
+    })->name('orders');
+
+    Route::get('favoris', function () {
+        return Inertia::render('settings/favoris');
+    })->name('favoris');
 });

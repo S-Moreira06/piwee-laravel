@@ -27,13 +27,7 @@ Route::get('/cookie', function () {
     return Inertia::render('cookie');
 })->name('cookie');
 
-Route::prefix('settings')->middleware('auth')->group(function () {
-    Route::get('profile', fn() => Inertia::render('settings/profile'))->name('profile');
-    Route::get('password', fn() => Inertia::render('settings/password'))->name('password');
-    Route::get('appearance', fn() => Inertia::render('settings/appearance'))->name('appearance');
-    Route::get('orders', fn() => Inertia::render('settings/orders'))->name('orders');
-    Route::get('favoris', fn() => Inertia::render('settings/favoris'))->name('favoris');
-});
+
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
     Route::get('/{id}', 'category')->name('index');
@@ -65,3 +59,4 @@ Route::prefix('cart')->name('cart.')->controller(CartController::class)->middlew
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 
+require __DIR__.'/settings.php';
