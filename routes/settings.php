@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +28,13 @@ Route::middleware('auth')->prefix('settings')->group(function () {
         return Inertia::render('settings/appearance');
     })->name('appearance');
 
-    Route::get('orders', function () {
-        return Inertia::render('settings/orders');
-    })->name('orders');
+    // Route::get('orders', function () {
+    //     return Inertia::render('settings/orders');
+    // })->name('orders');
+
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
 
     Route::get('favoris', function () {
         return Inertia::render('settings/favoris');

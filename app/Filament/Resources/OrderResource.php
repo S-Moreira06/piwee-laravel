@@ -27,7 +27,7 @@ class OrderResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
+                    ->relationship('user', 'lastname')
                     ->label('Client')
                     ->searchable()
                     ->required(),
@@ -69,7 +69,7 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
                 Tables\Columns\TextColumn::make('reference')->searchable(),
-                Tables\Columns\TextColumn::make('user.name')
+                Tables\Columns\TextColumn::make('user.lastname')
                     ->label('Client')
                     ->sortable()
                     ->searchable(),
