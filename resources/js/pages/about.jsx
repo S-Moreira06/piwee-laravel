@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import { Head } from "@inertiajs/react";
 import Layout from "../layouts/layout";
 
 
 export default function About() {
   return (
     <Layout className="min-h-screen">
+      <Head title={"A propos"} />
       <motion.section 
         className="max-w-4xl mx-auto p-6 bg-base-100  shadow-lg my-10"
         initial={{ opacity: 0, y: 30 }}

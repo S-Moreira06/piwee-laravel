@@ -7,14 +7,23 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
+import ErrorDisplay from '@/components/ErrorDisplay';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: 'Soso Test',
-        email: 'sosotest@live.fr',
+        firstname: 'Test',
+        lastname: 'Test',
+        birthday: '',
+        gender: '',
+        address: '21 rue du test',
+        zip: '06400',
+        city: 'Cannes',
+        phone: '0606060606',
+        email: 'test@mail.fr',
         password: 'Azerty06!',
         password_confirmation: 'Azerty06!',
     });
+
 
     const submit = (e) => {
         e.preventDefault();
@@ -25,30 +34,173 @@ export default function Register() {
 
     return (
         <AuthLayout title="Créez votre compte" description="Et profitez de nos offres exclusives !">
-            <Head title="Register" />
+            <Head title="Inscription" />
+            <ErrorDisplay errors={errors} />
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="name">Nom</Label>
+                        <Label htmlFor="firstname">Nom</Label>
                         <Input
-                            id="name"
+                            id="firstname"
                             type="text"
                             required
                             autoFocus
                             tabIndex={1}
-                            autoComplete="name"
-                            value={data.name}
-                            onChange={(e) => setData('name', e.target.value)}
+                            autoComplete="firstname"
+                            value={data.firstname}
+                            onChange={(e) => setData('firstname', e.target.value)}
                             disabled={processing}
-                            placeholder="Nom complet"
+                            placeholder="Nom"
                         />
-                        {errors.name&& 
+                        {errors.firstname&& 
                         <div role="alert" className="alert alert-error">
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-  </svg>
-  <span>{errors.name}</span>
-</div>}
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.firstname}</span>
+                            </div>}
+                    </div>
+                    <div className="grid gap-2">
+                        <Label htmlFor="lastname">Prénom</Label>
+                        <Input
+                            id="lastname"
+                            type="text"
+                            required
+                            tabIndex={2}
+                            autoComplete="lastname"
+                            value={data.lastname}
+                            onChange={(e) => setData('lastname', e.target.value)}
+                            disabled={processing}
+                            placeholder="Prénom"
+                        />
+                        {errors.lastname&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.lastname}</span>
+                            </div>}
+                    </div>
+                     <div>
+                        <Label htmlFor="birthday">Date de naissance</Label>
+                        <Input
+                            id="birthday"
+                            type="date"
+                            required
+                            tabIndex={3}
+                            autoComplete="birthday"
+                            value={data.birthday}
+                            className="mt-1"
+                            onChange={(e) => setData('birthday', e.target.value)}
+                        />
+                        {errors.birthday&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.birthday}</span>
+                        </div>}
+                    </div>
+                     <div>
+                        <Label htmlFor="gender">Genre</Label>
+                        <select
+                            id="gender"
+                            value={data.gender}
+                            className="mt-1"
+                            tabIndex={4}
+                            onChange={(e) => setData('gender', e.target.value)}
+                            required
+                        >
+                            <option value="">Sélectionnez</option>
+                            <option value="homme">Homme</option>
+                            <option value="femme">Femme</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                        {errors.gender&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.gender}</span>
+                        </div>}
+                    </div>
+                    <div>
+                        <Label htmlFor="address">Adresse</Label>
+                        <Input
+                            id="address"
+                            type="text"
+                            tabIndex={5}
+                            value={data.address}
+                            className="mt-1"
+                            onChange={(e) => setData('address', e.target.value)}
+                            required
+                        />
+                        {errors.address&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.address}</span>
+                        </div>}
+                    </div>
+                    {/* Code postal */}
+                    <div>
+                        <Label htmlFor="zip">Code postal</Label>
+                        <Input
+                            id="zip"
+                            type="text"
+                            value={data.zip}
+                            className="mt-1"
+                            onChange={(e) => setData('zip', e.target.value)}
+                            required
+                        />
+                        {errors.zip&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.zip}</span>
+                        </div>}
+                    </div>
+
+                    {/* Ville */}
+                    <div>
+                        <Label htmlFor="city">Ville</Label>
+                        <Input
+                            id="city"
+                            type="text"
+                            value={data.city}
+                            className="mt-1"
+                            onChange={(e) => setData('city', e.target.value)}
+                            required
+                        />
+                        {errors.city&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.city}</span>
+                        </div>}
+                    </div>
+
+                    {/* Téléphone */}
+                    <div>
+                        <Label htmlFor="phone">Téléphone</Label>
+                        <Input
+                            id="phone"
+                            type="tel"
+                            value={data.phone}
+                            className="mt-1"
+                            onChange={(e) => setData('phone', e.target.value)}
+                            required
+                        />
+                        {errors.phone&& 
+                        <div role="alert" className="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{errors.phone}</span>
+                        </div>}
                     </div>
 
                     <div className="grid gap-2">

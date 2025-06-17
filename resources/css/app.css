@@ -3,7 +3,7 @@
 
 @plugin 'tailwindcss-animate';
 @plugin "daisyui" {
-    themes: retro --default, dracula --prefersdark, cupcake;
+    themes: cupcake --default, retro --prefersdark, cupcake;
   }
 
 @source "../views";

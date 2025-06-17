@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 export default function MainCarousel(props) {
     const isMobile = useIsMobile();
     const orientation = 'horizontal';
+    console.log(props)
     const items = props.cat 
     ? props.data.filter((item) => item.category.id === props.cat)
     : props.data;
@@ -50,7 +51,7 @@ export default function MainCarousel(props) {
             setHasAnimated(true);
         }
     }, [isVisible]);
-
+    if (!props.data) return null;
     return (
         <Carousel orientation={orientation} opts={{ align: "start", loop: true }} className="my-5 px-10">
             <CarouselContent className="py-10">

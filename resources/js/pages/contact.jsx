@@ -4,6 +4,7 @@ import Layout from "../layouts/layout";
 export default function Contact() {
     return (
         <Layout className="min-h-screen">
+            <Head title={"Contactez-nous!"} />
             <div className="mt-20">
                 <Head title={"Contactez-nous!"} />
                 <h1 className="text-4xl place-self-center mb-10">Formulaire de contact</h1>

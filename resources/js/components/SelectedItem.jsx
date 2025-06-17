@@ -1,20 +1,20 @@
 import { useState, useEffect, useRef } from "react"; // Importation des hooks React
-import { FakeItems } from "../hooks/useFakeItems";
 import { getRandomItems } from "../hooks/useGetRandomItems";
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { motion } from "framer-motion"; // Importation de framer-motion pour les animations
 
 export default function SelectedItem() {
-    const { items } = FakeItems();
+    const items = usePage().props.items || [];
     
     // Ajout d'un état pour charger les éléments uniquement au début
     const [randomItems, setRandomItems] = useState([]);
 
     // Fonction pour charger les éléments au début
     useEffect(() => {
-        const fetchedItems = getRandomItems(items, 1);
-        setRandomItems(fetchedItems);
-    }, []);  // Ce useEffect ne s'exécutera qu'une seule fois lors du chargement de la page
+        if (items.length > 0) {
+            setRandomItems(getRandomItems(items, 1));
+        }
+    }, [items]); // Ce useEffect ne s'exécutera qu'une seule fois lors du chargement de la page
 
     // État pour savoir si l'élément est visible
     const [isVisible, setIsVisible] = useState(false);
@@ -56,64 +56,57 @@ export default function SelectedItem() {
 
     return (
         <div className="mb-5 mt-20" ref={selectedItemRef}>
-            
-                <h2 className="text-4xl font-bold place-self-center joti mb-4">Notre sélection</h2>
-                
-                {/* Animation sur la carte entière, ne démarre que si 40% de l'élément est visible */}
+            <h2 className="text-4xl font-bold place-self-center joti mb-4">Notre sélection</h2>
+            {randomItems[0] && (
                 <motion.div
                     className="card card-sm md:card-md lg:card-lg bg-base-100 w-3/4 max-w-[400px] shadow-sm place-self-center"
-                    initial={{ opacity: 0, y: 20 }} // Départ invisible et légèrement décalé
-                    animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }} // Déclenche l'animation quand l'élément est visible
-                    transition={{ duration: 1.6 }} // Durée de l'animation
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
+                    transition={{ duration: 1.6 }}
                 >
                     <figure>
-                        {/* Animation de l'image */}
                         <motion.img
-                            src={randomItems[0]?.image}
-                            alt="Shoes"
-                            initial={{ opacity: 0 }} // Image invisible au départ
-                            animate={{ opacity: hasAnimated ? 1 : 0 }}  // L'image devient visible uniquement si l'élément est visible
-                            transition={{ duration:hasAnimated ? 0.8 : 1.5 }}  // Durée de l'animation
+                            src={randomItems[0].image}
+                            alt={randomItems[0].name}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: hasAnimated ? 1 : 0 }}
+                            transition={{ duration: hasAnimated ? 0.8 : 1.5 }}
                             loading="lazy"
-                            whileHover={{ scale: 1.15 }}  // Zoom au survol
+                            whileHover={{ scale: 1.15 }}
                         />
                     </figure>
-
                     <div className="card-body">
-                        {/* Animation sur le titre et le prix */}
                         <motion.div
                             className="flex w-auto justify-between"
-                            initial={{ opacity: 0, x: -30 }} // Titre et prix cachés au départ, avec décalage à gauche
-                            animate={{ opacity: hasAnimated ? 1 : 0, x: hasAnimated ? 0 : -30 }}  // Ils apparaissent avec un léger mouvement vers la droite
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: hasAnimated ? 1 : 0, x: hasAnimated ? 0 : -30 }}
                             transition={{ duration: 1.5 }}
                         >
-                            <h2 className="card-title text-xl">{randomItems[0]?.name}</h2>
-                            <span className="text-bold text-2xl">{randomItems[0]?.price}€</span>
+                            <h2 className="card-title text-xl">{randomItems[0].name}</h2>
+                            <span className="text-bold text-2xl">{randomItems[0].price}€</span>
                         </motion.div>
-
-                        {/* Animation sur la description */}
                         <motion.p
                             className="mx-5 text-sm text-gray-600"
-                            initial={{ opacity: 0, y: 20 }} // Description cachée au départ avec décalage vertical
-                            animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}  // Elle devient visible avec un léger mouvement vers le haut
-                            transition={{ duration:1.5 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
+                            transition={{ duration: 1.5 }}
                         >
-                            {randomItems[0]?.description}
+                            {randomItems[0].description}
                         </motion.p>
-
-                        {/* Animation sur le bouton */}
                         <motion.div
                             className="card-actions justify-center"
-                            initial={{ opacity: 0, y: 20 }} // Le bouton est caché et légèrement décalé vers le bas
-                            animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}  // Il devient visible avec un léger mouvement vers le haut
-                            transition={{ duration: hasAnimated ? 0.3 : 1.5, delay: hasAnimated ? 0 : 1 }} // Délai pour que le bouton apparaisse après la description
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: hasAnimated ? 1 : 0, y: hasAnimated ? 0 : 20 }}
+                            transition={{ duration: hasAnimated ? 0.3 : 1.5, delay: hasAnimated ? 0 : 1 }}
                             whileHover={{ scale: 1.15 }}
                         >
-                            <button className="btn btn-primary"><Link href={`/details/${randomItems[0]?.id}`}>Détails</Link></button>
+                            <button className="btn btn-primary">
+                                <Link href={`/details/${randomItems[0].id}`}>Détails</Link>
+                            </button>
                         </motion.div>
                     </div>
                 </motion.div>
-            
+            )}
         </div>
     );
 }

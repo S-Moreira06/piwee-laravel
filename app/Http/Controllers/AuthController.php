@@ -48,14 +48,32 @@ class AuthController extends Controller
     public function registerPost(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:50',
+            'lastname' => 'required|string|max:50',
+            'birthday' => 'required|date|before:today',
+            'gender' => 'required|string|in:homme,femme,autre',
+            'address' => 'required|string|max:255',
+            'zip' => 'required|string|max:50',
+            'city' => 'required|string|max:50',
+            'phone' => 'required|string|max:20',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
         $user = User::create([
-            'name' => $request->name,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'zip' => $request->zip,
+            'city' => $request->city,
+            'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'verified' => false, // Valeur par défaut
+            'role' => 'user', // Valeur par défaut
+            'is_deleted' => false, // Valeur par défaut
         ]);
         event(new Registered($user));
         Auth::login($user);

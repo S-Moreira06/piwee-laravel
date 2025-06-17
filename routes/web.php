@@ -6,10 +6,11 @@ use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 
-Route::get('/', function () {
-    return Inertia::render('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/contact', function () {
     return Inertia::render('contact');
 })->name('contact');
@@ -26,24 +27,7 @@ Route::get('/cookie', function () {
     return Inertia::render('cookie');
 })->name('cookie');
 
-Route::get('settings/profile', function () {
-    return Inertia::render('settings/profile');
-})->name('profile');
-Route::get('settings/password', function () {
-    return Inertia::render('settings/password');
-})->name('password');
-Route::get('settings/password', function () {
-    return Inertia::render('settings/password');
-})->name('password');
-Route::get('settings/appearance', function () {
-    return Inertia::render('settings/appearance');
-})->name('appearance');
-Route::get('settings/orders', function () {
-    return Inertia::render('settings/orders');
-})->name('orders');
-Route::get('settings/favoris', function () {
-    return Inertia::render('settings/favoris');
-})->name('favoris');
+
 
 Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
     Route::get('/{id}', 'category')->name('index');
@@ -63,11 +47,16 @@ Route::prefix('auth')->name('auth.')->controller(AuthController::class)->group(f
     Route::post('/password/reset', 'resetPasswordPost')->name('password.reset.post');
 });
 
-Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function () {
+Route::prefix('cart')->name('cart.')->controller(CartController::class)->middleware('auth')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/add/{id}', 'addToCart')->name('add');
     Route::post('/remove/{id}', 'removeFromCart')->name('remove');
     Route::post('/clear', 'clearCart')->name('clear');
-    // Route::post('/update', 'updateCart')->name('update');
+    Route::post('/increment', 'increment')->name('increment');
+    Route::post('/decrement', 'decrement')->name('decrement');
 });
 
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
+
+require __DIR__.'/settings.php';
