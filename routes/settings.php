@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
@@ -36,7 +37,15 @@ Route::middleware('auth')->prefix('settings')->group(function () {
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 
-    Route::get('favoris', function () {
-        return Inertia::render('settings/favoris');
-    })->name('favoris');
+    // Route::get('favoris', function () {
+    //     return Inertia::render('settings/favoris');
+    // })->name('favoris');
+
+    // Routes pour les favoris
+    Route::prefix('favorites')->group(function () {
+        Route::get('/', [FavoriteController::class, 'index'])->name('favorites.index');
+        Route::post('/', [FavoriteController::class, 'store'])->name('favorites.store');
+        Route::delete('/{item}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+        Route::get('/check/{item}', [FavoriteController::class, 'check'])->name('favorites.check');
+    });
 });

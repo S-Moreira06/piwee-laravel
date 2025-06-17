@@ -2,6 +2,7 @@ import { usePage, Link, Head } from "@inertiajs/react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "../layouts/layout";
+import FavoriteButton from '@/Components/FavoriteButton';
 
 export default function Details() {
     const { item } = usePage().props;
@@ -145,21 +146,26 @@ export default function Details() {
                     </div>
 
                     {/* Boutons */}
-                    <Link
-                        href={route("cart.add", item.id)}
-                        method="post"
-                        as="button"
-                        data={{ size: selectedSize, quantity: quantity }}
-                        disabled={isQuantityTooHigh}
-                        
-                    >
-                        <motion.div
-                            whileHover={isQuantityTooHigh ? {} : { scale: 1.05 }}
-                            className={`btn btn-primary mb-2 ${isQuantityTooHigh ? "btn-disabled opacity-50 cursor-not-allowed pointer-events-none" : ""}`}
+                    <div className="place-self-center flex flex-col">
+                        <Link
+                            href={route("cart.add", item.id)}
+                            method="post"
+                            as="button"
+                            data={{ size: selectedSize, quantity: quantity }}
+                            disabled={isQuantityTooHigh}
+                            
                         >
-                            Ajouter au panier
-                        </motion.div>
-                    </Link>
+                            <motion.div
+                                whileHover={isQuantityTooHigh ? {} : { scale: 1.05 }}
+                                className={`btn btn-primary mb-2 ${isQuantityTooHigh ? "btn-disabled opacity-50 cursor-not-allowed pointer-events-none" : ""}`}
+                            >
+                                Ajouter au panier
+                            </motion.div>
+                            
+                        </Link>
+                        <FavoriteButton itemId={item.id} className="place-self-center" />
+
+                    </div>
                     {/* <Link href={route("home")} method="get" as="button">
                         <motion.div
                             whileHover={{ scale: 1.05 }}

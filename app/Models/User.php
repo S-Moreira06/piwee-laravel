@@ -61,5 +61,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Order::class);
     }
+    /**
+ * Obtenir tous les favoris de l'utilisateur.
+ */
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    /**
+     * Obtenir tous les articles favoris de l'utilisateur.
+     */
+    public function favoriteItems()
+    {
+        return $this->belongsToMany(Item::class, 'favorites');
+    }
+
 
 }
