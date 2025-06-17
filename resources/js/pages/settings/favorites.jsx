@@ -57,10 +57,10 @@ export default function Favorites({ favorites = [] }) {
                             </button>
                         </div>
                     ) : (
-                        <div className="overflow-x-auto bg-white rounded-lg shadow-sm border">
-                            <table className="table w-full">
+                        <div className="overflow-x-auto">
+                            <table className="table table-zebra">
                                 <thead>
-                                    <tr className="bg-gray-50">
+                                    <tr className="">
                                         <th className="text-left py-3 px-4 font-medium text-gray-900">Image</th>
                                         <th className="text-left py-3 px-4 font-medium text-gray-900">Nom de l'article</th>
                                         <th className="text-left py-3 px-4 font-medium text-gray-900">Catégorie</th>
@@ -72,11 +72,12 @@ export default function Favorites({ favorites = [] }) {
                                 </thead>
                                 <tbody>
                                     {favorites.map((item, index) => (
-                                        <tr key={item.id} className={`border-t ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors`}>
+                                        // <tr key={item.id} className={`border-t ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors`}>
+                                        <tr key={item.id} className="">
                                             <td className="py-3 px-4">
                                                 <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100">
                                                     <img
-                                                        src={item.images?.[0]?.url || '/placeholder-image.jpg'}
+                                                        src={item.image}
                                                         alt={item.name}
                                                         className="w-full h-full object-cover"
                                                         loading="lazy"

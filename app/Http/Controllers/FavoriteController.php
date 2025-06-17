@@ -17,10 +17,32 @@ class FavoriteController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $favoriteItems = $user->favoriteItems()->with(['images', 'stocks', 'category', 'brand'])->withPivot('created_at')->get();
-        
+        $favoriteItems = $user->favoriteItems()
+            ->with(['images', 'stocks', 'category', 'brand'])->withPivot('created_at')->get();
+        $formattedFavorites = $favoriteItems->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+                'brand' => $item->brand ? ['name' => $item->brand->name] : null,
+                'category' => $item->category ? [
+                    'id' => $item->category->id, 
+                    'name' => $item->category->name
+                ] : null,
+                'price' => $item->price,
+                'description' => $item->description,
+                'image' => $item->images->first()
+                    ? asset('storage/' . $item->images->first()->url)
+                    : '/placeholder.jpg',
+                'sizes' => $item->stocks->map(fn($s) => [
+                    'size' => $s->size,
+                    'stock' => $s->stock,
+                ]),
+                'is_favorite' => true, // Toujours true dans la liste des favoris
+                'added_at' => $item->pivot->created_at, // Date d'ajout aux favoris
+            ];
+        });
         return Inertia::render('settings/favorites', [
-            'favorites' => $favoriteItems
+            'favorites' => $formattedFavorites
         ]);
     }
 
