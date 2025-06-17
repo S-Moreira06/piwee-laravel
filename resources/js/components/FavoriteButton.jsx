@@ -26,7 +26,7 @@ export default function FavoriteButton({ itemId, isFavorite: initialFavorite, cl
         <button
             onClick={toggleFavorite}
             disabled={processing}
-            className={`p-2 rounded-full transition-colors ${
+            className={`btn w-10 p-2 rounded-full transition-colors ${
                 isFavorite 
                     ? 'bg-red-100 text-red-600 hover:bg-red-200' 
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'

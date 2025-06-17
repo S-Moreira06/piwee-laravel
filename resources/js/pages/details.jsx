@@ -146,22 +146,26 @@ export default function Details() {
                     </div>
 
                     {/* Boutons */}
-                    <Link
-                        href={route("cart.add", item.id)}
-                        method="post"
-                        as="button"
-                        data={{ size: selectedSize, quantity: quantity }}
-                        disabled={isQuantityTooHigh}
-                        
-                    >
-                        <motion.div
-                            whileHover={isQuantityTooHigh ? {} : { scale: 1.05 }}
-                            className={`btn btn-primary mb-2 ${isQuantityTooHigh ? "btn-disabled opacity-50 cursor-not-allowed pointer-events-none" : ""}`}
+                    <div className="place-self-center flex flex-col">
+                        <Link
+                            href={route("cart.add", item.id)}
+                            method="post"
+                            as="button"
+                            data={{ size: selectedSize, quantity: quantity }}
+                            disabled={isQuantityTooHigh}
+                            
                         >
-                            Ajouter au panier
-                        </motion.div>
-                        
-                    </Link><FavoriteButton itemId={item.id} />
+                            <motion.div
+                                whileHover={isQuantityTooHigh ? {} : { scale: 1.05 }}
+                                className={`btn btn-primary mb-2 ${isQuantityTooHigh ? "btn-disabled opacity-50 cursor-not-allowed pointer-events-none" : ""}`}
+                            >
+                                Ajouter au panier
+                            </motion.div>
+                            
+                        </Link>
+                        <FavoriteButton itemId={item.id} className="place-self-center" />
+
+                    </div>
                     {/* <Link href={route("home")} method="get" as="button">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
@@ -170,12 +174,6 @@ export default function Details() {
                             Ajouter aux favoris
                         </motion.div>
                     </Link> */}
-                    <div className="flex items-center space-x-2 mt-4">
-                        <button className="btn btn-primary">
-                            Ajouter au panier
-                        </button>
-                        
-                    </div>
                 </motion.div>
             </motion.div>
         </Layout>
