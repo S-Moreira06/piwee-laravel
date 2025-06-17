@@ -28,7 +28,7 @@ const sidebarNavItems = [
     },
     {
         title: 'Mes Favoris',
-        url: '/settings/favoris',
+        url: '/settings/favorites',
         icon: null,
     },
 ];

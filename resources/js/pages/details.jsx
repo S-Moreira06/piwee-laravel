@@ -2,6 +2,7 @@ import { usePage, Link, Head } from "@inertiajs/react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "../layouts/layout";
+import FavoriteButton from '@/Components/FavoriteButton';
 
 export default function Details() {
     const { item } = usePage().props;
@@ -159,7 +160,8 @@ export default function Details() {
                         >
                             Ajouter au panier
                         </motion.div>
-                    </Link>
+                        
+                    </Link><FavoriteButton itemId={item.id} />
                     {/* <Link href={route("home")} method="get" as="button">
                         <motion.div
                             whileHover={{ scale: 1.05 }}
@@ -168,6 +170,12 @@ export default function Details() {
                             Ajouter aux favoris
                         </motion.div>
                     </Link> */}
+                    <div className="flex items-center space-x-2 mt-4">
+                        <button className="btn btn-primary">
+                            Ajouter au panier
+                        </button>
+                        
+                    </div>
                 </motion.div>
             </motion.div>
         </Layout>
