@@ -58,7 +58,7 @@ export default function Favorites({ favorites = [] }) {
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
-                            <table className="table table-zebra">
+                            <table className="table table-zebra table-xs">
                                 <thead>
                                     <tr className="">
                                         <th className="text-left py-3 px-4 font-medium text-gray-900">Image</th>
@@ -75,11 +75,11 @@ export default function Favorites({ favorites = [] }) {
                                         // <tr key={item.id} className={`border-t ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors`}>
                                         <tr key={item.id} className="">
                                             <td className="py-3 px-4">
-                                                <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100">
+                                                <div className="w-16 h-16">
                                                     <img
                                                         src={item.image}
                                                         alt={item.name}
-                                                        className="w-full h-full object-cover"
+                                                        className=""
                                                         loading="lazy"
                                                     />
                                                 </div>
@@ -90,8 +90,8 @@ export default function Favorites({ favorites = [] }) {
                                                 </div>
                                                 {item.description && (
                                                     <div className="text-sm text-gray-500 mt-1">
-                                                        {item.description.length > 50 
-                                                            ? `${item.description.substring(0, 50)}...` 
+                                                        {item.description.length > 30 
+                                                            ? `${item.description.substring(0, 30)}...` 
                                                             : item.description
                                                         }
                                                     </div>
