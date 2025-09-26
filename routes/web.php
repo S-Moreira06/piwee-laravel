@@ -47,7 +47,7 @@ Route::prefix('auth')->name('auth.')->controller(AuthController::class)->group(f
     Route::post('/password/reset', 'resetPasswordPost')->name('password.reset.post');
 });
 
-Route::prefix('cart')->name('cart.')->controller(CartController::class)->middleware('auth')->group(function () {
+Route::middleware('guest')->prefix('cart')->name('cart.')->controller(CartController::class)->middleware('auth')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/add/{id}', 'addToCart')->name('add');
     Route::post('/remove/{id}', 'removeFromCart')->name('remove');

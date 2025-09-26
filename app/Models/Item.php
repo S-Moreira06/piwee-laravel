@@ -36,32 +36,22 @@ class Item extends Model
     {
         return $this->belongsTo(Brand::class);
     }
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
-
     public function images(): HasMany
     {
         return $this->hasMany(Image::class);
     }
-
     public function stocks()
     {
         return $this->hasMany(Stock::class);
     }
-    /**
-     * Obtenir tous les favoris pour cet article.
-     */
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
     }
-
-    /**
-     * Obtenir tous les utilisateurs qui ont mis cet article en favori.
-     */
     public function favoritedBy()
     {
         return $this->belongsToMany(User::class, 'favorites');

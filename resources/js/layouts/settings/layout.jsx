@@ -7,12 +7,12 @@ import Layout from '../layout';
 
 const sidebarNavItems = [
     {
-        title: 'Profil',
+        title: 'Modifiez vos informations',
         url: '/settings/profile',
         icon: null,
     },
     {
-        title: 'Mot de pase',
+        title: 'Modifiez votre mot de pase',
         url: '/settings/password',
         icon: null,
     },

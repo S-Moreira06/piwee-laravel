@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import { FakeItems } from "../hooks/useFakeItems";
+// import { FakeItems } from "../hooks/useFakeItems";
 import { usePage, Link, Head } from "@inertiajs/react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -8,14 +8,17 @@ import Layout from "../layouts/layout";
 export default function Category() {
     const { props } = usePage();
     const categoryId = parseInt(props.id);
-
-    const { items, brands } = FakeItems();
+    const items = props.items;
+    const brands = props.brands;
+    console.log('MARQUES: ',brands);
+    console.log('ARTICLES: ',items)
+    // const { items, brands } = FakeItems();
 
     const [selectedBrand, setSelectedBrand] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const categoryItems = items.filter(item => item.category && item.category.id === categoryId);
-
+    console.log("categoryItems :", categoryItems)
     const filteredItems = selectedBrand
         ? categoryItems.filter(item => item.brand && item.brand.id === parseInt(selectedBrand, 10))
         : categoryItems;
@@ -37,7 +40,7 @@ export default function Category() {
     return (
         <Layout className="min-w-screen">
             <Head title={categoryItems[0]?.category?.name || "Catégorie"} />
-            <h1 className="text-4xl place-self-center mb-4 text-center">{categoryItems[0]?.category?.name}</h1>
+            <h1 className="text-4xl place-self-center my-6 text-center">{categoryItems[0]?.category?.name}</h1>
             <form className="ml-4 flex items-center gap-4">
                 <label htmlFor="brand" className="font-medium">Filtrer par marque :</label>
                 <select

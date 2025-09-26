@@ -57,40 +57,40 @@ class ItemResource extends Resource
                     ->maxValue(42949672.95)
                     ->required(),
                 Forms\Components\Actions::make([
-                FormAction::make('marquerCommeSupprime')
-                    ->label('Marquer comme supprimé')
-                    ->color('danger')
-                    ->icon('heroicon-o-trash')
-                    ->visible(fn ($record) => $record && !$record->isDeleted)
-                    ->requiresConfirmation()
-                    ->action(function ($get, $record, $set) {
-                        $record->isDeleted = true;
-                        $record->save();
-                        $set('isDeleted', true);
+                    FormAction::make('marquerCommeSupprime')
+                        ->label('Marquer comme supprimé')
+                        ->color('danger')
+                        ->icon('heroicon-o-trash')
+                        ->visible(fn ($record) => $record && !$record->isDeleted)
+                        ->requiresConfirmation()
+                        ->action(function ($get, $record, $set) {
+                            $record->isDeleted = true;
+                            $record->save();
+                            $set('isDeleted', true);
 
-                        Notification::make()
-                            ->title('L\'item a été marqué comme supprimé.')
-                            ->success()
-                            ->send();
-                    }),
-                FormAction::make('reactiver')
-                    ->label('Réactiver')
-                    ->color('success')
-                    ->icon('heroicon-o-arrow-path')
-                    ->visible(fn ($record) => $record && $record->isDeleted)
-                    ->requiresConfirmation()
-                    ->action(function ($get, $record, $set) {
-                        $record->isDeleted = false;
-                        $record->save();
-                        $set('isDeleted', false);
+                            Notification::make()
+                                ->title('L\'item a été marqué comme supprimé.')
+                                ->success()
+                                ->send();
+                        }),
+                    FormAction::make('reactiver')
+                        ->label('Réactiver')
+                        ->color('success')
+                        ->icon('heroicon-o-arrow-path')
+                        ->visible(fn ($record) => $record && $record->isDeleted)
+                        ->requiresConfirmation()
+                        ->action(function ($get, $record, $set) {
+                            $record->isDeleted = false;
+                            $record->save();
+                            $set('isDeleted', false);
 
-                        Notification::make()
-                            ->title('L\'item a été réactivé.')
-                            ->success()
-                            ->send();
-                    }),
-            ])->visible(fn ($record) => $record !== null),
-        ]);
+                            Notification::make()
+                                ->title('L\'item a été réactivé.')
+                                ->success()
+                                ->send();
+                        }),
+                ])->visible(fn ($record) => $record !== null),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -151,7 +151,7 @@ class ItemResource extends Resource
         return [
         RelationManagers\ImagesRelationManager::class,
         RelationManagers\StocksRelationManager::class,
-    ];
+        ];
     }
 
     public static function getPages(): array

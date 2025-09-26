@@ -22,6 +22,9 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\CheckAdmin::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (AuthenticationException $e, $request) {
@@ -29,4 +32,5 @@ return Application::configure(basePath: dirname(__DIR__))
             ->route('auth.login')
             ->with('error', 'Veuillez vous connecter pour accéder à cette page.');
     });
+    
     })->create();

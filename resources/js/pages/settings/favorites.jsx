@@ -22,6 +22,13 @@ export default function Favorites({ favorites = [] }) {
         router.visit(`/items/${itemId}`);
     };
 
+    function formatDate(dateStr) {
+        return new Date(dateStr).toLocaleDateString('fr-FR', {
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit'
+        });
+    }
+
     const formatPrice = (price) => {
         return new Intl.NumberFormat('fr-FR', {
             style: 'currency',
@@ -72,6 +79,7 @@ export default function Favorites({ favorites = [] }) {
                                 </thead>
                                 <tbody>
                                     {favorites.map((item, index) => (
+                                        console.log(item),
                                         // <tr key={item.id} className={`border-t ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors`}>
                                         <tr key={item.id} className="">
                                             <td className="py-3 px-4">
@@ -119,7 +127,7 @@ export default function Favorites({ favorites = [] }) {
                                             </td>
                                             <td className="py-3 px-4">
                                                 <span className="text-sm text-gray-500">
-                                                    {new Date(item.pivot?.created_at || item.created_at).toLocaleDateString('fr-FR')}
+                                                    {formatDate(item.added_at)}
                                                 </span>
                                             </td>
                                             <td className="py-3 px-4">

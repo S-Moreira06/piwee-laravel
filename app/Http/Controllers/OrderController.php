@@ -13,12 +13,10 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user();
-        $cart = session('cart', []); // ou récupère le panier selon ta logique
-
+        $cart = session('cart', []);
         if (empty($cart)) {
             return back()->with('error', 'Votre panier est vide.');
         }
-
         // Calcul du sous-total
         $items = Item::whereIn('id', collect($cart)->pluck('id'))->get();
         $grouped = collect($cart)->groupBy(fn($entry) => $entry['id'].'-'.$entry['size']);
@@ -26,11 +24,9 @@ class OrderController extends Controller
             $item = $items->firstWhere('id', $entries[0]['id']);
             return $acc + ($item ? $item->price * count($entries) : 0);
         }, 0);
-
         $shipping = 9.99;
         $total = $subtotal + $shipping;
         $tax = round(($total - $shipping) * 0.2, 2);
-
         // Création de la commande
         $order = Order::create([
             'user_id' => $user->id,
@@ -39,7 +35,6 @@ class OrderController extends Controller
             'tax' => $tax,
             // 'reference', 'status' sont générés automatiquement
         ]);
-
         // Ajout des OrderItems
         foreach ($grouped as $key => $entries) {
             $entry = $entries[0];
@@ -64,10 +59,8 @@ class OrderController extends Controller
                 }
             }
         }
-
         // Vide le panier
         session()->forget('cart');
-
         // Redirige ou renvoie une réponse Inertia
         return redirect()->route('home')->with('success', 'Commande validée !');
     }
@@ -82,7 +75,6 @@ class OrderController extends Controller
             'orders' => $orders,
         ]);
     }
-
     public function show(Order $order)
     {
         $this->authorize('view', $order);

@@ -9,7 +9,7 @@ use Filament\Tables\Actions\CreateAction ;
 
 class ImagesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'images';
+    protected static string $relationship = 'images'; // on appelle la methode image() de notre ressource 
 
     public function form(Forms\Form $form): Forms\Form
     {
@@ -25,18 +25,9 @@ class ImagesRelationManager extends RelationManager
     public function table(Tables\Table $table): Tables\Table
     {
     return $table
-        ->columns([
-            Tables\Columns\ImageColumn::make('url')->disk('public')->size(80),
-            // Tables\Columns\TextColumn::make('url'),
-        ])
-        ->headerActions([
-            CreateAction::make(),
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-        ]);
-
+        ->columns([Tables\Columns\ImageColumn::make('url')->disk('public')->size(80),])
+        ->headerActions([CreateAction::make(),])
+        ->actions([Tables\Actions\EditAction::make(),Tables\Actions\DeleteAction::make(),]);
     }
     public function canCreate(): bool
     {
