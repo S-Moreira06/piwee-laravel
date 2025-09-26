@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
+import { usePage, Link } from '@inertiajs/react';
+
 
 export default function Hero() {
+    const { auth } = usePage().props;
+    const isAuthenticated = auth?.user !== null;
+
     return (
         <div className="hero h-100 md:h-150 lg:h-200 mb-5 relative overflow-hidden">
             <motion.div 
@@ -21,14 +26,19 @@ export default function Hero() {
                     <p className="mb-5 montserrat-semibold-italic">
                         Revendeur officiel de vêtements et sneakers de marques tendances.
                     </p>
+                    {!isAuthenticated && (
                     <motion.button
                         className="btn btn-primary"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1.5, delay: 1.2 }} // Apparition plus tard que le texte
                     >
-                        Inscrivez-vous
+                        <Link href={route('auth.register')}>
+                            Inscrivez-vous
+                        </Link>
                     </motion.button>
+                    )}
+                    {isAuthenticated && <p>Bonjour {auth.user.firstname}!</p>}
                 </motion.div>
             </div>
         </div>
