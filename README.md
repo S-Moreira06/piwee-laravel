@@ -46,7 +46,7 @@ Site e-commerce moderne développé avec Laravel et React, spécialisé dans la 
 
 ### 1. Cloner le projet
 ```bash
-git clone <votre-repo-url>
+git clone https://github.com/S-Moreira06/piwee-laravel.git
 cd piwee
 ```
 
