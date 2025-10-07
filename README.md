@@ -4,10 +4,10 @@ Site e-commerce moderne développé avec Laravel et React, spécialisé dans la 
 
 ## 🚀 Technologies
 
-- **Backend** : Laravel 12.13.0 (PHP ^8.2)
-- **Administration** : Filament v3.3.14
-- **Frontend** : React 19.0, Livewire 3.6.3, Inertia.js 2.0.2
-- **Styles** : TailwindCSS 4.0, DaisyUI 5.0.28, Radix UI
+- **Backend** : Laravel 12.0 (PHP ^8.2)
+- **Administration** : Filament v3.3
+- **Frontend** : Inertia.js 2.0 (React 19)
+- **Styles** : TailwindCSS 4.0, DaisyUI 5.0.28, Framer Motion 12.9.2
 - **Base de données** : SQLite (par défaut)
 - **Build** : Vite 6.0
 - **Tests** : Pest 3.8 ( Bientôt disponible )
