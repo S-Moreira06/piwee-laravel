@@ -1,239 +1,334 @@
 # 🛒 Piwee - E-commerce de Vêtements
 
-Site e-commerce moderne développé avec Laravel et React, spécialisé dans la vente de vêtements avec une interface utilisateur moderne et intuitive.
+<div align="center">
 
-## 🚀 Technologies
+![Piwee E-commerce](https://via.placeholder.com/800x400/6366F1/ffffff?text=Piwee+E-commerce)
 
-- **Backend** : Laravel 12.0 (PHP ^8.2)
-- **Administration** : Filament v3.3
-- **Frontend** : Inertia.js 2.0 (React 19)
-- **Styles** : TailwindCSS 4.0, DaisyUI 5.0.28, Framer Motion 12.9.2
-- **Base de données** : SQLite (par défaut)
-- **Build** : Vite 6.0
-- **Tests** : Pest 3.8 ( Bientôt disponible )
+**Site e-commerce moderne développé avec Laravel et React**  
+*Spécialisé dans la vente de vêtements avec une interface utilisateur moderne et intuitive*
 
-## ✨ Fonctionnalités
+[![Laravel](https://img.shields.io/badge/Laravel-12.0-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org)
+[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-### 👤 Gestion Utilisateur
-- ✅ Inscription complète avec profil détaillé
-- ✅ Authentification sécurisée
-- ✅ Gestion du profil (modification, suppression logique)
-- ✅ Changement de mot de passe
-- ✅ Système de favoris avec synchronisation
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/S-Moreira06/piwee-laravel?style=for-the-badge)](https://github.com/S-Moreira06/piwee-laravel/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/S-Moreira06/piwee-laravel?style=for-the-badge)](https://github.com/S-Moreira06/piwee-laravel/network)
 
-### 🛍️ E-commerce
-- ✅ Catalogue de produits complet
-- ✅ Système de commandes avancé
-- ✅ Gestion des stocks
-- ✅ Système de favoris
-- ✅ Commentaires et évaluations
-- ✅ Tags ( Bientôt disponible ) et catégories
+</div>
 
-### 👨‍💼 Administration
-- ✅ Interface d'administration Filament
-- ✅ Gestion des commandes avec statuts
-- ✅ Dashboard analytics ( Bientôt disponible )
-- ✅ Gestion des utilisateurs ( Bientôt disponible )
-- ✅ Système de permissions
+---
 
-## 🛠️ Installation
+## 📸 Aperçu
+
+### Interface Utilisateur
+<table>
+<tr>
+<td width="50%">
+
+**🛍️ Catalogue Moderne**  
+Interface de shopping intuitive avec filtres avancés et gestion du panier en temps réel.
+
+</td>
+<td width="50%">
+
+**📱 Design Responsive**  
+Expérience utilisateur optimisée sur tous les appareils avec animations fluides.
+
+</td>
+</tr>
+</table>
+
+### Panneau d'Administration
+<table>
+<tr>
+<td width="50%">
+
+**⚡ Dashboard Analytics**  
+Interface d'administration Filament avec statistiques en temps réel et gestion complète des données.
+
+</td>
+<td width="50%">
+
+**🎯 Gestion Avancée**  
+Système complet de gestion des commandes, stocks, et utilisateurs avec interface moderne.
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🚀 Stack Technologique
+
+<div align="center">
+
+### Backend
+![Laravel](https://img.shields.io/badge/Laravel-12.0-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php&logoColor=white)
+![Filament](https://img.shields.io/badge/Filament-3.3-F59E0B?style=flat-square&logo=laravel&logoColor=white)
+
+### Frontend  
+![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Inertia.js](https://img.shields.io/badge/Inertia.js-2.0-9553E9?style=flat-square&logo=inertia&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat-square&logo=typescript&logoColor=white)
+
+### Styling & UI
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![DaisyUI](https://img.shields.io/badge/DaisyUI-5.0-5A67D8?style=flat-square&logo=daisyui&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.9-0055FF?style=flat-square&logo=framer&logoColor=white)
+
+### Tools & Build
+![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Pest](https://img.shields.io/badge/Pest-3.8-41B883?style=flat-square&logo=pest&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-Default-003B57?style=flat-square&logo=sqlite&logoColor=white)
+
+</div>
+
+---
+
+## ✨ Fonctionnalités Principales
+
+### 👤 **Gestion Utilisateur Complète**
+- ✅ **Authentification sécurisée** avec Laravel Sanctum
+- ✅ **Profils détaillés** avec informations personnelles complètes
+- ✅ **Gestion de compte** (modification, suppression logique)
+- ✅ **Système de favoris** synchronisé et persistant
+- ✅ **Changement de mot de passe** avec validation robuste
+
+### 🛍️ **E-commerce Avancé**
+- ✅ **Catalogue dynamique** avec recherche et filtres
+- ✅ **Gestion des stocks** par taille et produit
+- ✅ **Système de commandes** avec statuts et suivi
+- ✅ **Panier persistant** avec synchronisation session
+- ✅ **Système d'évaluations** et commentaires
+- ✅ **Catégories et marques** organisées
+
+### 👨‍💼 **Administration Filament**
+- ✅ **Dashboard analytics** avec métriques en temps réel
+- ✅ **Gestion des commandes** avec changement de statuts
+- ✅ **Interface moderne** avec thème sombre/clair
+- ✅ **Gestion des utilisateurs** et permissions
+- ✅ **Relations manager** pour images et stocks
+- ✅ **Actions personnalisées** (suppression logique, réactivation)
+
+### 🔒 **Sécurité & Performance**
+- ✅ **Policies Laravel** pour l'autorisation
+- ✅ **Form Requests** pour la validation
+- ✅ **Protection CSRF** et XSS
+- ✅ **Hachage sécurisé** des mots de passe
+- ✅ **Optimisations** cache et requêtes
+
+---
+
+## 🛠️ Installation Rapide
 
 ### Prérequis
-- PHP ^8.2
-- Composer
-- Node.js ^20
-- SQLite (ou autre base de données)
-
-### 1. Cloner le projet
 ```bash
-git clone https://github.com/S-Moreira06/piwee-laravel.git
-cd piwee
+PHP >= 8.2
+Composer >= 2.0
+Node.js >= 20
+SQLite ou MySQL
 ```
 
-### 2. Installation des dépendances
+### 🚀 Installation en une commande
 ```bash
-# Dépendances PHP
-composer install
-
-# Dépendances Node.js
-npm install
+git clone https://github.com/S-Moreira06/piwee-laravel.git piwee
+cd piwee && composer install && npm install
+cp .env.example .env && php artisan key:generate
+touch database/database.sqlite && php artisan migrate --seed
 ```
 
-### 3. Configuration de l'environnement
+### ⚡ Démarrage
 ```bash
-# Copier le fichier d'environnement
-cp .env.example .env
-
-# Générer la clé d'application
-php artisan key:generate
-
-# Créer la base de données SQLite
-touch database/database.sqlite
-```
-
-### 4. Configuration de la base de données
-Modifier le fichier `.env` selon vos besoins :
-```env
-APP_NAME=Piwee
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://localhost:8000
-
-DB_CONNECTION=sqlite
-# Ou pour MySQL :
-# DB_CONNECTION=mysql
-# DB_HOST=127.0.0.1
-# DB_PORT=3306
-# DB_DATABASE=piwee
-# DB_USERNAME=root
-# DB_PASSWORD=
-```
-
-### 5. Migrations et données
-```bash
-# Exécuter les migrations
-php artisan migrate
-
-# (Optionnel) Exécuter les seeders
-php artisan db:seed
-```
-
-### 6. Build des assets
-```bash
-# Pour le développement
-npm run dev
-
-# Pour la production
-npm run build
-```
-
-## 🚀 Démarrage
-
-### Mode Développement
-```bash
-# Option 1 : Script automatisé (recommandé)
+# Option recommandée : Tout en un
 composer run dev
-# Lance automatiquement : serveur PHP, queue worker, et Vite
 
-# Option 2 : Manuel
-php artisan serve
-npm run dev
+# Ou manuellement
+php artisan serve & npm run dev
 ```
 
-### Mode Production
+🌐 **Accès** : http://localhost:8000  
+🔐 **Admin** : http://localhost:8000/admin
+
+---
+
+## 📊 Architecture de la Base de Données
+
+<details>
+<summary><strong>🗄️ Voir le schéma complet</strong></summary>
+
+### Tables Principales
+```sql
+users          # Utilisateurs avec profils complets
+├── brands     # Marques (Nike, Adidas, Puma...)
+├── categories # Catégories (T-shirts, Chaussures...)
+├── items      # Catalogue produits
+│   ├── images # Galerie multimédia
+│   └── stocks # Gestion inventaire par taille
+├── orders     # Commandes avec statuts
+│   └── order_items # Articles des commandes
+└── favorites  # Système de favoris
+```
+
+### Relations Optimisées
+- **Un-à-plusieurs** : User → Orders, Item → Images
+- **Plusieurs-à-plusieurs** : User ↔ Favorites ↔ Items
+- **Polymorphiques** : Commentaires sur Items
+- **Index uniques** : Prévention des doublons favoris
+
+</details>
+
+---
+
+## 🎯 Scripts de Développement
+
+### Frontend
 ```bash
-npm run build
-php artisan serve --env=production
+npm run dev          # 🔥 Mode développement avec hot-reload
+npm run build        # 🏗️ Build de production optimisé  
+npm run build:ssr    # ⚡ Build avec Server-Side Rendering
+npm run format       # 💄 Formatage automatique (Prettier)
+npm run lint         # 🔍 Analyse de code (ESLint)
 ```
 
-## 📊 Structure de la Base de Données
+### Backend  
+```bash
+composer run dev     # 🚀 Serveur + Queue + Vite en simultané
+php artisan serve    # 🌐 Serveur Laravel uniquement
+php artisan queue:work # ⚙️ Worker de files d'attente
+```
 
-### Tables principales
-- **users** : Utilisateurs avec profils complets
-- **orders** : Commandes avec statuts et détails
-- **order_items** : Articles des commandes
-- **items** : Catalogue produits
-- **favorites** : Système de favoris
-- **stocks** : Gestion des inventaires
-- **images** : Galerie multimédia
-- **comments** : Avis et commentaires
+---
 
-## 🔐 Sécurité
-
-- ✅ Authentification Laravel Sanctum
-- ✅ Policies pour l'autorisation
-- ✅ Validation via FormRequest
-- ✅ Protection CSRF
-- ✅ Hachage sécurisé des mots de passe
-- ✅ Suppression logique des données
-
-## 🧪 Tests ( Bientôt disponible )
+## 🧪 Tests & Qualité (En développement)
 
 ```bash
-# Exécuter les tests
-php artisan test
-# ou
-./vendor/bin/pest
+# Tests automatisés
+./vendor/bin/pest              # 🧪 Suite de tests Pest
+php artisan test --coverage    # 📊 Tests avec couverture
 
-# Avec couverture
-php artisan test --coverage
+# Qualité du code
+composer run format    # 💎 Standards PSR-12
+composer run analyse   # 🔬 Analyse statique PHPStan
 ```
 
-## 📝 Scripts Disponibles
+---
 
-```bash
-# Frontend
-npm run dev          # Développement Vite
-npm run build        # Build production
-npm run build:ssr    # Build avec SSR
-npm run format       # Formatage Prettier
-npm run lint         # Linting ESLint
+## 🌟 Roadmap & Fonctionnalités à Venir
 
-# Backend
-composer run dev     # Développement complet
-php artisan serve    # Serveur Laravel
-php artisan queue:work # Worker de queues
-```
+### 📦 **Phase 1 - Priorité Haute**
+- [ ] **💳 Paiements** Stripe/PayPal intégrés
+- [ ] **📍 Adresses multiples** Gestion complète
+- [ ] **📧 Notifications email** Système complet
+- [ ] **📊 Analytics avancés** Dashboard détaillé
+- [ ] **🔄 Gestion retours** Processus complet
 
-## 🌟 Fonctionnalités à Venir
+### 🎯 **Phase 2 - Améliorations UX**
+- [ ] **🔄 Sync favoris** Multi-onglets en temps réel
+- [ ] **🤖 Recommandations** Basées sur l'historique
+- [ ] **🎁 Listes de souhaits** Partageables
+- [ ] **🔔 Alertes prix** Notifications automatiques
+- [ ] **🏆 Programme fidélité** Système de points
 
-### 📦 Prioritaires
-- [ ] Gestion des adresses multiples
-- [ ] Système de paiement (Stripe/PayPal)
-- [ ] Gestion des retours/annulations
-- [ ] Notifications email
-- [ ] Dashboard analytics avancé
+### 🚀 **Phase 3 - Évolutions**
+- [ ] **📱 PWA** Application mobile  
+- [ ] **🌍 Multi-langues** i18n complet
+- [ ] **🤖 Chatbot** Support client IA
+- [ ] **📈 A/B Testing** Optimisation conversions
 
-### 🎯 Bonus
-- [ ] Synchronisation des favoris multi-onglets
-- [ ] Recommandations basées sur les favoris
-- [ ] Partage de listes de souhaits
-- [ ] Notifications de changement de prix
-- [ ] Système de points de fidélité
+---
 
 ## 🤝 Contribution
 
-1. Fork le projet
-2. Créez votre branche feature (`git checkout -b feature/AmazingFeature`)
-3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
+<div align="center">
 
-## 🐛 Dépannage
+**Contribuez à Piwee et aidez-nous à créer la meilleure plateforme e-commerce !**
 
-### Problèmes courants
+</div>
 
-**Erreur de permissions sur storage/**
+### 🔄 Processus de Contribution
+1. **🍴 Fork** le projet
+2. **🌱 Créez** votre branche feature (`git checkout -b feature/AmazingFeature`)
+3. **💫 Committez** vos changements (`git commit -m 'Add: AmazingFeature'`)
+4. **🚀 Pushez** vers la branche (`git push origin feature/AmazingFeature`)
+5. **📝 Ouvrez** une Pull Request
+
+### 📋 Guidelines
+- ✅ Suivre les standards **PSR-12** pour PHP
+- ✅ Utiliser **Conventional Commits** pour les messages
+- ✅ Ajouter des **tests** pour les nouvelles fonctionnalités
+- ✅ Documenter les **changements significatifs**
+
+---
+
+## 🐛 Dépannage Rapide
+
+<details>
+<summary><strong>⚠️ Problèmes courants</strong></summary>
+
+### 🔐 Erreurs de permissions
 ```bash
-chmod -R 775 storage/
-chmod -R 775 bootstrap/cache/
+chmod -R 775 storage/ bootstrap/cache/
+sudo chown -R www-data:www-data storage/
 ```
 
-**Base de données non trouvée**
+### 🗄️ Base de données introuvable
 ```bash
 touch database/database.sqlite
-php artisan migrate
+php artisan migrate --seed
 ```
 
-**Assets non compilés**
+### 🎨 Assets non compilés
 ```bash
 npm run build
 php artisan optimize:clear
 ```
 
-## 📚 Documentation
+### 🚫 Erreur 500
+```bash
+# Vérifier les logs
+tail -f storage/logs/laravel.log
 
-- [Laravel 12](https://laravel.com/docs)
-- [Filament 3](https://filamentphp.com/docs)
-- [Inertia.js](https://inertiajs.com/)
-- [React](https://react.dev/)
-- [TailwindCSS](https://tailwindcss.com/)
+# Nettoyer le cache
+php artisan config:clear
+php artisan cache:clear
+```
 
-## 📄 Licence
-
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
+</details>
 
 ---
 
-⭐ **N'hésitez pas à mettre une étoile si ce projet vous plaît !**
+## 📚 Documentation & Ressources
+
+### 🔗 **Liens Utiles**
+- 📖 [Laravel 12 Docs](https://laravel.com/docs)  
+- 🎛️ [Filament 3 Docs](https://filamentphp.com/docs)
+- ⚡ [Inertia.js Guide](https://inertiajs.com/)
+- ⚛️ [React Documentation](https://react.dev/)
+- 🎨 [TailwindCSS Reference](https://tailwindcss.com/)
+
+---
+
+## 📄 Licence & Crédits
+
+<div align="center">
+
+**MIT License** - Voir [LICENSE](LICENSE) pour plus de détails
+
+---
+
+
+**Vous aimez ce projet ?** ⭐ **N'hésitez pas à lui donner une étoile !**
+
+[![GitHub followers](https://img.shields.io/github/followers/S-Moreira06?style=social)](https://github.com/S-Moreira06)
+
+</div>
+
+---
+
+<div align="center">
+
+</div>
