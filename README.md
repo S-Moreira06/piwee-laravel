@@ -257,40 +257,11 @@ composer run analyse   # 🔬 Analyse statique PHPStan
 - [ ] **🔄 Gestion retours** Processus complet
 
 ### 🎯 **Phase 2 - Améliorations UX**
-- [ ] **🔄 Sync favoris** Multi-onglets en temps réel
+- [x] **🔄 Sync favoris** Multi-onglets en temps réel
 - [ ] **🤖 Recommandations** Basées sur l'historique
 - [ ] **🎁 Listes de souhaits** Partageables
 - [ ] **🔔 Alertes prix** Notifications automatiques
 - [ ] **🏆 Programme fidélité** Système de points
-
-### 🚀 **Phase 3 - Évolutions**
-- [ ] **📱 PWA** Application mobile  
-- [ ] **🌍 Multi-langues** i18n complet
-- [ ] **🤖 Chatbot** Support client IA
-- [ ] **📈 A/B Testing** Optimisation conversions
-
----
-
-## 🤝 Contribution
-
-<div align="center">
-
-**Contribuez à Piwee et aidez-nous à créer la meilleure plateforme e-commerce !**
-
-</div>
-
-### 🔄 Processus de Contribution
-1. **🍴 Fork** le projet
-2. **🌱 Créez** votre branche feature (`git checkout -b feature/AmazingFeature`)
-3. **💫 Committez** vos changements (`git commit -m 'Add: AmazingFeature'`)
-4. **🚀 Pushez** vers la branche (`git push origin feature/AmazingFeature`)
-5. **📝 Ouvrez** une Pull Request
-
-### 📋 Guidelines
-- ✅ Suivre les standards **PSR-12** pour PHP
-- ✅ Utiliser **Conventional Commits** pour les messages
-- ✅ Ajouter des **tests** pour les nouvelles fonctionnalités
-- ✅ Documenter les **changements significatifs**
 
 ---
 
