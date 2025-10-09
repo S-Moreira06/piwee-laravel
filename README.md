@@ -20,46 +20,6 @@
 
 ---
 
-## 📸 Aperçu
-
-### Interface Utilisateur
-<table>
-<tr>
-<td width="50%">
-
-**🛍️ Catalogue Moderne**  
-Interface de shopping intuitive avec filtres avancés et gestion du panier en temps réel.
-
-</td>
-<td width="50%">
-
-**📱 Design Responsive**  
-Expérience utilisateur optimisée sur tous les appareils avec animations fluides.
-
-</td>
-</tr>
-</table>
-
-### Panneau d'Administration
-<table>
-<tr>
-<td width="50%">
-
-**⚡ Dashboard Analytics**  
-Interface d'administration Filament avec statistiques en temps réel et gestion complète des données.
-
-</td>
-<td width="50%">
-
-**🎯 Gestion Avancée**  
-Système complet de gestion des commandes, stocks, et utilisateurs avec interface moderne.
-
-</td>
-</tr>
-</table>
-
----
-
 ## 🚀 Stack Technologique
 
 <div align="center">
@@ -121,35 +81,107 @@ Système complet de gestion des commandes, stocks, et utilisateurs avec interfac
 
 ---
 
-## 🛠️ Installation Rapide
+## 🛠️ Installation
 
 ### Prérequis
+- PHP ^8.2
+- Composer
+- Node.js ^20
+- SQLite (ou autre base de données)
+
+### 1. Cloner le projet
 ```bash
-PHP >= 8.2
-Composer >= 2.0
-Node.js >= 20
-SQLite ou MySQL
+git clone https://github.com/S-Moreira06/piwee-laravel.git
+cd piwee
 ```
 
-### 🚀 Installation en une commande
+### 2. Installation des dépendances
 ```bash
-git clone https://github.com/S-Moreira06/piwee-laravel.git piwee
-cd piwee && composer install && npm install
-cp .env.example .env && php artisan key:generate
-touch database/database.sqlite && php artisan migrate --seed
+# Dépendances PHP
+composer install
+
+# Dépendances Node.js
+npm install
 ```
 
-### ⚡ Démarrage
+### 3. Configuration de l'environnement
 ```bash
-# Option recommandée : Tout en un
+# Copier le fichier d'environnement
+cp .env.example .env
+
+# Générer la clé d'application
+php artisan key:generate
+
+# Créer la base de données SQLite
+touch database/database.sqlite
+```
+
+### 4. Configuration de la base de données
+Modifier le fichier `.env` selon vos besoins :
+```env
+APP_NAME=Piwee
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=sqlite
+# Ou pour MySQL :
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=piwee
+# DB_USERNAME=root
+# DB_PASSWORD=
+```
+
+### 5. Migrations et données
+```bash
+# Exécuter les migrations
+php artisan migrate
+
+# (Optionnel) Exécuter les seeders
+php artisan db:seed
+```
+
+### 6. Build des assets
+```bash
+# Pour le développement
+npm run dev
+
+# Pour la production
+npm run build
+```
+
+## 🚀 Démarrage
+
+### Mode Développement
+```bash
+# Option 1 : Script automatisé (recommandé)
 composer run dev
+# Lance automatiquement : serveur PHP, queue worker, et Vite
 
-# Ou manuellement
-php artisan serve & npm run dev
+# Option 2 : Manuel
+php artisan serve
+npm run dev
 ```
 
-🌐 **Accès** : http://localhost:8000  
-🔐 **Admin** : http://localhost:8000/admin
+### Mode Production
+```bash
+npm run build
+php artisan serve --env=production
+```
+
+## 📊 Structure de la Base de Données
+
+### Tables principales
+- **users** : Utilisateurs avec profils complets
+- **orders** : Commandes avec statuts et détails
+- **order_items** : Articles des commandes
+- **items** : Catalogue produits
+- **favorites** : Système de favoris
+- **stocks** : Gestion des inventaires
+- **images** : Galerie multimédia
+- **comments** : Avis et commentaires
 
 ---
 
