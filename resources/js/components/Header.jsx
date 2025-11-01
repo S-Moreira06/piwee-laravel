@@ -46,7 +46,7 @@ export default function Header() {
                     <>
                         <Link href={route('cart.index')} className="montserrat-semibold-italic">Panier</Link>
                         <Link href={route('profile')} className="btn btn-primary ">Profil</Link>
-                        <Link href={route('auth.logout')} className="btn btn-primary ">Deco</Link>
+                        <Link href={route('logout')} method="post" className="btn btn-primary ">Deco</Link>
                     </>
                 )}
                 

@@ -1,14 +1,20 @@
 // Components
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm , usePage, router} from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import AuthLayout from '@/layouts/auth-layout';
+import { useEffect } from 'react';
 
 export default function VerifyEmail({ status }) {
+    const { auth } = usePage().props;
     const { post, processing } = useForm({});
-
+    useEffect(() => {
+        if (auth?.user?.email_verified_at) {
+            window.location.href = route('home');
+        }
+    }, [auth]);
     const submit = (e) => {
         e.preventDefault();
 
