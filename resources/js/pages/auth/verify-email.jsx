@@ -10,11 +10,14 @@ import { useEffect } from 'react';
 export default function VerifyEmail({ status }) {
     const { auth } = usePage().props;
     const { post, processing } = useForm({});
-    useEffect(() => {
+    // useEffect(() => {
+    //     if (auth?.user?.email_verified_at) {
+    //         window.location.href = route('home');
+    //     }
+    // }, [auth]);
         if (auth?.user?.email_verified_at) {
-            window.location.href = route('home');
-        }
-    }, [auth]);
+        router.visit(route('home'));
+    }
     const submit = (e) => {
         e.preventDefault();
 
