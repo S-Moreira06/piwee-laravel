@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { PiweeLogoImage } from '@/components/Logo';
 import { UserMenu } from '@/components/UserMenu';
 import { MobileUserMenu } from '@/components/MobileUserMenu';
+import { FavoritesIcon } from './FavoriteIcon';
 
 
 
@@ -45,14 +46,8 @@ export default function Header() {
                         <div className="flex items-center gap-6">
                             {/* Cart Icon */}
                             <CartIcon />
-
-                            {/* Favorites Icon */}
-                            <Link
-                                href="/settings/favorites"
-                                className="relative inline-flex items-center transition-transform hover:scale-110"
-                            >
-                                <Heart className="h-6 w-6 text-neutral-700 dark:text-neutral-300 hover:text-red-500 transition-colors" />
-                            </Link>
+                            <FavoritesIcon />
+                            
 
                             {/* User Menu */}
                             {auth.user === null ? (

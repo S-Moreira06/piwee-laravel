@@ -54,6 +54,9 @@ class HandleInertiaRequests extends Middleware
                 $cart = session()->get('cart', []);
                 return count($cart);
             },
+            'favoritesCount' => fn () => auth()->check() 
+            ? auth()->user()->favoriteItems()->count() 
+            : 0,
 
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),
