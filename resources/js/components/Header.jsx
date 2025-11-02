@@ -1,4 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
+import { CartIcon } from '@/components/CartIcon';
+
 
 export default function Header() {
     const { auth } = usePage().props;
@@ -44,7 +46,7 @@ export default function Header() {
                     </>
                 ) : (
                     <>
-                        <Link href={route('cart.index')} className="montserrat-semibold-italic">Panier</Link>
+                        <CartIcon />
                         <Link href={route('profile')} className="btn btn-primary ">Profil</Link>
                         <Link href={route('logout')} method="post" className="btn btn-primary ">Deco</Link>
                     </>

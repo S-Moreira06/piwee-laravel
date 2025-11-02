@@ -99,4 +99,31 @@ class CartController extends Controller
         session()->put('cart', $cart);
         return redirect()->route('cart.index');
     }
+    public function getCount(Request $request)
+    {
+        try {
+            // 1️⃣ Récupère le panier stocké en session
+            // Si le panier n'existe pas, retourne un tableau vide []
+            $cart = session()->get('cart', []);
+            
+            // 2️⃣ Compte le nombre d'articles
+            // En Laravel, on utilise count() pour compter les éléments d'un tableau
+            $count = count($cart);
+
+            // 3️⃣ Retourne une réponse JSON au format:
+            // {"count": 3, "success": true}
+            return response()->json([
+                'count' => $count,
+                'success' => true
+            ]);
+        } 
+        catch (\Exception $e) {
+            // En cas d'erreur, retourner 0
+            return response()->json([
+                'count' => 0,
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
