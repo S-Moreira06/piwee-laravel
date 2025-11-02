@@ -46,11 +46,11 @@ export function CategoriesNav() {
                     >
                         {category.name}
                         {/* Petit chevron qui indique un dropdown */}
-                        <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
+                        {/* <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" /> */}
                     </Link>
 
                     {/* 7️⃣ Dropdown menu (optionnel - peut rester vide pour l'instant) */}
-                    <AnimatePresence>
+                    {/* <AnimatePresence>
                         {openDropdown === category.id && (
                             <motion.div
                                 initial={{ opacity: 0, y: -10 }}
@@ -59,13 +59,12 @@ export function CategoriesNav() {
                                 transition={{ duration: 0.15 }}
                                 className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-lg z-50"
                             >
-                                {/* Vous pouvez ajouter des marques pour cette catégorie ici */}
                                 <div className="p-4 text-sm text-center text-neutral-500">
                                     {category.name}
                                 </div>
                             </motion.div>
                         )}
-                    </AnimatePresence>
+                    </AnimatePresence> */}
                 </div>
             ))}
         </nav>
