@@ -1,112 +1,170 @@
-import { useState } from 'react';
+import React,{ useState, useRef, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { Menu, X, LogOut, Settings, Heart, ShoppingBag } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { CartIcon } from '@/components/CartIcon';
+import { FavoritesIcon } from '@/components/FavoritesIcon';
 import { CategoriesNav } from '@/components/CategoriesNav';
-import { motion, AnimatePresence } from 'framer-motion';
 import { PiweeLogoImage } from '@/components/Logo';
 import { UserMenu } from '@/components/UserMenu';
 import { MobileUserMenu } from '@/components/MobileUserMenu';
-import { FavoritesIcon } from './FavoriteIcon';
-
-
+import { motion, AnimatePresence } from 'framer-motion';
+import MobileCategoriesMenu from './MobileCategoriesMenu';
 
 /**
- * 🎨 Header Component - Responsive & Moderne
- * Adapté aux routes réelles du projet Piwee
+ * 🎨 Header Component - Premium Design
+ * Design-optimisé avec DaisyUI
  */
-export default function Header() {
-    const { auth } = usePage().props;
+export  const Header = React.memo( function Header() {
+// export default function Header() {
+    const { auth, categories } = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const headerRef = useRef(null);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setMobileMenuOpen(false);
+                setSearchOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (headerRef.current && !headerRef.current.contains(e.target)) {
+                setMobileMenuOpen(false);
+            }
+        };
+
+        if (mobileMenuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [mobileMenuOpen]);
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-white shadow-sm dark:bg-secondary-content dark:shadow-neutral-800/50">
-            {/* DESKTOP HEADER */}
+        <header
+            ref={headerRef}
+            className="sticky top-0 z-50 w-full bg-white shadow-sm border-b border-neutral-200/50 dark:bg-neutral-950 dark:border-neutral-800/50 dark:shadow-lg"
+        >
+            {/* 🖥️ DESKTOP HEADER */}
             <div className="hidden md:block">
-                <div className="mx-auto  px-4 py-4">
-                    <div className="flex h-16 items-center justify-between gap-8">
+                <div className="mx-auto max-w-7xl">
+                    <div className="flex h-16 items-center justify-between px-4 lg:px-8 gap-6 lg:gap-8">
                         {/* LEFT: Logo */}
                         <Link
                             href="/"
-                            className="shrink-0 flex items-center gap-2 hover:opacity-80 transition-opacity"
+                            className="shrink-0 flex items-center gap-3 group transition-opacity hover:opacity-80"
                         >
-                            <div className="hidden md:flex items-center gap-2">
+                            <div className="relative">
                                 <PiweeLogoImage width={40} height={40} />
-                                <span className="text-2xl font-bold text-neutral-900 dark:text-white joti">Piwee</span>
                             </div>
+                            <span className="text-lg lg:text-xl font-bold text-neutral-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                Piwee
+                            </span>
                         </Link>
 
-
-                        {/* CENTER: Categories Navigation */}
-                        <div className="flex-1">
+                        {/* CENTER: Categories */}
+                        <div className="hidden lg:flex flex-1 justify-center">
                             <CategoriesNav />
                         </div>
 
                         {/* RIGHT: Icons */}
-                        <div className="flex items-center gap-6">
-                            {/* Cart Icon */}
-                            <CartIcon />
-                            <FavoritesIcon />
-                            
+                        <div className="flex items-center gap-4 lg:gap-6">
+                            {/* Cart */}
+                            <div className="transition-transform hover:scale-110">
+                                <CartIcon />
+                            </div>
+
+                            {/* Favorites */}
+                            <div className="transition-transform hover:scale-110">
+                                <FavoritesIcon />
+                            </div>
 
                             {/* User Menu */}
-                            {auth.user === null ? (
-                                // NOT LOGGED IN
-                                <div className="flex items-center gap-3 border-l border-neutral-200 dark:border-neutral-700 pl-6">
-                                    <Link
-                                        href="/auth/login"
-                                        className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors"
-                                    >
-                                        Connexion
-                                    </Link>
-                                    <Link
-                                        href="/auth/register"
-                                        className="px-4 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-                                    >
-                                        Inscription
-                                    </Link>
-                                </div>
-                            ) : (
-                                // LOGGED IN - User Menu Dropdown
-                                <UserMenu auth={auth} />
-                            )}
+                            <UserMenu />
                         </div>
                     </div>
                 </div>
+
+                {/* Tablet: Categories Bar */}
+                <div className="hidden md:flex lg:hidden border-t border-neutral-200/50 dark:border-neutral-800/50 px-4 py-3">
+                    <CategoriesNav />
+                </div>
             </div>
 
-            {/* MOBILE HEADER */}
+            {/* 📱 MOBILE HEADER */}
             <div className="md:hidden">
-                <div className="flex h-16 items-center justify-between px-4">
+                <div className="flex h-14 items-center justify-between px-3 xs:px-4 gap-3">
                     {/* Logo */}
-                    <div className="md:hidden">
-                        <PiweeLogoImage width={32} height={32} />
-                    </div>
+                    <Link href="/" className="flex items-center gap-2 shrink-0">
+                        <PiweeLogoImage width={28} height={28} />
+                        <span className="hidden xs:inline font-bold text-neutral-900 dark:text-white text-sm">
+                            Piwee
+                        </span>
+                    </Link>
 
-                    {/* Icons + Hamburger */}
-                    <div className="flex items-center gap-4">
-                        {/* Cart Icon */}
+                    {/* Right Section: Icons + Menu */}
+                    <div className="flex items-center gap-2 xs:gap-3">
+                        {/* Search */}
+                        <motion.button
+                            onClick={() => setSearchOpen(!searchOpen)}
+                            className="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <Search className="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
+                        </motion.button>
+
+                        {/* Cart */}
                         <CartIcon />
 
-                        {/* Menu Button */}
-                        <button
+                        {/* Menu */}
+                        <motion.button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="relative inline-flex items-center justify-center p-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-                            aria-label="Toggle menu"
+                            className="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             <motion.div
                                 animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
                                 transition={{ duration: 0.2 }}
                             >
                                 {mobileMenuOpen ? (
-                                    <X className="h-6 w-6" />
+                                    <X className="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
                                 ) : (
-                                    <Menu className="h-6 w-6" />
+                                    <Menu className="h-5 w-5 text-neutral-700 dark:text-neutral-300" />
                                 )}
                             </motion.div>
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
+
+                {/* Mobile Search Bar */}
+                <AnimatePresence>
+                    {searchOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="border-t border-neutral-200/50 dark:border-neutral-800/50 px-3 py-3 bg-neutral-50 dark:bg-neutral-900/50"
+                        >
+                            <input
+                                type="text"
+                                placeholder="Rechercher..."
+                                className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                autoFocus
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Mobile Menu */}
                 <AnimatePresence>
@@ -115,37 +173,17 @@ export default function Header() {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50"
+                            className="border-t border-neutral-200/50 dark:border-neutral-800/50 bg-neutral-50 dark:bg-neutral-900/50 backdrop-blur-sm max-h-[calc(100vh-56px)] overflow-y-auto"
                         >
-                            <div className="px-4 py-4 space-y-4">
-                                {/* Categories */}
-                                <MobileCategoriesMenu />
+                            <div className="px-3 py-4 space-y-3">
+                                {/* Categories Mobile */}
+                                <MobileCategoriesMenu onClose={() => setMobileMenuOpen(false)} />
 
                                 {/* Divider */}
                                 <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
 
-                                {/* User Links */}
-                                {auth.user === null ? (
-                                    <div className="space-y-3">
-                                        <Link
-                                            href="/login"
-                                            className="block w-full px-4 py-2 text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                        >
-                                            Connexion
-                                        </Link>
-                                        <Link
-                                            href="/register"
-                                            className="block w-full px-4 py-2 text-center text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                        >
-                                            Inscription
-                                        </Link>
-                                    </div>
-                                ) : (
-                                    <MobileUserMenu auth={auth} onClose={() => setMobileMenuOpen(false)} />
-                                )}
+                                {/* User Menu Mobile */}
+                                <MobileUserMenu onClose={() => setMobileMenuOpen(false)} />
                             </div>
                         </motion.div>
                     )}
@@ -153,180 +191,9 @@ export default function Header() {
             </div>
         </header>
     );
-}
-
+});
+export default Header; 
 /**
- * 👤 Desktop User Menu Dropdown
+ * 📱 Mobile Categories Menu
  */
-// function UserMenu({ auth }) {
-//     const [isOpen, setIsOpen] = useState(false);
 
-//     return (
-//         <div className="relative">
-//             <button
-//                 onClick={() => setIsOpen(!isOpen)}
-//                 className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-//             >
-//                 {/* Avatar with initials */}
-//                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-bold">
-//                     {auth.user.firstname[0]}
-//                     {auth.user.lastname[0]}
-//                 </div>
-//                 <span className="hidden lg:inline text-sm font-medium text-neutral-700 dark:text-neutral-300">
-//                     {auth.user.firstname}
-//                 </span>
-//             </button>
-
-//             {/* Dropdown Menu */}
-//             <AnimatePresence>
-//                 {isOpen && (
-//                     <motion.div
-//                         initial={{ opacity: 0, y: -10 }}
-//                         animate={{ opacity: 1, y: 0 }}
-//                         exit={{ opacity: 0, y: -10 }}
-//                         className="absolute right-0 mt-2 w-56 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-lg z-50"
-//                     >
-//                         {/* User Info */}
-//                         <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-800">
-//                             <p className="text-sm font-medium text-neutral-900 dark:text-white">
-//                                 {auth.user.firstname} {auth.user.lastname}
-//                             </p>
-//                             <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">
-//                                 {auth.user.email}
-//                             </p>
-//                         </div>
-
-//                         {/* Menu Items */}
-//                         <div className="p-2 space-y-1">
-//                             <MenuLink
-//                                 href="/settings/profile"
-//                                 icon={<Settings className="h-4 w-4" />}
-//                                 label="Profil"
-//                                 onClose={() => setIsOpen(false)}
-//                             />
-//                             <MenuLink
-//                                 href="/settings/orders"
-//                                 icon={<ShoppingBag className="h-4 w-4" />}
-//                                 label="Mes Commandes"
-//                                 onClose={() => setIsOpen(false)}
-//                             />
-//                             <MenuLink
-//                                 href="/settings/favorites"
-//                                 icon={<Heart className="h-4 w-4" />}
-//                                 label="Mes Favoris"
-//                                 onClose={() => setIsOpen(false)}
-//                             />
-//                         </div>
-
-//                         {/* Logout */}
-//                         <div className="border-t border-neutral-200 dark:border-neutral-800 p-2">
-//                             <Link
-//                                 href="/logout"
-//                                 method="post"
-//                                 as="button"
-//                                 className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-lg transition-colors"
-//                                 onClick={() => setIsOpen(false)}
-//                             >
-//                                 <LogOut className="h-4 w-4" />
-//                                 Déconnexion
-//                             </Link>
-//                         </div>
-//                     </motion.div>
-//                 )}
-//             </AnimatePresence>
-//         </div>
-//     );
-// }
-
-/**
- * 🎯 Mobile Categories Menu
- */
-function MobileCategoriesMenu() {
-    // Simulated categories - à remplacer par useCategories hook
-    const categories = [
-        { id: 1, name: 'T-Shirts' },
-        { id: 2, name: 'Sneakers' },
-    ];
-
-    return (
-        <div className="space-y-2">
-            <p className="px-4 text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase">
-                Catégories
-            </p>
-            {categories.map((category) => (
-                <Link
-                    key={category.id}
-                    href={`/category/${category.id}`}
-                    className="block px-4 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-                >
-                    {category.name}
-                </Link>
-            ))}
-        </div>
-    );
-}
-
-/**
- * 👤 Mobile User Menu
- */
-// function MobileUserMenu({ auth, onClose }) {
-//     return (
-//         <div className="space-y-2">
-//             <p className="px-4 text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase">
-//                 Mon Compte
-//             </p>
-            
-//             <Link
-//                 href="/settings/profile"
-//                 className="block px-4 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-//                 onClick={onClose}
-//             >
-//                 📋 Profil
-//             </Link>
-            
-//             <Link
-//                 href="/settings/orders"
-//                 className="block px-4 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-//                 onClick={onClose}
-//             >
-//                 📦 Mes Commandes
-//             </Link>
-            
-//             <Link
-//                 href="/settings/favorites"
-//                 className="block px-4 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-//                 onClick={onClose}
-//             >
-//                 ❤️ Mes Favoris
-//             </Link>
-
-//             <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
-
-//             <Link
-//                 href="/logout"
-//                 method="post"
-//                 as="button"
-//                 className="block w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-lg transition-colors text-left"
-//                 onClick={onClose}
-//             >
-//                 🚪 Déconnexion
-//             </Link>
-//         </div>
-//     );
-// }
-
-/**
- * 🔗 Menu Link Component
- */
-function MenuLink({ href, icon, label, onClose }) {
-    return (
-        <Link
-            href={href}
-            className="flex items-center gap-3 px-3 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-            onClick={onClose}
-        >
-            {icon}
-            {label}
-        </Link>
-    );
-}

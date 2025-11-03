@@ -42,13 +42,13 @@ export function UserMenu() {
         return (
             <div className="flex items-center gap-3 border-l border-neutral-200 dark:border-neutral-700 pl-6">
                 <Link
-                    href="/login"
+                    href="/auth/login"
                     className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors"
                 >
                     Connexion
                 </Link>
                 <Link
-                    href="/register"
+                    href="/auth/register"
                     className="px-4 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm"
                 >
                     Inscription
