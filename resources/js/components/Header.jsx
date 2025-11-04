@@ -72,7 +72,7 @@ export  const Header = React.memo( function Header() {
                         </Link>
 
                         {/* CENTER: Categories */}
-                        <div className="hidden lg:flex flex-1 justify-center">
+                        <div className="hidden md:flex flex-1 justify-center">
                             <CategoriesNav />
                         </div>
 
@@ -92,11 +92,6 @@ export  const Header = React.memo( function Header() {
                             <UserMenu />
                         </div>
                     </div>
-                </div>
-
-                {/* Tablet: Categories Bar */}
-                <div className="hidden md:flex lg:hidden border-t border-neutral-200/50 dark:border-neutral-800/50 px-4 py-3">
-                    <CategoriesNav />
                 </div>
             </div>
 

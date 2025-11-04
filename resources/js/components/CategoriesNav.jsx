@@ -26,20 +26,13 @@ export function CategoriesNav() {
     };
 
     // Animation de chaque catégorie
-    const itemVariants = isHomePage ? {
-        hidden: { opacity: 0, y: -15 }, // ✅ Plus d'espace vertical
+    const itemVariants = {
+        hidden: { opacity: 0, y: -10 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: { 
-                duration: 0.5, // ✅ Plus lent (0.5 au lieu de 0.3)
-                ease: 'easeOut',
-                delay:0.5
-            },
+            transition: { duration: 0.3, ease: 'easeOut' },
         },
-    } : {
-        hidden: { opacity: 1, y: 0 },
-        visible: { opacity: 1, y: 0 },
     };
 
     return (
@@ -48,7 +41,6 @@ export function CategoriesNav() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            transition={{ duration: 1, delay: 0.5 }}
         >
             {categories.map((category) => (
                 <motion.div

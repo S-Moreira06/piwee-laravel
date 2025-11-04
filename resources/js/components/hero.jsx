@@ -8,11 +8,11 @@ export default function Hero() {
 
     return (
         <div className="hero h-100 md:h-150 lg:h-200 mb-5 relative overflow-hidden">
-            <motion.div 
+            <div 
                 style={{backgroundImage: "url('/img/hero.webp')"}}
-                initial={{ scale: 0.6 }} // Image commence à droite
-                animate={{ scale: 1 }} // Glissement à sa position originale
-                transition={{ duration: 1 }} // Durée de l'animation
+                // initial={{ scale: 0.6 }} // Image commence à droite
+                // animate={{ scale: 1 }} // Glissement à sa position originale
+                // transition={{ duration: 1 }} // Durée de l'animation
                 className="hero-background hero-overlay absolute inset-0 bg-cover bg-center"
             />
             <div className="hero-content text-neutral-content text-center absolute inset-0 flex justify-center items-center">

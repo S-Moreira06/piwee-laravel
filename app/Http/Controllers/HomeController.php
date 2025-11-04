@@ -9,7 +9,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $items = Item::with(['category', 'brand', 'images', 'stocks'])->get();
+        $items = Item::with('category', 'brand', 'images', 'stocks')
+            ->where('isDeleted', false)
+            ->limit(12)  // ← Limité à 12
+            ->get();        
         //adapter le donné pour le front
         $items = $items->map(function ($item) {
             return [

@@ -18,10 +18,10 @@ export default function Home(){
                     <MainCarousel data={items} cat={1} />
                     
                 </div>
-                <div>
+                {/* <div>
                     <h2 className="text-4xl font-bold place-self-center md:mt-3 joti">Sneakers</h2>
                     <MainCarousel data={items} cat={2} />
-                </div>
+                </div> */}
             </div>
             
         </Layout>
