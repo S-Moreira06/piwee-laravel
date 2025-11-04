@@ -11,10 +11,6 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserAvatar } from '@/components/UserAvatar';
 
-/**
- * 🧑 UserMenu Component (Desktop)
- * Menu déroulant pour utilisateur connecté
- */
 export function UserMenu() {
     const { auth } = usePage().props;
     const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +45,7 @@ export function UserMenu() {
                 </Link>
                 <Link
                     href="/auth/register"
-                    className="px-4 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm"
+                    className="btn  text-sm font-medium bg-secondary text-secondary-content hover:bg-primary transition-colors shadow-sm"
                 >
                     Inscription
                 </Link>

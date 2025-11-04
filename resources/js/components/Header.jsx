@@ -10,10 +10,7 @@ import { MobileUserMenu } from '@/components/MobileUserMenu';
 import { motion, AnimatePresence } from 'framer-motion';
 import MobileCategoriesMenu from './MobileCategoriesMenu';
 
-/**
- * 🎨 Header Component - Premium Design
- * Design-optimisé avec DaisyUI
- */
+
 export  const Header = React.memo( function Header() {
 // export default function Header() {
     const { auth, categories } = usePage().props;
@@ -54,9 +51,9 @@ export  const Header = React.memo( function Header() {
             ref={headerRef}
             className="sticky top-0 z-50 w-full bg-white shadow-sm border-b border-neutral-200/50 dark:bg-neutral-950 dark:border-neutral-800/50 dark:shadow-lg"
         >
-            {/* 🖥️ DESKTOP HEADER */}
+            {/* DESKTOP HEADER */}
             <div className="hidden md:block">
-                <div className="mx-auto max-w-7xl">
+                <div className="mx-auto max-w-8xl">
                     <div className="flex h-16 items-center justify-between px-4 lg:px-8 gap-6 lg:gap-8">
                         {/* LEFT: Logo */}
                         <Link
@@ -95,7 +92,7 @@ export  const Header = React.memo( function Header() {
                 </div>
             </div>
 
-            {/* 📱 MOBILE HEADER */}
+            {/* MOBILE HEADER */}
             <div className="md:hidden">
                 <div className="flex h-14 items-center justify-between px-3 xs:px-4 gap-3">
                     {/* Logo */}
@@ -142,25 +139,6 @@ export  const Header = React.memo( function Header() {
                     </div>
                 </div>
 
-                {/* Mobile Search Bar */}
-                <AnimatePresence>
-                    {searchOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="border-t border-neutral-200/50 dark:border-neutral-800/50 px-3 py-3 bg-neutral-50 dark:bg-neutral-900/50"
-                        >
-                            <input
-                                type="text"
-                                placeholder="Rechercher..."
-                                className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                autoFocus
-                            />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
                 {/* Mobile Menu */}
                 <AnimatePresence>
                     {mobileMenuOpen && (
@@ -188,7 +166,5 @@ export  const Header = React.memo( function Header() {
     );
 });
 export default Header; 
-/**
- * 📱 Mobile Categories Menu
- */
+
 
