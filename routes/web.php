@@ -6,6 +6,7 @@ use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 
@@ -50,7 +51,11 @@ Route::middleware('auth')->prefix('cart')->name('cart.')->controller(CartControl
     Route::post('/decrement', 'decrement')->name('decrement');
 });
 
-Route::post('/order', [OrderController::class, 'store'])->name('order.store');
-
+// Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+Route::middleware('auth')->prefix('checkout')->name('checkout.')->controller(CheckoutController::class)->group(function () {
+    Route::get('/confirm', 'showCheckout')->name('confirm');
+    Route::post('/process', 'processCheckout')->name('process');
+    Route::post('/payment', 'confirmPayment')->name('payment');
+});
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
