@@ -8,14 +8,14 @@ import { motion } from "framer-motion";
 export default function MainCarousel(props) {
     const isMobile = useIsMobile();
     const orientation = 'horizontal';
-    console.log(props)
+    
     const items = props.cat 
     ? props.data.filter((item) => item.category.id === props.cat)
     : props.data;
       // Ajout d'un état pour charger les éléments uniquement au début
     const [randomItems, setRandomItems] = useState([]);
     // Fonction pour charger les éléments au début
-    useEffect(() => {
+    useEffect(() => {console.log(props)
         const fetchedItems = getRandomItems(items, 10);
         setRandomItems(fetchedItems);
     }, []);

@@ -32,21 +32,10 @@ export default function Cart() {
 
     const [loading, setLoading] = useState(false);
     function handleOrder() {
-        if (cartItems.length === 0) return; // Sécurité côté front
-        setLoading(true);
-        router.post(
-            route('order.store'),
-            {},
-            {
-                onSuccess: () => {
-                    setLoading(false);
-                    // Redirection ou message de succès si besoin
-                    router.visit(route('orders.user'));
-                },
-                onError: () => setLoading(false),
-            }
-        );
-    }
+    if (cartItems.length === 0) return;
+    // Redirection vers la page de confirmation de commande
+    router.visit(route('checkout.confirm'));
+}
 
     return (
         <Layout className="min-h-screen">
@@ -125,12 +114,13 @@ export default function Cart() {
                                 Vider le panier
                             </Link>
                             {cartItems.length > 0 && (
-                                <button
-                                    className="btn btn-success w-full mt-4"
-                                    onClick={handleOrder}
-                                >
-                                    Commander
-                                </button>
+                                <button 
+    onClick={handleOrder} 
+    disabled={cartItems.length === 0}
+    className="..."
+>
+    Procéder au paiement
+</button>
                             )}
 
 

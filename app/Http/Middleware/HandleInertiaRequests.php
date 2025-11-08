@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -50,7 +51,17 @@ class HandleInertiaRequests extends Middleware
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
             ],
-
+            'cartCount' => function () {
+                $cart = session()->get('cart', []);
+                return count($cart);
+            },
+            'favoritesCount' => fn () => auth()->check() 
+            ? auth()->user()->favoriteItems()->count() 
+            : 0,
+            'categories' => fn () => Category::select('id', 'name')
+            ->orderBy('name')
+            ->get()
+            ->toArray(),
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
