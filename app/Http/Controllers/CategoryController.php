@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -34,5 +35,25 @@ class CategoryController extends Controller
             'items' => $items,
             'brands' => $brands
         ]);
+    }
+    public function getAll()
+    {
+        try {
+            // Récupérer toutes les catégories, triées par nom
+            $categories = Category::select('id', 'name')
+                ->orderBy('name', 'asc')
+                ->get();
+
+            return response()->json([
+                'categories' => $categories,
+                'success' => true
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'categories' => [],
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

@@ -14,7 +14,6 @@ export default function About() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <h1 className="text-3xl font-bold mb-6 text-center">À propos de Piwee!</h1>
-
         <div className="space-y-6 text-base-content">
           {sections.map((section, index) => (
             <motion.div 
