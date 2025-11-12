@@ -102,7 +102,6 @@ class OrderResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y H:i')->sortable(),
-
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')

@@ -116,6 +116,7 @@ class ItemResource extends Resource
                     ->tooltip(fn ($record) => $record->description)
                     ->limit(30)
                     ->searchable(),
+                    
                 Tables\Columns\TextColumn::make('tailles_disponibles')
                 ->label('Tailles disponibles')
                 ->html()

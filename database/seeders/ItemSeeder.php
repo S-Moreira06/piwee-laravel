@@ -4,61 +4,63 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Item;
+use App\Models\Brand;
+use App\Models\Category;
+use Illuminate\Support\Str;
 
 class ItemSeeder extends Seeder
 {
     public function run(): void
     {
-        $items = [
-            [
-                'name' => 'StreetTone Classic',
-                'description' => 'Un t-shirt au style urbain intemporel, parfait pour afficher une allure décontractée avec une touche de caractère.',
-                'slug' => 'streettone-classic',
-                'price' => 19.99,
-                'brand_id' => 1,
-                'category_id' => 1,
-                'isDeleted' => 0,
+        $brands = Brand::all();
+        $categories = Category::all();
+
+        $productNames = [
+            1 => [ // T-shirt
+                'Classic Tee', 'Urban Style', 'Sport Pro', 'Vintage Fit',
+                'Street Wear', 'Comfort Plus', 'Essential Basic', 'Premium Cotton',
             ],
-            [
-                'name' => 'Drip Motion Tee',
-                'description' => 'Exprime ton flow avec ce t-shirt fluide et stylé, conçu pour bouger avec toi, du matin au soir.',
-                'slug' => 'drip-motion-tee',
-                'price' => 24.99,
-                'brand_id' => 19,
-                'category_id' => 1,
-                'isDeleted' => 0,
+            2 => [ // Chaussures
+                'Running Pro', 'Street Kicks', 'Urban Walk', 'Sport Elite',
+                'Casual Step', 'City Style', 'Active Flex', 'Daily Comfort',
             ],
-            [
-                'name' => 'Pulse Fade',
-                'description' => 'Un dégradé moderne qui capte l\'énergie de la rue. Parfait pour ceux qui vivent au rythme du bitume.',
-                'slug' => 'pulse-fade',
-                'price' => 29.99,
-                'brand_id' => 19,
-                'category_id' => 1,
-                'isDeleted' => 0,
-            ],
-            [
-                'name' => 'CoreLayer Fit',
-                'description' => 'Confort et structure réunis dans ce tee minimaliste conçu comme base de ton style quotidien.',
-                'slug' => 'corelayer-fit',
-                'price' => 34.99,
-                'brand_id' => 19,
-                'category_id' => 1,
-                'isDeleted' => 0,
-            ],
-            [
-                'name' => 'UrbanFrame Tee',
-                'description' => 'Encadre ton look avec ce t-shirt à coupe nette, pensé pour la jungle urbaine et les esprits affûtés.',
-                'slug' => 'urbanframe-tee',
-                'price' => 39.99,
-                'brand_id' => 20,
-                'category_id' => 1,
-                'isDeleted' => 0,
+            3 => [ // Pulls
+                'Cozy Knit', 'Winter Warm', 'Urban Pull', 'Classic Fit',
+                'Comfort Fleece', 'Street Style', 'Essential Knit', 'Premium Wool',
             ],
         ];
 
-        foreach ($items as $item) {
-            Item::create($item);
+        $counter = 0;
+
+        foreach ($brands as $brand) {
+            foreach ($categories as $category) {
+                // 2 produits par marque ET par catégorie
+                for ($i = 0; $i < 2; $i++) {
+                    $nameIndex = $counter % count($productNames[$category->id]);
+                    $baseName = $productNames[$category->id][$nameIndex];
+                    $name = "{$brand->name} {$baseName} {$category->name}";
+                    
+                    $price = match($category->id) {
+                        1 => rand(15, 35), // T-shirts: 15-35€
+                        2 => rand(50, 120), // Chaussures: 50-120€
+                        3 => rand(30, 70), // Pulls: 30-70€
+                    };
+
+                    Item::create([
+                        'brand_id' => $brand->id,
+                        'category_id' => $category->id,
+                        'name' => $name,
+                        'slug' => Str::slug($name) . '-' . uniqid(),
+                        'description' => "Un excellent {$category->name} de la marque {$brand->name}, parfait pour toutes les occasions.",
+                        'price' => $price,
+                        'is_deleted' => false,
+                    ]);
+
+                    $counter++;
+                }
+            }
         }
+
+        $this->command->info("✅ {$counter} produits créés (2 par marque × catégorie)");
     }
 }
